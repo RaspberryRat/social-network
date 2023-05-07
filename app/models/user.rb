@@ -7,4 +7,6 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true,
             format: { with: URI::MailTo::EMAIL_REGEXP }
 
+  has_many :friendships
+  has_many :friends, through: :friendships, source: :friend
 end
