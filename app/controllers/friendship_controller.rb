@@ -7,8 +7,15 @@ class FriendshipController < ApplicationController
 
   def create
     @friend = User.find(params[:id])
-    @friendship = current_user.friendships.build(@friend)
-    @
+    @friendship = Friendship.new(user: current_user, friend: @friend)
+
+    if @friendship.save
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+
+
   end
 
 
