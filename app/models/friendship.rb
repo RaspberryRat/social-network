@@ -2,13 +2,23 @@ class Friendship < ApplicationRecord
   belongs_to :user
   belongs_to :friend, class_name: 'User'
 
+  after_save :add_mutual_friend
+
   validates :friend_id, uniqueness: { scope: :user_id }
   validate :not_own_friend
 
+  # private
 
   def not_own_friend
     if user_id == friend_id
       errors.add(:friend, "can't be your own friend")
+    end
+  end
+
+  def add_mutual_friend
+    mutual_friend = Friendship.find_by(user_id: friend_id, friend_id: user_id)
+    if mutual_friend.nil?
+      Friendship.create(user: friend, friend: user)
     end
   end
 end
