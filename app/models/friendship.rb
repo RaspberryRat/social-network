@@ -15,11 +15,14 @@ class Friendship < ApplicationRecord
     end
   end
 
-  def add_mutual_friend
-    mutual_friend = Friendship.find_by(user_id: friend_id, friend_id: user_id)
-    if mutual_friend.nil?
-      Friendship.create(user: friend, friend: user)
+    def add_mutual_friend
+      mutual_friend = Friendship.find_by(user_id: friend_id, friend_id: user_id)
+
+      if mutual_friend.nil?
+        Friendship.create(user: friend, friend: user)
+      else
+        errors.add(:friend, 'mutual friend already exists')
+      end
     end
-  end
 end
 
