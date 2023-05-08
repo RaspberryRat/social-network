@@ -20,4 +20,19 @@
         expect(friendship.errors[:friend]).to include('mutual friend already exists')
       end
     end
+
+    context 'when friend confirms friendship' do
+      it 'changes confirmed? to true on mutual friend records' do
+        friendship.confirm_friend
+        user_friend_record = Friendship.find_by(
+          user_id: user1, friend_id: user2
+          )
+        mutual_friend_record = Friendship.find_by(
+          user_id: user2, friend_id: user1
+          )
+
+        expect(user_friend_record.confirmed?).to be(true)
+        expect(mutual_friend_record.confirmed?).to be(true)
+      end
+    end
   end
