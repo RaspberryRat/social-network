@@ -37,6 +37,18 @@ class Friendship < ApplicationRecord
     Friendship.find(mutual_friend_record.id).update(confirmed?: true)
   end
 
+  def deny_friend_request
+    user_friend_record = Friendship.find_by(
+      user_id: user_id, friend_id: friend_id
+      )
+    mutual_friend_record = Friendship.find_by(
+      user_id: friend_id, friend_id: user_id
+      )
+
+    Friendship.find(user_friend_record.id).destroy
+    Friendship.find(mutual_friend_record.id).destroy
+  end
+
 
 end
 

@@ -35,4 +35,20 @@
         expect(mutual_friend_record.confirmed?).to be(true)
       end
     end
+
+    context 'when friend denies friendship' do
+      it 'deletes both friendship records' do
+        user_friend_record = Friendship.find_by(
+          user_id: user1, friend_id: user2
+          )
+        mutual_friend_record = Friendship.find_by(
+          user_id: user2, friend_id: user1
+          )
+
+        friendship.deny_friend_request
+
+        expect(Friendship.find_by(id: user_friend_record)).to be(nil)
+        expect(Friendship.find_by(id: mutual_friend_record)).to be(nil)
+      end
+    end
   end
