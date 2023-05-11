@@ -9,5 +9,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    resources :friendships, only: [:index] do
+      patch :confirm_friend_request, on: :member
+    end
+  end
 end

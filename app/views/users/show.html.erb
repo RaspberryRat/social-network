@@ -1,5 +1,18 @@
 <% user = @user %>
 
+<div class="user-navbar">
+  <div class="root-link">
+    <div><%= link_to 'Main Page', root_path %></div>
+  </div>
+  <div class="notifications">
+    <div class="friend-requests">
+      <div>You have a friend request from:
+
+
+      </div>
+    </div>
+  </div>
+</div>
 <ul>
   <li><%= user.username %></li>
   <li><%= user.email %></li>

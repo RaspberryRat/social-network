@@ -49,6 +49,9 @@ class Friendship < ApplicationRecord
     Friendship.find(mutual_friend_record.id).destroy
   end
 
-
+  def self.show_friend_requests(user_id)
+    Friendship.where(friend_id: user_id)
+              .where(confirmed?: false)
+  end
 end
 

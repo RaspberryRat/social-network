@@ -1,0 +1,27 @@
+<div><%= @user.username %>'s friend requests</div>
+
+
+<ul>
+  <% request_num = 1 %>
+  <% @friend_requests.each do |fr| %>
+    <li>
+      Request # <%= request_num %>
+    </li>
+    <li>
+      <%= fr.user.username %>
+    </li>
+    <li>
+      <%= fr.user.email %>
+    </li>
+    <li>
+      #TODO need to figure out this button to call right controller method
+      <%= form_with model: @friendship, url: confirm_friend_request_user_friendship_path, method: :patch do |form| %>
+        <%= form.submit 'Confirm Friend Request' %>
+      <% end %>
+    </li>
+     <li>
+      <button type="button">Deny Friend Request</button>
+    </li>
+    <% request_num +=1 %>
+  <% end %>
+</ul>
