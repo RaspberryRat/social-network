@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :users, only: [:show] do
-    resources :friendships, only: [:index, :update]
+    resources :friendships, only: [:index, :update, :destroy]
   end
 end

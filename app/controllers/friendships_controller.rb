@@ -10,7 +10,7 @@ class FriendshipsController < ApplicationController
     @friendship = Friendship.new(user: current_user, friend: @friend)
 
     if @friendship.save
-      redirect_to root_path
+      redirect_to user_path(@friend)
     else
       render :new, status: :unprocessable_entity
     end
@@ -23,8 +23,17 @@ class FriendshipsController < ApplicationController
 
   def update
     @friend_request = Friendship.find(params[:id])
-    @friend_request.confirm_friend
     @user = @friend_request.friend
+
+    @friend_request.confirm_friend
+    redirect_to user_path(@user)
+  end
+
+  def destroy
+    @friend_request = Friendship.find(params[:id])
+    @user = @friend_request.friend
+
+    @friend_request.destroy
     redirect_to user_path(@user)
   end
 

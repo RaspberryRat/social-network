@@ -20,7 +20,10 @@
       <% end %>
     </li>
      <li>
-      <button type="button">Deny Friend Request</button>
+      <%= form_with model: @friendship,
+        url: user_friendship_path(@user.id, fr.id), method: :delete do |f| %>
+        <%= f.submit 'Deny Friend Request' %>
+      <% end %>
     </li>
     <% request_num +=1 %>
   <% end %>
