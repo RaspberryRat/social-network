@@ -19,3 +19,18 @@
   <li>Name: <%= user.username %></li>
   <li>Email: <%= user.email %></li>
 </ul>
+
+<div class="friend-list">
+  <ul>
+    <% friend_num = 1 %>
+    <% user.friends.each do |friend| %>
+    <li>Friend # <%=friend_num %>:
+      Friend's name: <%= friend.username %>
+    </li>
+    <li>
+      Friend's email: <%= friend.email %>
+    </li>
+      <% friend_num += 1 %>
+    <% end %>
+  </ul>
+</div>
