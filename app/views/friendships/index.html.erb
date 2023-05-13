@@ -5,18 +5,18 @@
   <% request_num = 1 %>
   <% @friend_requests.each do |fr| %>
     <li>
-      Request # <%= request_num %>
+      Friend Request # <%= request_num %>
     </li>
     <li>
-      <%= fr.user.username %>
+      Name: <%= fr.user.username %>
     </li>
     <li>
-      <%= fr.user.email %>
+      Email: <%= fr.user.email %>
     </li>
     <li>
-      #TODO need to figure out this button to call right controller method
-      <%= form_with model: @friendship, url: confirm_friend_request_user_friendship_path, method: :patch do |form| %>
-        <%= form.submit 'Confirm Friend Request' %>
+      <%= form_with model: @friendship,
+        url: user_friendship_path(@user.id, fr.id), method: :patch do |f| %>
+        <%= f.submit 'Confirm Friend Request' %>
       <% end %>
     </li>
      <li>

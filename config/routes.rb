@@ -10,8 +10,6 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :users, only: [:show] do
-    resources :friendships, only: [:index] do
-      patch :confirm_friend_request, on: :member
-    end
+    resources :friendships, only: [:index, :update]
   end
 end

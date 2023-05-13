@@ -21,9 +21,11 @@ class FriendshipsController < ApplicationController
     @friend_requests = Friendship.show_friend_requests(@user.id)
   end
 
-  def confirm_friend_request
+  def update
     @friend_request = Friendship.find(params[:id])
     @friend_request.confirm_friend
+    @user = @friend_request.friend
+    redirect_to user_path(@user)
   end
 
 

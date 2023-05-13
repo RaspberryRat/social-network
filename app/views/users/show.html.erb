@@ -1,6 +1,7 @@
 <% user = @user %>
 
 <div class="user-navbar">
+  <div class="user-name"><%= user.username %>'s Page</div>
   <div class="root-link">
     <div><%= link_to 'Main Page', root_path %></div>
   </div>
@@ -10,10 +11,11 @@
 
 
       </div>
+      <%= link_to 'See Friend Requests', user_friendships_path(user) %>
     </div>
   </div>
 </div>
 <ul>
-  <li><%= user.username %></li>
-  <li><%= user.email %></li>
+  <li>Name: <%= user.username %></li>
+  <li>Email: <%= user.email %></li>
 </ul>
