@@ -6,10 +6,10 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    @friend = User.find(params[:id])
-    @friendship = Friendship.new(user: current_user, friend: @friend)
+    @friendship = Friendship.new(user_id: current_user.id, friend_id: params[:friend_id])
 
     if @friendship.save
+      @friend = @friendship.friend
       redirect_to user_path(@friend)
     else
       render :new, status: :unprocessable_entity
@@ -39,8 +39,9 @@ class FriendshipsController < ApplicationController
 
 
   private
-
-  def friendship_params
-
-  end
+  # TODO can't get this working
+  # def friendship_params
+  #   debugger
+  #   params.require(:friendship).permit(:user_id, :friend_id)
+  # end
 end

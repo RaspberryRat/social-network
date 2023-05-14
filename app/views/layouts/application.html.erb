@@ -11,6 +11,28 @@
   </head>
 
   <body>
+    <div class="main-nav">
+      <div>
+        <% if user_signed_in? %>
+          <%= current_user.username %></div>
+        <% end %>
+      <ul>
+          <% if user_signed_in? %>
+          <li class="log-out-btn link-btn">
+            <%= button_to "Logout", destroy_user_session_path, method: :delete  %>
+          </li>
+          <% else %>
+          <li class="link-btn">
+            <%= button_to "Sign up here", new_user_registration_path %>
+          </li>
+          <% end %>
+
+          <% unless user_signed_in? %>
+          <li class="link-btn">
+            <%= button_to "Sign in", user_session_path %>
+          </li>
+          <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>

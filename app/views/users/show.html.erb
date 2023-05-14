@@ -34,3 +34,11 @@
     <% end %>
   </ul>
 </div>
+
+<div class="add-friend">
+  <%= form_with model: @friendship,
+    url: user_friendships_path(@user), method: :post do |f| %>
+    <%= f.hidden_field :friend_id, value: user.id %>
+    <%= f.submit 'Send Friend Request' %>
+  <% end %>
+</div>
