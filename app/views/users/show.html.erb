@@ -24,13 +24,18 @@
   <ul>
     <% friend_num = 1 %>
     <% user.friends.each do |friend| %>
-    <li>Friend # <%=friend_num %>:
-      Friend's name: <%= friend.username %>
-    </li>
-    <li>
-      Friend's email: <%= friend.email %>
-    </li>
-      <% friend_num += 1 %>
+      <% friendship = Friendship.find_by(
+        user_id: user.id, friend_id: friend.id
+        ) %>
+      <% if friendship.confirmed? == true %>
+        <li>Friend # <%=friend_num %>:
+          Friend's name: <%= friend.username %>
+        </li>
+        <li>
+          Friend's email: <%= friend.email %>
+        </li>
+      <% end %>
+        <% friend_num += 1 %>
     <% end %>
   </ul>
 </div>
