@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :posts
   devise_for :users
 
   get 'users/index'
@@ -13,4 +12,5 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :create] do
     resources :friendships, only: [:index, :new, :create, :update, :destroy]
   end
+  resources :posts
 end
