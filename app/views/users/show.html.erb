@@ -47,3 +47,17 @@
     <%= f.submit 'Send Friend Request' %>
   <% end %>
 </div>
+
+
+<div class="user-posts">
+  <%# @posts.each do |post| %>
+    <%# turbo_frame_tag post do %>
+      <%# post.title %>
+      <%# post.content %>
+    <%# end %>
+  <%# end %>
+</div>
+
+<div class="new-posts-link">
+  <%= link_to 'Add a post', new_user_post_path(user)  %>
+</div>
