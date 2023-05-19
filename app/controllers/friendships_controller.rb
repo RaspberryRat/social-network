@@ -18,7 +18,12 @@ class FriendshipsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @friend_requests = Friendship.show_friend_requests(@user.id)
+    if current_user == @user
+      @friend_requests = Friendship.show_friend_requests(@user.id)
+    else
+      flash[:alert] = 'You are not authorized to access this page'
+      redirect_to root_path
+    end
   end
 
   def update
