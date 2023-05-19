@@ -6,13 +6,16 @@
     <div><%= link_to 'Main Page', root_path %></div>
   </div>
   <div class="notifications">
-    <div class="friend-requests">
-      <div>You have a friend request from:
+
+    <% if current_user == user %>
+      <div class="friend-requests">
+        <div>You have a friend request from:
 
 
+        </div>
+        <%= link_to 'See Friend Requests', user_friendships_path(user) %>
       </div>
-      <%= link_to 'See Friend Requests', user_friendships_path(user) %>
-    </div>
+    <% end %>
   </div>
 </div>
 
@@ -41,13 +44,18 @@
   </ul>
 </div>
 
-<div class="add-friend">
-  <%= form_with model: @friendship,
-    url: user_friendships_path(@user), method: :post do |f| %>
-    <%= f.hidden_field :friend_id, value: user.id %>
-    <%= f.submit 'Send Friend Request' %>
-  <% end %>
-</div>
+<% if current_user != user &&
+  user_signed_in? &&
+  !current_user.friends.include?(user)%>
+
+  <div class="add-friend">
+    <%= form_with model: @friendship,
+      url: user_friendships_path(@user), method: :post do |f| %>
+      <%= f.hidden_field :friend_id, value: user.id %>
+      <%= f.submit 'Send Friend Request' %>
+    <% end %>
+  </div>
+<% end %>
 
 
 <div class="user-posts">
@@ -59,6 +67,8 @@
   <%# end %>
 </div>
 
-<div class="new-posts-link">
-  <%= link_to 'Add a post', new_user_post_path(user)  %>
-</div>
+<% if current_user == user %>
+  <div class="new-posts-link">
+    <%= link_to 'Add a post', new_user_post_path(user)  %>
+  </div>
+<% end %>
