@@ -23,7 +23,7 @@
           </li>
           <% else %>
           <li class="link-btn">
-            <%= link_to "Sign up here", new_user_registration_path %>
+            <%= button_to "Sign up here", new_user_registration_path %>
           </li>
           <% end %>
 
@@ -33,6 +33,13 @@
           </li>
           <% end %>
     </div>
+
+    <div class="flash-message">
+        <% flash.each do |name, message| %>
+        <div class="<%= name %>"><%= message %></div>
+        <% end %>
+      </div>
+
     <%= yield %>
   </body>
 </html>

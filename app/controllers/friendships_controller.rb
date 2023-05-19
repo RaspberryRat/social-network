@@ -24,9 +24,13 @@ class FriendshipsController < ApplicationController
   def update
     @friend_request = Friendship.find(params[:id])
     @user = @friend_request.friend
-
-    @friend_request.confirm_friend
-    redirect_to user_path(@user)
+    if @user == current_user
+      @friend_request.confirm_friend
+      redirect_to user_path(@user)
+    else
+      flash[:error] = "You can only accept friend requests sent to you."
+      redirect_to user_path(current_user)
+    end
   end
 
   def destroy
