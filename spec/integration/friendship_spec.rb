@@ -41,4 +41,45 @@ RSpec.describe 'Submitting a friend request', type: :system do
     expect(page).to have_content 'Email: fakeemail2@cool.com'
   end
 
+  scenario 'acccept a friend request' do
+    visit user_session_path
+    fill_in 'Email', with: 'fakeemail2@cool.com'
+    fill_in 'Password', with: 'password'
+    click_on 'Log in'
+    click_on 'fakeman'
+    click_on 'Send Friend Request'
+    click_on 'Logout'
+
+    visit user_session_path
+    fill_in 'Email', with: 'fakeemail@cool.com'
+    fill_in 'Password', with: 'password'
+    click_on 'Log in'
+    click_on 'fakeman'
+    click_on 'See Friend Requests'
+    click_on 'Confirm Friend Request'
+
+    expect(page).to have_content("Friend's name: fakeman2")
+    expect(page).to have_content("Friend's email: fakeemail2@cool.com")
+  end
+
+  scenario 'deny a friend request' do
+    visit user_session_path
+    fill_in 'Email', with: 'fakeemail2@cool.com'
+    fill_in 'Password', with: 'password'
+    click_on 'Log in'
+    click_on 'fakeman'
+    click_on 'Send Friend Request'
+    click_on 'Logout'
+
+    visit user_session_path
+    fill_in 'Email', with: 'fakeemail@cool.com'
+    fill_in 'Password', with: 'password'
+    click_on 'Log in'
+    click_on 'fakeman'
+    click_on 'See Friend Requests'
+    click_on 'Confirm Friend Request'
+
+    expect(page).to_not have_content("Friend's name: fakeman2")
+    expect(page).to_not have_content("Friend's email: fakeemail2@cool.com")
+  end
 end
