@@ -4,7 +4,8 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @user = User.find(params[:user_id])
+    @posts = Post.show_posts(@user)
   end
 
   # GET /posts/1 or /posts/1.json

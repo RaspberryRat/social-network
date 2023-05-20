@@ -39,6 +39,7 @@ RSpec.describe 'Submitting a friend request', type: :system do
     expect(page).to have_content 'Friend Request # 1'
     expect(page).to have_content 'Name: fakeman2'
     expect(page).to have_content 'Email: fakeemail2@cool.com'
+    click_on 'Logout'
   end
 
   scenario 'acccept a friend request' do
@@ -60,6 +61,7 @@ RSpec.describe 'Submitting a friend request', type: :system do
 
     expect(page).to have_content("Friend's name: fakeman2")
     expect(page).to have_content("Friend's email: fakeemail2@cool.com")
+    click_on 'Logout'
   end
 
   scenario 'deny a friend request' do
@@ -81,5 +83,6 @@ RSpec.describe 'Submitting a friend request', type: :system do
 
     expect(page).to_not have_content("Friend's name: fakeman2")
     expect(page).to_not have_content("Friend's email: fakeemail2@cool.com")
+    click_on 'Logout'
   end
 end
