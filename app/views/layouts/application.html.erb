@@ -23,13 +23,13 @@
           </li>
           <% else %>
           <li class="link-btn">
-            <%= button_to "Sign up here", new_user_registration_path %>
+            <%= link_to "Sign up here", new_user_registration_path %>
           </li>
           <% end %>
 
           <% unless user_signed_in? %>
           <li class="link-btn">
-            <%= button_to "Sign in", user_session_path %>
+            <%= link_to "Sign in", user_session_path %>
           </li>
           <% end %>
     </div>
