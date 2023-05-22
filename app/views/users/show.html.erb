@@ -72,6 +72,9 @@
 
 <% if current_user == user %>
   <div class="new-posts-link">
-    <%= link_to 'Add a post', new_user_post_path(user)  %>
+    <%= turbo_frame_tag 'new post' do %>
+
+      <%= link_to 'Add a post', new_user_post_path(user)  %>
+    <% end %>
   </div>
 <% end %>
