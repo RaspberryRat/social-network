@@ -39,12 +39,12 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = current_user.posts.build(post_params)
-    @user = User.find(params[:user_id])
+    set_user
 
     if current_user == @user
       respond_to do |format|
         if @post.save
-          format.turbo_stream
+          format.turbo_stream { render turbo_stream: turbo_stream.prepend('posts', @post)}
           # format.html { redirect_to user_posts_path(current_user), notice: "Post was successfully created." }
           # format.json { render :show, status: :created, location: @post }
         else
@@ -60,13 +60,12 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
-    @user = User.find(params[:user_id])
-    @posts = Post.show_posts(@user)
+    set_user
+    set_post
 
     respond_to do |format|
       if @post.update(post_params)
-        format.turbo_stream
-
+        format.turbo_stream { render turbo_stream: turbo_stream.update('posts', @post) }
         # format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
         # format.json { render :show, status: :ok, location: @post }
       else
@@ -78,6 +77,8 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
+    set_post
+
     @post.destroy
 
     respond_to do |format|

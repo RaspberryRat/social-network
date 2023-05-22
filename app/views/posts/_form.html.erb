@@ -1,5 +1,6 @@
 <%= form_with model: post,
-  url: user_posts_path(current_user), method: :post do |form| %>
+  url: post.persisted? ? user_post_path(@user, post) : user_posts_path(@user),
+  method: post.persisted? ? :patch : :post do |form| %>
   <% if post.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
