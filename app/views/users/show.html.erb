@@ -60,11 +60,13 @@
 
 
 <div class="user-posts">
+  <p><%= user.username %>'s Posts</p>
   <% @posts.each do |post| %>
     <ul>
       <%= turbo_frame_tag post do %>
         <li><%= post.title %></li>
         <li><%= post.content %></li>
+        <li><%=link_to 'Edit Post', edit_user_post_path(user, post) %> </li>
       <% end %>
     </ul>
   <% end %>
@@ -73,7 +75,6 @@
 <% if current_user == user %>
   <div class="new-posts-link">
     <%= turbo_frame_tag 'new post' do %>
-
       <%= link_to 'Add a post', new_user_post_path(user)  %>
     <% end %>
   </div>
