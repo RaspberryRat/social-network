@@ -33,12 +33,14 @@
           </li>
           <% end %>
     </div>
-
-    <div class="flash-message">
+    <%= flash.any? %>
+    <% if flash.any? %>
+      <div class="flash-message">
         <% flash.each do |name, message| %>
         <div class="<%= name %>"><%= message %></div>
         <% end %>
       </div>
+    <% end %>
 
     <%= yield %>
   </body>

@@ -38,6 +38,7 @@
         <li>
           Friend's email: <%= friend.email %>
         </li>
+        <br />
       <% end %>
         <% friend_num += 1 %>
     <% end %>
@@ -59,8 +60,13 @@
 
 
 <div class="user-posts">
-  <%= turbo_frame_tag 'post' do %>
-
+  <% @posts.each do |post| %>
+    <ul>
+      <%= turbo_frame_tag post do %>
+        <li><%= post.title %></li>
+        <li><%= post.content %></li>
+      <% end %>
+    </ul>
   <% end %>
 </div>
 
