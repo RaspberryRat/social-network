@@ -28,7 +28,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to user_posts_path, notice: "Post was successfully created." }
+        format.turbo_stream
+        # format.html { redirect_to user_posts_path(current_user), notice: "Post was successfully created." }
         # format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
