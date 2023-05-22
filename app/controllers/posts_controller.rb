@@ -14,12 +14,26 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    set_user
+
+    if current_user == @user
+      @post = Post.new
+    else
+      flash[:alert] = 'You are not authorized to do that action'
+      redirect_to root_path
+    end
   end
 
   # GET /posts/1/edit
   def edit
-    set_post
+    set_user
+
+    if current_user == @user
+      set_post
+    else
+      flash[:alert] = 'You are not authorized to do that action'
+      redirect_to root_path
+    end
   end
 
   # POST /posts or /posts.json
@@ -79,8 +93,13 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def set_user
+    @user = User.find(params[:user_id])
+  end
+
   # Only allow a list of trusted parameters through.
   def post_params
     params.require(:post).permit(:title, :content)
   end
+
 end
