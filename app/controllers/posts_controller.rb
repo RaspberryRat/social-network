@@ -25,16 +25,22 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = current_user.posts.build(post_params)
+    @user = User.find(params[:user_id])
 
-    respond_to do |format|
-      if @post.save
-        format.turbo_stream
-        # format.html { redirect_to user_posts_path(current_user), notice: "Post was successfully created." }
-        # format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        # format.json { render json: @post.errors, status: :unprocessable_entity }
+    if current_user == @user
+      respond_to do |format|
+        if @post.save
+          format.turbo_stream
+          # format.html { redirect_to user_posts_path(current_user), notice: "Post was successfully created." }
+          # format.json { render :show, status: :created, location: @post }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          # format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:alert] = 'You are not authorized to do that'
+      redirect_to root_path
     end
   end
 
