@@ -68,9 +68,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         format.turbo_stream {
-          render turbo_stream: turbo_stream.update(dom_id(@post),
-          partial: 'posts/post',
-          locals: { post: @post })
+          render turbo_stream: turbo_stream.update(@post)
         }
         format.html { redirect_to user_path(current_user), notice: "Post was successfully updated." }
         # format.json { render :show, status: :ok, location: @post }
