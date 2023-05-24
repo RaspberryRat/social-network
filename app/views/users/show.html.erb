@@ -64,17 +64,17 @@
   <p><%= user.username %>'s Posts</p>
 
   <% if current_user == user %>
-  <div class="new-posts-link">
-    <%= turbo_frame_tag 'new_post' do %>
-      <%= link_to 'Add a post', new_user_post_path(user)  %>
-    <% end %>
-  </div>
-<% end %>
+    <div class="new-posts-link">
+      <%= turbo_frame_tag 'new_post' do %>
+        <%= link_to 'Add a post', new_user_post_path(user)  %>
+      <% end %>
+    </div>
+  <% end %>
 
-    <ul>
-      <div id="posts">
-        <%= render @posts.reverse %>
-      </div>
-    </ul>
+  <ul>
+    <div id="posts">
+      <%= render @posts.reverse %>
+    </div>
+  </ul>
 </div>
 

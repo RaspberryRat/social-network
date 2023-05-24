@@ -2,4 +2,6 @@
 
 <%= turbo_frame_tag id='new_post' do %>
   <%= render "form", post: @post %>
+  <div><%= link_to 'Back', user_path(current_user),
+    data: { turbo_frame: "_top" } %></div>
 <% end %>
