@@ -72,11 +72,9 @@
   <% end %>
 
   <ul>
-    <%= turbo_frame_tag 'posts' do %>
-      <div id="posts">
-        <%= render @posts.reverse %>
+    <div id="posts">
+      <%= render @posts.reverse %>
     </div>
-    <% end %>
   </ul>
 
 </div>

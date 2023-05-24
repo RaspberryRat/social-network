@@ -65,17 +65,19 @@ class PostsController < ApplicationController
     set_user
     set_post
 
-    respond_to do |format|
-      if @post.update(post_params)
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.update(@post)
-        }
-        format.html { redirect_to user_path(current_user), notice: "Post was successfully updated." }
-        # format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        # format.json { render json: @post.errors, status: :unprocessable_entity }
+    if current_user == @user
+      respond_to do |format|
+        if @post.update(post_params)
+          format.html { redirect_to user_path(current_user), notice: "Post was successfully updated." }
+          # format.json { render :show, status: :ok, location: @post }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          # format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:alert] = 'You are not authorized to do that'
+      redirect_to root_path
     end
   end
 
