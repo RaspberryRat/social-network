@@ -19,8 +19,7 @@ class PostsController < ApplicationController
     if current_user == @user
       @post = Post.new
     else
-      flash[:alert] = 'You are not authorized to do that action'
-      redirect_to root_path
+      unauthorized
     end
   end
 
@@ -31,8 +30,7 @@ class PostsController < ApplicationController
     if current_user == @user
       set_post
     else
-      flash[:alert] = 'You are not authorized to do that action'
-      redirect_to root_path
+      unauthorized
     end
   end
 
@@ -47,7 +45,9 @@ class PostsController < ApplicationController
           format.turbo_stream {
             render turbo_stream: turbo_stream.prepend('posts', @post)
           }
-          format.html { redirect_to user_path(current_user), notice: "Post was successfully created." }
+          format.html {
+            redirect_to user_path(current_user),
+            notice: "Post was successfully created." }
           # format.json { render :show, status: :created, location: @post }
         else
           format.html { render :new, status: :unprocessable_entity }
@@ -55,8 +55,7 @@ class PostsController < ApplicationController
         end
       end
     else
-      flash[:alert] = 'You are not authorized to do that'
-      redirect_to root_path
+      unauthorized
     end
   end
 
@@ -68,7 +67,9 @@ class PostsController < ApplicationController
     if current_user == @user
       respond_to do |format|
         if @post.update(post_params)
-          format.html { redirect_to user_path(current_user), notice: "Post was successfully updated." }
+          format.html {
+            redirect_to user_path(current_user),
+            notice: "Post was successfully updated." }
           # format.json { render :show, status: :ok, location: @post }
         else
           format.html { render :edit, status: :unprocessable_entity }
@@ -76,8 +77,7 @@ class PostsController < ApplicationController
         end
       end
     else
-      flash[:alert] = 'You are not authorized to do that'
-      redirect_to root_path
+      unauthorized
     end
   end
 
@@ -109,4 +109,8 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :content)
   end
 
+  def unauthorized
+    flash[:alert] = 'You are not authorized to do that'
+    redirect_to root_path
+  end
 end
