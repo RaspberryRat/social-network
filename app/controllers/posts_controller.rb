@@ -44,8 +44,10 @@ class PostsController < ApplicationController
     if current_user == @user
       respond_to do |format|
         if @post.save
-          format.turbo_stream { render turbo_stream: turbo_stream.prepend('posts', @post)}
-          # format.html { redirect_to user_posts_path(current_user), notice: "Post was successfully created." }
+          format.turbo_stream {
+            render turbo_stream: turbo_stream.prepend('posts', @post)
+          }
+          format.html { redirect_to user_path(current_user), notice: "Post was successfully created." }
           # format.json { render :show, status: :created, location: @post }
         else
           format.html { render :new, status: :unprocessable_entity }
@@ -65,8 +67,12 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update(post_params)
-        # format.turbo_stream { render turbo_stream: turbo_stream.update(dom_id('posts'), partials: "posts/post", locals: { post: @posts }) }
-        format.html { redirect_to user_posts_path(current_user), notice: "Post was successfully updated." }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.update(dom_id(@post),
+          partial: 'posts/post',
+          locals: { post: @post })
+        }
+        format.html { redirect_to user_path(current_user), notice: "Post was successfully updated." }
         # format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }

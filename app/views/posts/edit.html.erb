@@ -1,9 +1,10 @@
 <h1>Editing post</h1>
 
-<%= turbo_frame_tag 'edit_post' do %>
+<%= turbo_frame_tag dom_id(@post) do %>
   <%= render "form", post: @post %>
   <div><%= link_to 'Back', user_path(current_user),
     data: { turbo_frame: "_top" } %></div>
 <% end %>
+
 
 <br>
