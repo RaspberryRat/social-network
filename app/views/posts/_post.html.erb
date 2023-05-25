@@ -9,6 +9,7 @@
       </li>
     <% end %>
     <li>
+    <%= turbo_frame_tag post do %>
       <% if post.liking_users.include?(current_user) %>
         <%= link_to "Unlike", user_post_like_path(post.author, post),
         data: { turbo_method: :delete } %>
@@ -17,6 +18,7 @@
           method: :post do |f| %>
           <%= f.submit 'Like Post' %>
         <% end %>
+      <% end %>
       <% end %>
     </li>
     <li><%= post.display_likes %></li>
