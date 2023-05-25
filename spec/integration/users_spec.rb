@@ -50,6 +50,7 @@ end
 
 RSpec.describe 'Logging in a user', type: :system do
   before do
+    destroy_user_session_path
     visit new_user_registration_path
     fill_in 'Email', with: 'fakeemail@cool.com'
     fill_in 'Username', with: 'fakeman'
