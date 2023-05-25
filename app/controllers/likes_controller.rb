@@ -7,7 +7,10 @@ class LikesController < ApplicationController
   def create
     set_post
 
+    return if Like.duplicate?(@post, current_user)
+
     @like = Like.new(post: @post, user: current_user)
+
     respond_to do |format|
       if @like.save
         format.turbo_stream { render turbo_stream: turbo_stream.update(@post) }
