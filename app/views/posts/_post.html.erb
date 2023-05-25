@@ -1,6 +1,5 @@
 
 <%= turbo_frame_tag post do %>
-  <li><%= post.title %></li>
   <li><%= post.content %></li>
   <li><%= link_to 'Edit Post', edit_user_post_path(post.author, post) %></li>
   <br/>
