@@ -12,12 +12,7 @@
         <%= f.submit 'Like Post' %>
       <% end %>
     </li>
-    <li>
-      <% post.liking_users.each do |user| %>
-        <%= user.username %>
-      <% end %>
-      <span>likes this</span>
-      </li>
+    <li><%= post.display_likes %></li>
   <br/>
 <% end %>
 
