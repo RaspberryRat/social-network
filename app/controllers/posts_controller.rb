@@ -84,12 +84,22 @@ class PostsController < ApplicationController
   # DELETE /posts/1 or /posts/1.json
   def destroy
     set_post
+    set_user
 
-    @post.destroy
+    if current_user == @user
+      @post.destroy
 
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
-      # format.json { head :no_content }
+      respond_to do |format|
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.remove(@post)
+        }
+        format.html {
+          redirect_to posts_url,
+          notice: 'Post was successfully destroyed.' }
+        # format.json { head :no_content }
+      end
+    else
+      unauthorized
     end
   end
 
