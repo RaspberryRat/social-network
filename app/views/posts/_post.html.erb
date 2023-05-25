@@ -6,6 +6,18 @@
     <%= link_to "Delete Post", user_post_path(post.author, post),
       data: { turbo_method: :delete } %>
     </li>
+    <li>
+      <%= form_with url: user_post_likes_path(post.author, post),
+        method: :post do |f| %>
+        <%= f.submit 'Like Post' %>
+      <% end %>
+    </li>
+    <li>
+      <% post.liking_users.each do |user| %>
+        <%= user.username %>
+      <% end %>
+      <span>likes this</span>
+      </li>
   <br/>
 <% end %>
 

@@ -7,10 +7,12 @@ class LikesController < ApplicationController
   def create
     set_post
 
-    @like = @post.likes.new(user: current_user)
-
+    @like = Like.new(post: @post, user: current_user)
     respond_to do |format|
       if @like.save
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.update(@post)
+        }
         format.html {
           redirect_to user_path(current_user),
           notice: "Post was successfully liked." }
@@ -23,6 +25,6 @@ class LikesController < ApplicationController
   private
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:post_id])
   end
 end
