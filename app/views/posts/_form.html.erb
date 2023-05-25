@@ -1,22 +1,24 @@
-<%= form_with model: post,
-  url: post.persisted? ? user_post_path(@user, post) : user_posts_path(@user),
-  method: post.persisted? ? :patch : :post do |form| %>
-  <% if post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-      <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <%= form_with model: post,
+    url: post.persisted? ? user_post_path(@user, post) : user_posts_path(@user),
+    method: post.persisted? ? :patch : :post, data: { controller: 'form', action: 'turbo:submit-end->form#reset' } do |form| %>
+    <% if post.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+        <ul>
+          <% post.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <%= form.label :content, 'Post Content: ' %>
+      <%= form.text_field :content, placeholder: "What's on your mind?", data: { target: 'form.contentField' } %>
+    </div>
+    <div>
+      <%= form.submit %>
     </div>
   <% end %>
-  <div>
-    <%= form.label :content, 'Post Content: ' %>
-    <%= form.text_field :content, placeholder: "What's on your mind?" %>
-  </div>
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+
