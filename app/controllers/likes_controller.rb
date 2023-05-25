@@ -10,9 +10,7 @@ class LikesController < ApplicationController
     @like = Like.new(post: @post, user: current_user)
     respond_to do |format|
       if @like.save
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.update(@post)
-        }
+        format.turbo_stream { render turbo_stream: turbo_stream.update(@post) }
         format.html {
           redirect_to user_path(current_user),
           notice: "Post was successfully liked." }
@@ -30,15 +28,13 @@ class LikesController < ApplicationController
     if current_user == @like.user
       @like.destroy
       respond_to do |format|
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.update(@post)
-        }
+        format.turbo_stream { render turbo_stream: turbo_stream.update(@post) }
         format.html {
           redirect_to posts_url,
           notice: 'Post was successfully unliked.' }
       end
     else
-     unauthorized
+      unauthorized
     end
   end
 
