@@ -12,18 +12,17 @@ class Post < ApplicationRecord
   def display_likes
     users = self.liking_users
 
-    if users.empty?
+    case users.length
+    when 0
       'Nobody likes this'
-    elsif users.length == 1
+    when 1
       "#{users[0].username} likes this"
-    elsif users.length == 2
+    when 2
       "#{users[0].username} and #{users[1].username} like this"
-    elsif users.length == 3
+    when 3
       "#{users[0].username}, #{users[1].username}, and #{users[2].username} like this"
-    elsif users.length > 3
-      "#{users.sample.username} and #{users.length - 1} others like this"
     else
-      puts "ERROR"
+      "#{users.sample.username} and #{users.length - 1} others like this"
     end
   end
 end
