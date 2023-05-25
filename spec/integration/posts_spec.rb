@@ -26,4 +26,15 @@ RSpec.describe 'Using Posts', type: :system do
     click_on 'Update Post'
     expect(page).to have_content('Changed my mind')
   end
+
+  scenario 'delete post' do
+    visit user_path(user.id)
+    fill_in 'Post Content', with: "This is what's on my mind!"
+    find('#post_content').send_keys(:enter)
+
+    expect(page).to have_content("This is what's on my mind!")
+
+    click_on 'Delete Post'
+    expect(page).to_not have_content("This is what's on my mind!")
+  end
 end
