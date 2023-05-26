@@ -13,7 +13,7 @@
     <% else %>
       <%= form_with url: user_post_likes_path(post.author, post),
         method: :post do |f| %>
-        <%= f.submit 'Like Post' %>
+        <%= f.submit 'Like' %>
       <% end %>
     <% end %>
     </li>

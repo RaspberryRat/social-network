@@ -37,4 +37,25 @@ RSpec.describe 'Using Posts', type: :system do
     click_on 'Delete Post'
     expect(page).to_not have_content("This is what's on my mind!")
   end
+
+  scenario 'like post' do
+    visit user_path(user.id)
+    fill_in 'Post Content', with: "This is what's on my mind!"
+    find('#post_content').send_keys(:enter)
+
+    click_on 'Like'
+    expect(page).to have_content("#{user.username} likes this")
+  end
+
+  scenario 'unlike post' do
+    visit user_path(user.id)
+    fill_in 'Post Content', with: "This is what's on my mind!"
+    find('#post_content').send_keys(:enter)
+
+    click_on 'Like'
+    expect(page).to have_content("#{user.username} likes this")
+
+    click_on 'Unlike'
+    expect(page).to_not have_content("#{user.username} likes this")
+  end
 end
