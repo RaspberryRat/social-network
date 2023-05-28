@@ -8,13 +8,17 @@
   <div class="notifications">
 
     <% if current_user == user %>
-      <div class="friend-requests">
-        <div>You have a friend request from:
+      <% unless Friendship.
+        where(friend_id: user).
+        where(confirmed?: false).empty? %>
+        <div class="friend-requests">
+          <div>You have a friend request from:
 
 
+          </div>
+          <%= link_to 'See Friend Requests', user_friendships_path(user) %>
         </div>
-        <%= link_to 'See Friend Requests', user_friendships_path(user) %>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>
