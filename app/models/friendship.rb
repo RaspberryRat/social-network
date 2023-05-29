@@ -16,9 +16,9 @@ class Friendship < ApplicationRecord
     end
   end
 
+
   def confirm_friend
     add_mutual_friend
-
     user_friend_record = Friendship.find_by(
       user_id: user_id, friend_id: friend_id
     )
