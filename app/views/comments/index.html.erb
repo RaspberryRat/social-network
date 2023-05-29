@@ -1,0 +1,15 @@
+
+  <p style="color: green"><%= notice %></p>
+
+  <h1>Comments</h1>
+
+  <div id="comments">
+    <ul>
+      <% @comments.each do |post| %>
+        <li>Content: <br /><%= comment.content %></li>
+        <br />
+      <% end %>
+    </ul>
+  </div>
+
+

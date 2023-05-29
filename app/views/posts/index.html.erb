@@ -1,17 +1,11 @@
+<h1>Posts</h1>
+
+
 <%= turbo_frame_tag 'post' do %>
   <p style="color: green"><%= notice %></p>
 
-  <h1>Posts</h1>
 
-  <div id="posts">
-    <ul>
-      <% @posts.each do |post| %>
-        <li>Title: <%= post.title %></li>
-        <li>Content: <br /><%= post.content %></li>
-        <br />
-      <% end %>
-    </ul>
-  </div>
+  <%= render 'posts' %>
 <% end %>
 
 

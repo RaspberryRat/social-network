@@ -1,23 +1,26 @@
-<%= turbo_frame_tag post do %>
-  <li><%= post.content %></li>
-
-  <li><%= link_to 'Edit Post', edit_user_post_path(post.author, post) %></li>
-  <li>
-    <%= link_to "Delete Post", user_post_path(post.author, post),
-      data: { turbo_method: :delete } %>
-    </li>
-    <li>
-    <% if post.liking_users.include?(current_user) %>
-      <%= link_to "Unlike", user_post_like_path(post.author, post, post.likes.where(user_id: current_user.id).take),
-      data: { turbo_method: :delete } %>
-    <% else %>
-      <%= form_with url: user_post_likes_path(post.author, post),
-        method: :post do |f| %>
-        <%= f.submit 'Like' %>
-      <% end %>
+  <div class="post-box">
+    <%= turbo_frame_tag post do %>
+      <li><%= post.content %></li>
+      <li><%= link_to 'Edit Post', edit_user_post_path(post.author, post) %></li>
+      <li>
+        <%= link_to "Delete Post", user_post_path(post.author, post),
+          data: { turbo_method: :delete } %>
+        </li>
+        <li>
+        <% if post.liking_users.include?(current_user) %>
+          <%= link_to "Unlike", user_post_like_path(post.author, post, post.likes.where(user_id: current_user.id).take),
+          data: { turbo_method: :delete } %>
+        <% else %>
+          <%= form_with url: user_post_likes_path(post.author, post),
+            method: :post do |f| %>
+            <%= f.submit 'Like' %>
+          <% end %>
+        <% end %>
+        </li>
+        <li><%= post.display_likes %></li>
+      <br/>
+      <%= render post.comments %>
     <% end %>
-    </li>
-    <li><%= post.display_likes %></li>
-  <br/>
-<% end %>
+  </div>
+
 

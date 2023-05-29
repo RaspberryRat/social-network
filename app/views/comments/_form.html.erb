@@ -1,5 +1,5 @@
 <%= form_with model: comment,
-    method: comment.persisted? ? :patch : :post do |form| %>
+    url: comment.persisted? ? user_post_comment_path(@user, @post, comment) : user_post_comments_path(@user, @post), method: comment.persisted? ? :patch : :post do |form| %>
     <% if comment.errors.any? %>
       <div style="color: red">
         <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
