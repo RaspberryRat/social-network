@@ -77,4 +77,47 @@ RSpec.describe Post, type: :model do
       expect(return_values).to include(display)
     end
   end
+
+  context 'when a post is correct' do
+    it 'is valid' do
+      post = Post.new(content: 'Test', author: user1)
+
+      expect(post).to be_valid
+    end
+  end
+
+  context 'when a post is missing author' do
+    it 'is not valid' do
+      post = Post.new(content: 'Test', author: nil)
+
+      expect(post).to_not be_valid
+    end
+  end
+
+  context 'when a post is missing content' do
+    it 'is not valid' do
+      post = Post.new(content: nil, author: user1)
+
+      expect(post).to_not be_valid
+    end
+  end
+
+  context 'when a content of post is 0 characters' do
+    it 'is not valid' do
+      post = Post.new(content: '', author: user1)
+
+      expect(post).to_not be_valid
+    end
+  end
+
+  context 'when a content of post is over 500 characters' do
+    it 'is not valid' do
+
+      too_long_content = 'gxyuyncbsjotlvyojxueymgrilijplnvpldzsqjdiqdrimgdvtoeawgguamevpclboazzsrxptdywksdzfwfjeuuzklweqzzwkzaxkhymrdonhpavrxrgwazkyhnplqvhalvjbselqgvkqwrycjfhfieabjanopaljhujdqghzejntmraxkkyapjswbnudflftffvzckwgdoltbxpofeaxgrsqolhxqakehloxdlgtlqvqzbghjqfuzeeqkvdcunaufzkxjpsifqjwogioxyevupzpjjronxbcicwzuiyqqroawkrrtokscqbbpfxczwvvmtfqagjjxzpghkszvxnnhtefiunadnqtblyitmlljoqeffyugtzowiizhlmfmqyianrrzopbajxydmxyuzlbtwwbrjhjnvvhfpenkbhweomswnbucmnzjhhhtytidresisyyjuunnibvuqerxeztzfmpejefqgqahtvebpvyhpiuuiiyqkj'
+
+      post = Post.new(content: too_long_content, author: user1)
+
+      expect(post).to_not be_valid
+    end
+  end
 end
