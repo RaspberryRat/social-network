@@ -67,11 +67,14 @@ RSpec.describe Post, type: :model do
       FactoryBot.create(:like, post: post1, user: user3)
       FactoryBot.create(:like, post: post1, user: user4)
 
+      return_values = [
+                        "#{user1.username} and 3 others like this",
+                        "#{user2.username} and 3 others like this",
+                        "#{user3.username} and 3 others like this",
+                        "#{user4.username} and 3 others like this"
+                      ]
       display = post1.display_likes
-      expect(display).to match(/^#{user1.username} and 3 others like this$/).or(
-        /^#{user2.username} and 3 others like this$/
-      ).or(
-        /^#{user3.username} and 3 others like this$/)
+      expect(return_values).to include(display)
     end
   end
 end
