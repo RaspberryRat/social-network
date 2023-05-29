@@ -4,8 +4,20 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build(comment_params)
+    @comment = current_user.comments.build(comment_params)
 
+    respond_to do |format|
+      if @comment.save
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.append('posts', @post)
+        }
+        format.html {
+          redirect_to user_path(current_user),
+          notice: "Comment was successfully created." }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
