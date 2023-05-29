@@ -19,7 +19,7 @@
         </li>
         <li><%= post.display_likes %></li>
       <br/>
-      <%= render post.comments %>
+      <%= render post.comments, post: post %>
     <% end %>
   </div>
 
