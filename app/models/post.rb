@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   belongs_to :author, class_name: 'User'
   has_many :likes, dependent: :destroy
   has_many :liking_users, through: :likes, source: :user
+  has_many :comments, dependent: :destroy
 
   def self.show_posts(user)
     Post.where(author: user)
