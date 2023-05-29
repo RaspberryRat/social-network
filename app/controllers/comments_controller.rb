@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         format.turbo_stream {
-          render turbo_stream: turbo_stream.append('posts', @post)
+          render turbo_stream: turbo_stream.append(@post)
         }
         format.html {
           redirect_to user_path(current_user),

@@ -1,9 +1,5 @@
 <%= turbo_frame_tag comment do %>
   <li><%= comment.content %></li>
-  <li class="new-comment-link">
-    debugger
-      <%= turbo_frame_tag  id="new_comment", src:new_user_post_comment_path(@user, post) %>
-    </li>
   <br />
 <% end %>
 
