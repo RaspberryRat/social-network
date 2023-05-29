@@ -20,10 +20,13 @@
         <li><%= post.display_likes %></li>
       <br/>
       <%= render post.comments, post: post %>
-      <li class="new-comment-link">
-      <%= turbo_frame_tag  id="new_comment", src:new_user_post_comment_path(@user, post) %>
-    </li>
     <% end %>
+
+    <div class="new-comment-link">
+      <%= turbo_frame_tag  id="new_comment", src:new_user_post_comment_path(post.author, post) %>
+    </div>
+
   </div>
+
 
 
