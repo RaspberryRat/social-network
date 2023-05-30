@@ -1,5 +1,5 @@
 <%= form_with model: comment,
-    url: comment.persisted? ? user_post_comment_path(@user, @post, comment) : user_post_comments_path(@user, @post),
+    url: comment.persisted? ? user_post_comment_path(comment.post.author, comment.post, comment) : user_post_comments_path(@user, @post),
     method: comment.persisted? ? :patch : :post, data: { controller: 'form', action: 'turbo:submit-end->form#reset' } do |form| %>
     <% if comment.errors.any? %>
       <div style="color: red">

@@ -35,6 +35,26 @@ class CommentsController < ApplicationController
     set_comment
   end
 
+  def edit
+    set_comment
+  end
+
+  def update
+    set_comment
+
+    respond_to do |format|
+      if @comment.update(comment_params)
+        format.html {
+          redirect_to user_path(@comment.post.author),
+          notice: "Comment was successfully updated." }
+        # format.json { render :show, status: :ok, location: @post }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        # format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def comment_params
