@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships, source: :friend
-  has_many :posts, foreign_key: 'author_id', class_name: 'Post'
+  has_many :posts, foreign_key: 'author_id', class_name: 'Post', dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: :post
   has_many :comments, foreign_key: 'author_id', class_name: 'Comment', dependent: :destroy
