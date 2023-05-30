@@ -13,8 +13,8 @@
       </div>
     <% end %>
     <div>
-      <%= form.label :content, 'comment Content: ' %>
-      <%= form.text_field :content, data: { target: 'form.contentField' } %>
+      <%= form.label :content, ': ' %>
+      <%= form.text_field :content, placeholder: 'Write a comment...', data: { target: 'form.contentField' } %>
     </div>
     <div>
       <%= form.submit %>

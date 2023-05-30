@@ -6,3 +6,7 @@
 .post-box {
   outline: 1px solid blue;
 }
+
+input[type="text"] {
+  width: min(15vw, 100%);
+}

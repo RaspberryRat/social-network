@@ -14,8 +14,9 @@
       </div>
     <% end %>
     <div>
-      <%= form.label :content, 'Post Content: ' %>
-      <%= form.text_field :content, placeholder: "What's on your mind?", data: { target: 'form.contentField' } %>
+      <%= form.label :content, ': ' %>
+      <%= form.text_field :content,
+        placeholder: "What's on your mind?, #{current_user.username}", data: { target: 'form.contentField' } %>
     </div>
     <div>
       <%= form.submit %>

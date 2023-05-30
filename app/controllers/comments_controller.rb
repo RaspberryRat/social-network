@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
           render turbo_stream: turbo_stream.append(@post, @comment)
         }
         format.html {
-          redirect_to user_path(current_user),
+          redirect_to user_path(@post.author),
           notice: "Comment was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
