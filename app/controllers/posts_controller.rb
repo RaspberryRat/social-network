@@ -26,12 +26,9 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     set_user
+    return unauthorized unless current_user == @user
 
-    if current_user == @user
-      set_post
-    else
-      unauthorized
-    end
+    set_post
   end
 
   # POST /posts or /posts.json
@@ -39,23 +36,21 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     set_user
 
-    if current_user == @user
-      respond_to do |format|
-        if @post.save
-          format.turbo_stream {
-            render turbo_stream: turbo_stream.prepend('posts', @post)
-          }
-          format.html {
-            redirect_to user_path(current_user),
-            notice: "Post was successfully created." }
-          # format.json { render :show, status: :created, location: @post }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-          # format.json { render json: @post.errors, status: :unprocessable_entity }
-        end
+    return unauthorized unless current_user == @user
+
+    respond_to do |format|
+      if @post.save
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend('posts', @post)
+        }
+        format.html {
+          redirect_to user_path(current_user),
+          notice: "Post was successfully created." }
+        # format.json { render :show, status: :created, location: @post }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        # format.json { render json: @post.errors, status: :unprocessable_entity }
       end
-    else
-      unauthorized
     end
   end
 
@@ -64,20 +59,18 @@ class PostsController < ApplicationController
     set_user
     set_post
 
-    if current_user == @user
-      respond_to do |format|
-        if @post.update(post_params)
-          format.html {
-            redirect_to user_path(current_user),
-            notice: "Post was successfully updated." }
-          # format.json { render :show, status: :ok, location: @post }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-          # format.json { render json: @post.errors, status: :unprocessable_entity }
-        end
+    return unauthorized unless current_user == @user
+
+    respond_to do |format|
+      if @post.update(post_params)
+        format.html {
+          redirect_to user_path(current_user),
+          notice: "Post was successfully updated." }
+        # format.json { render :show, status: :ok, location: @post }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        # format.json { render json: @post.errors, status: :unprocessable_entity }
       end
-    else
-      unauthorized
     end
   end
 
@@ -86,20 +79,17 @@ class PostsController < ApplicationController
     set_post
     set_user
 
-    if current_user == @user
-      @post.destroy
+    return unauthorized unless current_user == @user
 
-      respond_to do |format|
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.remove(@post)
-        }
-        format.html {
-          redirect_to posts_url,
-          notice: 'Post was successfully destroyed.' }
-        # format.json { head :no_content }
-      end
-    else
-      unauthorized
+    @post.destroy
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.remove(@post)
+      }
+      format.html {
+        redirect_to posts_url,
+        notice: 'Post was successfully destroyed.' }
+      # format.json { head :no_content }
     end
   end
 

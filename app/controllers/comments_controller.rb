@@ -42,6 +42,8 @@ class CommentsController < ApplicationController
   def update
     set_comment
 
+    return unauthorized unless current_user == @comment.author
+
     respond_to do |format|
       if @comment.update(comment_params)
         format.html {
@@ -58,8 +60,9 @@ class CommentsController < ApplicationController
   def destroy
     set_comment
 
-    @comment.destroy
+    return unauthorized unless current_user == @comment.author
 
+    @comment.destroy
     respond_to do |format|
       format.turbo_stream {
         render turbo_stream: turbo_stream.remove(@comment)
