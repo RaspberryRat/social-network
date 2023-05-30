@@ -16,9 +16,9 @@
             <%= f.submit 'Like' %>
           <% end %>
         <% end %>
-        </li>
-        <li><%= post.display_likes %></li>
-
+      </li>
+      <li><%= post.display_likes %></li>
+      <br />
       <%= render post.comments, post: post %>
 
       <li id="appended-comment"></li>

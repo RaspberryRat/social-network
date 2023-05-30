@@ -13,7 +13,7 @@ class LikesController < ApplicationController
 
     respond_to do |format|
       if @like.save
-        format.turbo_stream { render turbo_stream: turbo_stream.update(@post) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@post) }
         format.html {
           redirect_to user_path(current_user),
           notice: "Post was successfully liked." }
@@ -30,7 +30,7 @@ class LikesController < ApplicationController
 
     @like.destroy
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.update(@post) }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace(@post) }
       format.html {
         redirect_to posts_url,
         notice: 'Post was successfully unliked.' }
