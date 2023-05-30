@@ -26,4 +26,9 @@ class Post < ApplicationRecord
       "#{users.sample.username} and #{users.length - 1} others like this"
     end
   end
+
+  # changes the created at date of the post to be human readable
+  def formatted_date
+    created_at.strftime('%B %e at %-l:%M %p')
+  end
 end

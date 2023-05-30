@@ -120,4 +120,19 @@ RSpec.describe Post, type: :model do
       expect(post).to_not be_valid
     end
   end
+
+  context 'when formatted date is used' do
+    it 'returns current date and time' do
+      month = Date::MONTHNAMES[Time.now.utc.month]
+      day = Time.now.utc.day
+      hour = Time.now.utc.hour
+      meridian = hour > 12 ? 'PM' : 'AM'
+      hour = hour - 12 if hour > 12
+      minute = Time.now.utc.min
+
+
+      readable_date = post1.formatted_date
+      expect(readable_date).to eq("#{month} #{day} at #{hour}:#{minute} #{meridian}")
+    end
+  end
 end
