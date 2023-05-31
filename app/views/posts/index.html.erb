@@ -2,9 +2,12 @@
 
 <ul>
   <% @posts.reverse.each do |post| %>
-    <li>
-      <%=  render 'post', post: post %>
-    </li>
+    <% if current_user.friends.include?(post.author) ||
+      current_user == post.author %>
+      <li>
+        <%=  render 'post', post: post %>
+      </li>
+    <% end %>
   <% end %>
 </ul>
 
