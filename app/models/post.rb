@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   validates :content, presence: true, length: { in: 0..500 }
 
   belongs_to :author, class_name: 'User'
-  has_many :likes, dependent: :destroy
+  has_many :likes, as: :likeable, dependent: :destroy
   has_many :liking_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
 

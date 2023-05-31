@@ -5,15 +5,16 @@ class LikesController < ApplicationController
   end
 
   def create
-    set_post
+    @likeable = find_likeable
 
-    return if Like.duplicate?(@post, current_user)
+    # return if Like.duplicate?(@post, current_user)
 
-    @like = Like.new(post: @post, user: current_user)
+    @like = @likeable.likes.build(user: current_user)
+
 
     respond_to do |format|
       if @like.save
-        format.turbo_stream { render turbo_stream: turbo_stream.update(@post) }
+        format.turbo_stream { render turbo_stream: turbo_stream.update(@like.likeable) }
         format.html {
           redirect_to user_path(current_user),
           notice: "Post was successfully liked." }
@@ -24,13 +25,13 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    set_post
-    @like = Like.where(post_id: @post)
-                .where(user_id: current_user).take
+    @likeable = find_likeable
+    @like = Like.where(likeable: @likeable)
+                .where(user: current_user).take
 
     @like.destroy
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.update(@post) }
+      format.turbo_stream { render turbo_stream: turbo_stream.update(@like.likeable) }
       format.html {
         redirect_to posts_url,
         notice: 'Post was successfully unliked.' }
@@ -46,5 +47,15 @@ class LikesController < ApplicationController
   def unauthorized
     flash[:alert] = 'You are not authorized to do that'
     redirect_to root_path
+  end
+
+  def find_likeable
+    if params[:post_id]
+      Post.find(params[:post_id])
+    elsif params[:comment_id]
+      Comment.find(params[:comment_id])
+    else
+       render :new, status: :unprocessable_entity, notice: 'Invalid likeable object.'
+    end
   end
 end
