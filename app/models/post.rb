@@ -31,4 +31,8 @@ class Post < ApplicationRecord
   def formatted_date
     created_at.strftime('%B %e at %-l:%M %p')
   end
+
+  def self.reverse_chronological
+    order("created_at DESC")
+  end
 end
