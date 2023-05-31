@@ -1,16 +1,19 @@
 <%= turbo_frame_tag comment do %>
+  <li><%= comment.author.username %></li>
   <li><%= comment.content %></li>
-  <li>
-    <%= link_to 'Edit Comment',
-      edit_user_post_comment_path(comment.author, comment.post, comment)
-    %>
+  <% if current_user == comment.author %>
+    <li>
+      <%= link_to 'Edit Comment',
+        edit_user_post_comment_path(comment.author, comment.post, comment)
+      %>
+      </li>
+    <li>
+      <%= link_to "Delete Comment",
+        user_post_comment_path(comment.author, comment.post, comment),
+        data: { turbo_method: :delete }
+      %>
     </li>
-  <li>
-    <%= link_to "Delete Comment",
-      user_post_comment_path(comment.author, comment.post, comment),
-      data: { turbo_method: :delete }
-    %>
-  </li>
+  <% end %>
   <br />
 <% end %>
 
