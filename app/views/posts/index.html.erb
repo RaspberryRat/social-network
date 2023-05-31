@@ -1,11 +1,11 @@
 <h1>Posts</h1>
 
-
-<%= turbo_frame_tag 'post' do %>
-  <p style="color: green"><%= notice %></p>
-
-
-  <%= render 'posts' %>
-<% end %>
+<ul>
+  <% @posts.reverse.each do |post| %>
+    <li>
+      <%=  render 'post', post: post %>
+    </li>
+  <% end %>
+</ul>
 
 

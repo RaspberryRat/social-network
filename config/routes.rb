@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'users/index'
-  root 'users#index'
+  root 'posts#index'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -11,9 +11,11 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :create] do
     resources :friendships, only: [:index, :new, :create, :update, :destroy]
-    resources :posts do
+    resources :posts, except: [:index] do
       resources :likes, only: [:new, :create, :destroy]
       resources :comments
     end
   end
+
+  resources :posts, only: [:index]
 end

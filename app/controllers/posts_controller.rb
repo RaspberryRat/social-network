@@ -3,8 +3,7 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @user = User.find(params[:user_id])
-    @posts = Post.show_posts(@user)
+    @posts = Post.all
   end
 
   # GET /posts/1 or /posts/1.json
