@@ -28,7 +28,7 @@ RSpec.describe Post, type: :model do
   context 'when a post has 1 likes' do
 
     it 'returns "{name of user} likes this" ' do
-      FactoryBot.create(:like, post: post1, user: user1)
+      FactoryBot.create(:like, likeable: post1, user: user1)
 
       display = post1.display_likes
       expect(display).to eq("#{user1.username} likes this")
@@ -38,8 +38,8 @@ RSpec.describe Post, type: :model do
   context 'when a post has 2 likes' do
 
     it 'returns "{name of user1} and {name of user2}  like this" ' do
-      FactoryBot.create(:like, post: post1, user: user1)
-      FactoryBot.create(:like, post: post1, user: user2)
+      FactoryBot.create(:like, likeable: post1, user: user1)
+      FactoryBot.create(:like, likeable: post1, user: user2)
 
 
       display = post1.display_likes
@@ -50,9 +50,9 @@ RSpec.describe Post, type: :model do
   context 'when a post has 3 likes' do
 
     it 'returns "{name of user1}, {name of user 2}, and {name of user3} like this" ' do
-      FactoryBot.create(:like, post: post1, user: user1)
-      FactoryBot.create(:like, post: post1, user: user2)
-      FactoryBot.create(:like, post: post1, user: user3)
+      FactoryBot.create(:like, likeable: post1, user: user1)
+      FactoryBot.create(:like, likeable: post1, user: user2)
+      FactoryBot.create(:like, likeable: post1, user: user3)
 
       display = post1.display_likes
       expect(display).to eq("#{user1.username}, #{user2.username}, and #{user3.username} like this")
@@ -62,10 +62,10 @@ RSpec.describe Post, type: :model do
   context 'when a post more than 3 likes' do
 
     it 'returns "{name of user} and 3 others like this" ' do
-      FactoryBot.create(:like, post: post1, user: user1)
-      FactoryBot.create(:like, post: post1, user: user2)
-      FactoryBot.create(:like, post: post1, user: user3)
-      FactoryBot.create(:like, post: post1, user: user4)
+      FactoryBot.create(:like, likeable: post1, user: user1)
+      FactoryBot.create(:like, likeable: post1, user: user2)
+      FactoryBot.create(:like, likeable: post1, user: user3)
+      FactoryBot.create(:like, likeable: post1, user: user4)
 
       return_values = [
                         "#{user1.username} and 3 others like this",
