@@ -17,7 +17,7 @@
     <%# render 'likes/like', likeable: comment %>
   <% if comment.liking_users.include?(current_user) %>
       <%= link_to "Unlike", comment_like_path(comment, comment.likes.where(user_id: current_user.id).take),
-      data: { turbo_method: :delete } %>
+      data: { turbo_method: :delete }, class: 'unlike-btn' %>
     <% else %>
       <%= form_with url: comment_likes_path(comment),
         method: :post do |f| %>

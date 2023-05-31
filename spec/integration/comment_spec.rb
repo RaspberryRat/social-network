@@ -65,27 +65,33 @@ RSpec.describe 'Using Posts', type: :system do
     expect(page).to_not have_content("Nobody likes this")
   end
 
-  # scenario 'unlike comment' do
-  #   visit user_path(user.id)
-  #   fill_in 'post_content', with: "This is what's on my mind!"
-  #   find('#post_content').send_keys(:enter)
-  #   fill_in 'comment_content', with: 'I know what you are thinking!'
-  #   find('#comment_content').send_keys(:enter)
+  scenario 'unlike comment' do
+    visit user_path(user.id)
+    fill_in 'post_content', with: "This is what's on my mind!"
+    find('#post_content').send_keys(:enter)
+    fill_in 'comment_content', with: 'I know what you are thinking!'
+    find('#comment_content').send_keys(:enter)
 
-  #   click_on 'Like'
-  #   expect(page).to have_content("#{user.username} likes this")
-  #   expect(page).to have_content("Nobody likes this")
+    post_like_btn = find("#likes input[name='commit']", match: :first)
+    post_like_btn.click
+    expect(page).to have_content("#{user.username} likes this")
+    expect(page).to have_content("Nobody likes this")
 
-  #   click_on 'Like'
-  #   expect(page).to have_content("#{user.username} likes this")
-  #   expect(page).to_not have_content("Nobody likes this")
+    comment = user.comments.last
+    comment_like_btn = find("#comment_#{comment.id} input[name='commit']", match: :first)
+    comment_like_btn.click
+    expect(page).to have_content("#{user.username} likes this")
+    expect(page).to_not have_content("Nobody likes this")
 
-  #   click_on 'Unlike'
-  #   expect(page).to have_content("Nobody likes this")
-  #   expect(page).to have_content("#{user.username} likes this")
+    post_unlike_btn = find("#likes .unlike-btn", match: :first)
+    post_unlike_btn.click
+    expect(page).to have_content("Nobody likes this")
+    expect(page).to have_content("#{user.username} likes this")
 
-  #   click_on 'Unlike'
-  #   expect(page).to have_content("Nobody likes this")
-  #   expect(page).to_not have_content("#{user.username} likes this")
-  # end
+    comment = user.comments.last
+    comment_unlike_btn = find("#comment_#{comment.id} .unlike-btn", match: :first)
+    comment_unlike_btn.click
+    expect(page).to have_content("Nobody likes this")
+    expect(page).to_not have_content("#{user.username} likes this")
+  end
 end
