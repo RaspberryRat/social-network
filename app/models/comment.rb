@@ -1,7 +1,11 @@
 class Comment < ApplicationRecord
+  include Likeable
+
   belongs_to :author, class_name: 'User'
   belongs_to :post
   has_many :likes, as: :likeable, dependent: :destroy
+  has_many :liking_users, through: :likes, source: :user
+
 
   validates :content, length: { in: 1..500 }
 

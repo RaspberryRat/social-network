@@ -1,12 +1,13 @@
  <li id="likes">
-  <% if post.liking_users.include?(current_user) %>
-    <%= link_to "Unlike", user_post_like_path(post.author, post, post.likes.where(user_id: current_user.id).take),
-    data: { turbo_method: :delete } %>
-  <% else %>
-    <%= form_with url: user_post_likes_path(post.author, post),
-      method: :post do |f| %>
-      <%= f.submit 'Like' %>
+  <%#only works for the post like path, wasn't able to DRY comment partial likes %>
+    <% if likeable.liking_users.include?(current_user) %>
+      <%= link_to "Unlike", user_post_like_path(likeable.author, likeable, likeable.likes.where(user_id: current_user.id).take), data: { turbo_method: :delete } %>
+    <% else %>
+      <%= form_with url: user_post_likes_path(likeable.author, likeable),
+        method: :post do |f| %>
+        <%= f.submit 'Like' %>
+      <% end %>
     <% end %>
   <% end %>
 </li>
-<li><%= post.display_likes %></li>
+<li><%= likeable.display_likes %></li>

@@ -14,6 +14,18 @@
       %>
     </li>
   <% end %>
+    <%# render 'likes/like', likeable: comment %>
+  <% if comment.liking_users.include?(current_user) %>
+      <%= link_to "Unlike", comment_like_path(comment, comment.likes.where(user_id: current_user.id).take),
+      data: { turbo_method: :delete } %>
+    <% else %>
+      <%= form_with url: comment_likes_path(comment),
+        method: :post do |f| %>
+        <%= f.submit 'Like' %>
+      <% end %>
+    <% end %>
+
+
   <br />
 <% end %>
 
