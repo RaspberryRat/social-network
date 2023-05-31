@@ -1,0 +1,12 @@
+ <li id="likes">
+  <% if post.liking_users.include?(current_user) %>
+    <%= link_to "Unlike", user_post_like_path(post.author, post, post.likes.where(user_id: current_user.id).take),
+    data: { turbo_method: :delete } %>
+  <% else %>
+    <%= form_with url: user_post_likes_path(post.author, post),
+      method: :post do |f| %>
+      <%= f.submit 'Like' %>
+    <% end %>
+  <% end %>
+</li>
+<li><%= post.display_likes %></li>
