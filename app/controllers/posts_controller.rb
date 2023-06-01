@@ -43,7 +43,7 @@ class PostsController < ApplicationController
           render turbo_stream: turbo_stream.prepend('posts', @post)
         }
         format.html {
-          redirect_to user_path(current_user),
+          redirect_to root_path,
           notice: "Post was successfully created." }
         # format.json { render :show, status: :created, location: @post }
       else

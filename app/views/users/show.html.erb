@@ -67,9 +67,7 @@
   <p><%= user.username %>'s Posts</p>
 
   <% if current_user == user %>
-    <div class="new-posts-link">
-      <%= turbo_frame_tag  id="new_post", src:new_user_post_path(user) %>
-    </div>
+    <%= render 'posts/new_post', user: user %>
   <% end %>
 
   <ul>
