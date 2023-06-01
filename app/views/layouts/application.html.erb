@@ -14,9 +14,9 @@
     <div class="main-nav">
       <div>
         <% if user_signed_in? %>
-          <%= current_user.username %></div>
+          <%= link_to current_user.username, user_path(current_user) %></div>
         <% end %>
-      <ul>
+        <ul>
           <% if user_signed_in? %>
           <li class="log-out-btn link-btn">
             <%= button_to "Logout", destroy_user_session_path, method: :delete  %>
@@ -32,7 +32,8 @@
             <%= link_to "Sign in", user_session_path %>
           </li>
           <% end %>
-    </div>
+        </div>
+      <div class="site-name"><%= link_to 'Fauxbook', root_path %></div>
 
     <div class="flash-message">
       <% flash.each do |name, message| %>
