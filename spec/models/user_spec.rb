@@ -136,6 +136,7 @@ RSpec.describe User, type: :model do
     it 'destroys all records where user is a friend' do
       friendship.confirm_friend
 
+      expect(Friendship.where(friend: user1)).to exist
       user1.destroy
 
       expect(Friendship.where(friend: user1)).to_not exist
