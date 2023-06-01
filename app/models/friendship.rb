@@ -1,6 +1,6 @@
 class Friendship < ApplicationRecord
   belongs_to :user
-  belongs_to :friend, class_name: 'User', dependent: :destroy
+  belongs_to :friend, class_name: 'User'
 
   validates :friend_id, uniqueness: { scope: :user_id }
   validate :not_own_friend

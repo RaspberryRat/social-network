@@ -131,4 +131,15 @@ RSpec.describe User, type: :model do
         expect(friends).to_not include(user3)
       end
     end
+
+  context 'when a user is destroyed' do
+    it 'destroys all records where user is a friend' do
+      friendship.confirm_friend
+
+      user1.destroy
+
+      expect(Friendship.where(friend: user1)).to_not exist
+    end
+  end
+
 end
