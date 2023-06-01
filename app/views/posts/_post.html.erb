@@ -1,6 +1,5 @@
-<% if current_user == post.author ||
-  !Friendship.where(friend: current_user, user: post.author).where(confirmed?: true).empty?
-  %>
+<% if current_user.friends.include?(post.author) ||
+  current_user == post.author %>
   <div class="post-box" data-controller="time">
     <%= turbo_frame_tag post do %>
       <li><%= post.author.username %></li>

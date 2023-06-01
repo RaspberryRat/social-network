@@ -30,6 +30,12 @@ class Friendship < ApplicationRecord
     Friendship.find(mutual_friend_record.id).update(confirmed?: true)
   end
 
+  # returns a list of all Users that are confirmed friends
+  def self.friend_list(user)
+    friends_id = self.where(user: user).where(confirmed?: true).pluck(:friend_id)
+     User.where(id: friends_id)
+  end
+
   private
 
   def add_mutual_friend
