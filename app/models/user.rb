@@ -17,4 +17,11 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: :post
   has_many :comments, foreign_key: 'author_id', class_name: 'Comment', dependent: :destroy
+
+
+  # returns a list of all Users that are confirmed friends
+  def friend_list
+    friends_id = Friendship.where(user: self).where(confirmed?: true).pluck(:friend_id)
+     User.where(id: friends_id)
+  end
 end

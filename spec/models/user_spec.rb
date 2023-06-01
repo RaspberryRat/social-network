@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  let(:user1) { FactoryBot.create(:user) }
+  let(:user2) { FactoryBot.create(:user) }
+  let(:user3) { FactoryBot.create(:user) }
+  let!(:friendship) { Friendship.create(user: user1, friend: user2) }
+  let!(:friendship2) { Friendship.create(user: user1, friend: user3) }
+
   context 'when username, email, and password is provided' do
     it 'is valid' do
       user = User.new(
@@ -109,4 +115,20 @@ RSpec.describe User, type: :model do
       expect(user).to_not be_valid
     end
   end
+
+  context 'when #friend_list called' do
+      it 'returns list of confirmed friends' do
+        friendship.confirm_friend
+        friends = user1.friend_list
+
+        expect(friends).to include(user2)
+      end
+
+      it "doesn't include unconfirmed friends" do
+        friendship.confirm_friend
+        friends = user1.friend_list
+
+        expect(friends).to_not include(user3)
+      end
+    end
 end

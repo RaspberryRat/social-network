@@ -1,4 +1,4 @@
-<% if current_user.friends.include?(post.author) ||
+<% if Friendship.friend_list(current_user) ||
   current_user == post.author %>
   <div class="post-box" data-controller="time">
     <%= turbo_frame_tag post do %>
