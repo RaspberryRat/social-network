@@ -4,8 +4,12 @@ RSpec.describe User, type: :model do
   let(:user1) { FactoryBot.create(:user) }
   let(:user2) { FactoryBot.create(:user) }
   let(:user3) { FactoryBot.create(:user) }
+  let(:user4) { FactoryBot.create(:user) }
   let!(:friendship) { Friendship.create(user: user1, friend: user2) }
   let!(:friendship2) { Friendship.create(user: user1, friend: user3) }
+  let!(:friendship3) { Friendship.create(user: user4, friend: user1) }
+
+
 
   context 'when username, email, and password is provided' do
     it 'is valid' do
@@ -131,6 +135,15 @@ RSpec.describe User, type: :model do
         expect(friends).to_not include(user3)
       end
     end
+
+  context 'when #unconfirmed_friends_list is called' do
+    it 'returns list of unconfirmed friends' do
+      unconfirmed = user1.unconfirmed_friends_list
+
+      expect(unconfirmed).to include(user2)
+      expect(unconfirmed).to include(user4)
+    end
+  end
 
   context 'when a user is destroyed' do
     it 'destroys all records where user is a friend' do
