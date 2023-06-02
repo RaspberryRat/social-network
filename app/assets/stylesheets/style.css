@@ -14,3 +14,7 @@ input[type="text"] {
 .comment-box {
   outline: 1px solid green;
 }
+
+.profile-image-small {
+  border-radius: 50%;
+}
