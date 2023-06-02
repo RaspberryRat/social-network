@@ -13,11 +13,9 @@
   <body>
     <div class="main-nav">
       <div>
-        <% if user_signed_in? %>
+      <% if user_signed_in? %>
           <%= link_to current_user.username, user_path(current_user) %></div>
-        <% end %>
         <ul>
-          <% if user_signed_in? %>
           <li class="log-out-btn link-btn">
             <%= button_to "Logout", destroy_user_session_path, method: :delete  %>
           </li>
@@ -25,7 +23,7 @@
           <li class="link-btn">
             <%= link_to "Sign up here", new_user_registration_path %>
           </li>
-          <% end %>
+        <% end %>
 
           <% unless user_signed_in? %>
           <li class="link-btn">
@@ -34,7 +32,9 @@
           <% end %>
         </div>
       <div class="site-name"><%= link_to 'Fauxbook', root_path %></div>
-      <div class="user-list"><%= link_to 'All users', users_path %></div>
+      <% if user_signed_in? %>
+        <div class="user-list"><%= link_to 'All users', users_path %></div>
+      <% end %>
 
     <div class="flash-message">
       <% flash.each do |name, message| %>
