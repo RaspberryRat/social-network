@@ -5,6 +5,7 @@ RSpec.describe User, type: :model do
   let(:user2) { FactoryBot.create(:user) }
   let(:user3) { FactoryBot.create(:user) }
   let(:user4) { FactoryBot.create(:user) }
+  let(:user5) { FactoryBot.create(:user) }
   let!(:friendship) { Friendship.create(user: user1, friend: user2) }
   let!(:friendship2) { Friendship.create(user: user1, friend: user3) }
   let!(:friendship3) { Friendship.create(user: user4, friend: user1) }
@@ -180,6 +181,18 @@ RSpec.describe User, type: :model do
 
       expect(unconfirmed).to include(user2)
       expect(unconfirmed).to include(user4)
+    end
+  end
+
+  context 'when user has pending friend requests' do
+    it 'returns true' do
+      expect(user1.friend_requests?).to be(true)
+    end
+  end
+
+  context 'when user has no pending friend requests' do
+    it 'returns false' do
+      expect(user5.friend_requests?).to be(false)
     end
   end
 

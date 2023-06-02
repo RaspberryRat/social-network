@@ -8,9 +8,7 @@
   <div class="notifications">
 
     <% if current_user == user %>
-      <% unless Friendship.
-        where(friend_id: user).
-        where(confirmed?: false).empty? %>
+      <% if user.friend_requests? %>
         <div class="friend-requests">
           <div>You have a friend request from:
           </div>

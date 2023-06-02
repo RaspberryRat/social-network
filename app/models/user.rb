@@ -25,6 +25,12 @@ class User < ApplicationRecord
      User.where(id: friends_id)
   end
 
+  def friend_requests?
+    return false if unconfirmed_friends_list.empty?
+
+    true
+  end
+
   def unconfirmed_friends_list
     friends_id = Friendship.where(user: self).where(confirmed?: false).pluck(:friend_id)
     users_id = Friendship.where(friend: self).where(confirmed?: false).pluck(:user_id)
