@@ -9,8 +9,10 @@ RSpec.describe 'Creating a user', type: :system do
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
     click_on 'Sign up'
+    sleep(0.1)
 
     visit users_path
+
     expect(page).to have_content('fakeman')
   end
 
