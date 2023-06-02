@@ -14,7 +14,7 @@
     <div class="main-nav">
       <div>
       <% if user_signed_in? %>
-          <%= link_to current_user.username, user_path(current_user) %></div>
+          <%= link_to current_user.fullname, user_path(current_user) %></div>
         <ul>
           <li class="log-out-btn link-btn">
             <%= button_to "Logout", destroy_user_session_path, method: :delete  %>

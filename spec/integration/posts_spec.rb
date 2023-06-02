@@ -44,7 +44,7 @@ RSpec.describe 'Using Posts', type: :system do
     find('#post_content').send_keys(:enter)
 
     click_on 'Like'
-    expect(page).to have_content("#{user.username} likes this")
+    expect(page).to have_content("#{user.fullname} likes this")
   end
 
   scenario 'unlike post' do
@@ -53,9 +53,9 @@ RSpec.describe 'Using Posts', type: :system do
     find('#post_content').send_keys(:enter)
 
     click_on 'Like'
-    expect(page).to have_content("#{user.username} likes this")
+    expect(page).to have_content("#{user.fullname} likes this")
 
     click_on 'Unlike'
-    expect(page).to_not have_content("#{user.username} likes this")
+    expect(page).to_not have_content("#{user.fullname} likes this")
   end
 end

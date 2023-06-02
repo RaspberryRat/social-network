@@ -5,7 +5,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  validates :username, presence: true, uniqueness: true, length: { in: 3..20 }
+  validates :first_name, presence: true, length: { in: 3..20 }
+  validates :last_name, presence: true, length: { in: 3..20 }
   validates :email, presence: true, uniqueness: true,
             format: { with: URI::MailTo::EMAIL_REGEXP }
 
@@ -36,6 +37,10 @@ class User < ApplicationRecord
     users_id = Friendship.where(friend: self).where(confirmed?: false).pluck(:user_id)
     unconfirmed_ids = friends_id + users_id
     User.where(id: unconfirmed_ids)
+  end
+
+  def fullname
+    "#{first_name} #{last_name}"
   end
 
   private

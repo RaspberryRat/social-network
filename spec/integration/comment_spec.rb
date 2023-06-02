@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Using Posts', type: :system do
+RSpec.describe 'Using Comments', type: :system do
   let(:user) { FactoryBot.create(:user) }
 
   before do
@@ -59,9 +59,9 @@ RSpec.describe 'Using Posts', type: :system do
 
     click_on 'Like'
     expect(page).to have_content("Nobody likes this")
-    expect(page).to have_content("#{user.username} likes this")
+    expect(page).to have_content("#{user.fullname} likes this")
     click_on 'Like'
-    expect(page).to have_content("#{user.username} likes this")
+    expect(page).to have_content("#{user.fullname} likes this")
     expect(page).to_not have_content("Nobody likes this")
   end
 
@@ -74,24 +74,24 @@ RSpec.describe 'Using Posts', type: :system do
 
     post_like_btn = find("#likes input[name='commit']", match: :first)
     post_like_btn.click
-    expect(page).to have_content("#{user.username} likes this")
+    expect(page).to have_content("#{user.fullname} likes this")
     expect(page).to have_content("Nobody likes this")
 
     comment = user.comments.last
     comment_like_btn = find("#comment_#{comment.id} input[name='commit']", match: :first)
     comment_like_btn.click
-    expect(page).to have_content("#{user.username} likes this")
+    expect(page).to have_content("#{user.fullname} likes this")
     expect(page).to_not have_content("Nobody likes this")
 
     post_unlike_btn = find("#likes .unlike-btn", match: :first)
     post_unlike_btn.click
     expect(page).to have_content("Nobody likes this")
-    expect(page).to have_content("#{user.username} likes this")
+    expect(page).to have_content("#{user.fullname} likes this")
 
     comment = user.comments.last
     comment_unlike_btn = find("#comment_#{comment.id} .unlike-btn", match: :first)
     comment_unlike_btn.click
     expect(page).to have_content("Nobody likes this")
-    expect(page).to_not have_content("#{user.username} likes this")
+    expect(page).to_not have_content("#{user.fullname} likes this")
   end
 end

@@ -50,10 +50,11 @@ RSpec.describe User, type: :model do
   end
 
 
-  context 'when username, email, and password is provided' do
+  context 'when firstname, lastname, email, and password is provided' do
     it 'is valid' do
       user = User.new(
-        username: 'user',
+        first_name: 'user',
+        last_name: 'userlast',
         email: 'test@test.com',
         password: 'password'
       )
@@ -61,10 +62,23 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context 'when username is nil' do
+  context 'when firstname is nil' do
     it 'is not valid' do
       user = User.new(
-        username: nil,
+        first_name: nil,
+        last_name: 'userlast',
+        email: 'test@test.com',
+        password: 'password'
+      )
+      expect(user).to_not be_valid
+    end
+  end
+
+  context 'when lastname is nil' do
+    it 'is not valid' do
+      user = User.new(
+        first_name: 'user',
+        last_name: nil,
         email: 'test@test.com',
         password: 'password'
       )
@@ -75,7 +89,8 @@ RSpec.describe User, type: :model do
   context 'when email is nil' do
     it 'is not valid' do
       user = User.new(
-        username: 'user',
+        first_name: 'user',
+        last_name: 'userlast',
         email: nil,
         password: 'password'
       )
@@ -86,7 +101,8 @@ RSpec.describe User, type: :model do
   context 'when password is nil' do
     it 'is not valid' do
       user = User.new(
-        username: 'user',
+        first_name: 'user',
+        last_name: 'userlast',
         email: 'test@test.com',
         password: nil
       )
@@ -97,7 +113,8 @@ RSpec.describe User, type: :model do
   context 'when email format is incorrect' do
     it 'is not valid' do
       user = User.new(
-        username: 'user',
+        first_name: 'user',
+        last_name: 'userlast',
         email: 'test@',
         password: 'password'
       )
@@ -105,31 +122,17 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context 'when user already exisits' do
+  context 'when email already exists in database' do
     it 'is not valid' do
       user1 = User.create(
-        username: 'user',
+        first_name: 'user',
+        last_name: 'userlast',
         email: 'test@test.com',
         password: 'password'
       )
       user2 = User.new(
-        username: 'user',
-        email: 'test@newtest.com',
-        password: 'password'
-      )
-      expect(user2).to_not be_valid
-    end
-  end
-
-  context 'when email already exisits in database' do
-    it 'is not valid' do
-      user1 = User.create(
-        username: 'user1',
-        email: 'test@test.com',
-        password: 'password'
-      )
-      user2 = User.new(
-        username: 'user2',
+        first_name: 'user',
+        last_name: 'userlast',
         email: 'test@test.com',
         password: 'password'
       )
@@ -137,10 +140,11 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context 'when username is too short' do
+  context 'when firstname is too short' do
     it 'is not valid' do
       user = User.new(
-        username: 'us',
+        first_name: 'u',
+        last_name: 'userlast',
         email: 'test@test.com',
         password: 'password'
       )
@@ -148,10 +152,35 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context 'when username is too short' do
+  context 'when lastname is too short' do
     it 'is not valid' do
       user = User.new(
-        username: 'thisusernamethatistoolong',
+        first_name: 'user',
+        last_name: 'u',
+        email: 'test@test.com',
+        password: 'password'
+      )
+      expect(user).to_not be_valid
+    end
+  end
+
+  context 'when firstname is too long' do
+    it 'is not valid' do
+      user = User.new(
+        first_name: 'thisusernamethatistoolong',
+        last_name: 'user',
+        email: 'test@test.com',
+        password: 'password'
+      )
+      expect(user).to_not be_valid
+    end
+  end
+
+  context 'when lastname is too long' do
+    it 'is not valid' do
+      user = User.new(
+        last_name: 'thisusernamethatistoolong',
+        first_name: 'user',
         email: 'test@test.com',
         password: 'password'
       )

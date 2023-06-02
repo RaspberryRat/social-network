@@ -54,7 +54,7 @@ RSpec.describe Post, type: :model do
       FactoryBot.create(:like, likeable: post1, user: user1)
 
       display = post1.display_likes
-      expect(display).to eq("#{user1.username} likes this")
+      expect(display).to eq("#{user1.fullname} likes this")
     end
   end
 
@@ -65,7 +65,7 @@ RSpec.describe Post, type: :model do
       FactoryBot.create(:like, likeable: post1, user: user2)
 
       display = post1.display_likes
-      expect(display).to eq("#{user1.username} and #{user2.username} like this")
+      expect(display).to eq("#{user1.fullname} and #{user2.fullname} like this")
     end
   end
 
@@ -77,7 +77,7 @@ RSpec.describe Post, type: :model do
       FactoryBot.create(:like, likeable: post1, user: user3)
 
       display = post1.display_likes
-      expect(display).to eq("#{user1.username}, #{user2.username}, and #{user3.username} like this")
+      expect(display).to eq("#{user1.fullname}, #{user2.fullname}, and #{user3.fullname} like this")
     end
   end
 
@@ -90,10 +90,10 @@ RSpec.describe Post, type: :model do
       FactoryBot.create(:like, likeable: post1, user: user4)
 
       return_values = [
-                        "#{user1.username} and 3 others like this",
-                        "#{user2.username} and 3 others like this",
-                        "#{user3.username} and 3 others like this",
-                        "#{user4.username} and 3 others like this"
+                        "#{user1.fullname} and 3 others like this",
+                        "#{user2.fullname} and 3 others like this",
+                        "#{user3.fullname} and 3 others like this",
+                        "#{user4.fullname} and 3 others like this"
                       ]
       display = post1.display_likes
       expect(return_values).to include(display)

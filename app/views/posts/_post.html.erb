@@ -4,7 +4,7 @@
     <%= turbo_frame_tag post do %>
       <li>
         <%= image_tag post.author.gravatar_url(:size => 30), class: "profile-image-small" %>
-      <%= post.author.username %></li>
+      <%= post.author.fullname %></li>
       <li data-time-target="postTime"><%= post.created_at %></li>
       <br />
       <li><%= post.content %></li>

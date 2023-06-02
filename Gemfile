@@ -77,3 +77,6 @@ end
 
 gem 'devise'
 gem 'gravtastic'
+gem 'omniauth-facebook'
+gem "figaro"
+gem 'omniauth-rails_csrf_protection'
