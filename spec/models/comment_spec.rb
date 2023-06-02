@@ -7,7 +7,21 @@ RSpec.describe Comment, type: :model do
   let(:user3) {FactoryBot.create(:user) }
   let(:user4) {FactoryBot.create(:user) }
   let(:comment1) { FactoryBot.create(:comment) }
+  let(:comment2) { FactoryBot.create(:comment) }
 
+
+  context 'when Comment associations called' do
+    it 'returns comment1' do
+      expect(Comment.all).to include(comment1)
+      expect(Comment.first).to eq(comment1)
+    end
+    it 'returns 2' do
+      # have to assign comments to variables or test doesn't pass
+      c = comment1
+      c2 = comment2
+      expect(Comment.count).to be(2)
+    end
+  end
   context 'when comment is valid' do
     it 'is valid' do
       comment = Comment.new(

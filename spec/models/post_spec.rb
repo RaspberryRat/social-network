@@ -6,11 +6,34 @@ RSpec.describe Post, type: :model do
   let(:user2) {FactoryBot.create(:user) }
   let(:user3) {FactoryBot.create(:user) }
   let(:user4) {FactoryBot.create(:user) }
+  let!(:post2) {FactoryBot.create(:post, author: user1, content: 'test') }
 
+  context 'when Post associations called' do
+    it 'returns 2 record' do
+      expect(Post.count).to eq(2)
+    end
 
+    it 'includes post record' do
+      expect(Post.all).to include(post1)
+      expect(Post.all).to include(post2)
+
+    end
+
+    it 'returns post record' do
+      expect(Post.first).to eq(post1)
+    end
+
+    it 'returns user1' do
+      expect(post2.author).to eq(user1)
+    end
+
+    it 'returns post1' do
+      post_message = 'test'
+      expect(post2.content).to eq(post_message)
+    end
+  end
 
   context 'when show posts is called' do
-
     let!(:post) { FactoryBot.create(:post, author: user1, content: 'test')}
 
     it 'returns authors post' do
@@ -40,7 +63,6 @@ RSpec.describe Post, type: :model do
     it 'returns "{name of user1} and {name of user2}  like this" ' do
       FactoryBot.create(:like, likeable: post1, user: user1)
       FactoryBot.create(:like, likeable: post1, user: user2)
-
 
       display = post1.display_likes
       expect(display).to eq("#{user1.username} and #{user2.username} like this")

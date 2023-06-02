@@ -5,6 +5,28 @@
     let(:user2) { FactoryBot.create(:user) }
     let!(:friendship) { Friendship.create(user: user1, friend: user2) }
 
+    context 'when Friendship associations called' do
+      it 'returns 1 record' do
+        expect(Friendship.count).to be(1)
+      end
+
+      it 'includes friendship record' do
+        expect(Friendship.all).to include(friendship)
+      end
+
+      it 'returns friendship record' do
+        expect(Friendship.first).to eq(friendship)
+      end
+
+      it 'returns user1' do
+        expect(friendship.user).to eq(user1)
+      end
+
+      it 'returns user2' do
+        expect(friendship.friend).to eq(user2)
+      end
+    end
+
     context 'when friend confirms friendship' do
       it 'changes confirmed? to true on mutual friend records' do
 

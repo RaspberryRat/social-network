@@ -8,7 +8,45 @@ RSpec.describe User, type: :model do
   let!(:friendship) { Friendship.create(user: user1, friend: user2) }
   let!(:friendship2) { Friendship.create(user: user1, friend: user3) }
   let!(:friendship3) { Friendship.create(user: user4, friend: user1) }
+  let!(:post1) { FactoryBot.create(:post, author: user1, content: 'test') }
+  let(:comment1) { FactoryBot.create(:comment, author: user1, content: 'test') }
+  let(:like1) { FactoryBot.create(:like, likeable: post1, user: user1) }
 
+
+
+  context 'when User associations called' do
+    it 'returns 4 record' do
+      expect(User.count).to eq(4)
+    end
+
+    it 'includes user records' do
+      expect(User.all).to include(user1)
+      expect(User.all).to include(user2)
+      expect(User.all).to include(user3)
+      expect(User.all).to include(user4)
+    end
+
+    it 'returns user1 record' do
+      expect(User.first).to eq(user1)
+    end
+
+    it 'includes post1' do
+      expect(user1.posts).to include(post1)
+    end
+
+    it 'includes comment1' do
+      expect(user1.comments).to include(comment1)
+    end
+
+    it 'includes like1' do
+      expect(user1.likes).to include(like1)
+    end
+
+    it 'includes user2' do
+      expect(user1.friends).to include(user2)
+      expect(user1.friends).to include(user3)
+    end
+  end
 
 
   context 'when username, email, and password is provided' do
