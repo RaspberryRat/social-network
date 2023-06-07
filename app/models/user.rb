@@ -10,6 +10,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true,
             format: { with: URI::MailTo::EMAIL_REGEXP }
 
+  has_one_attached :profile_picture
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships, source: :friend
   has_many :posts, foreign_key: 'author_id', class_name: 'Post', dependent: :destroy

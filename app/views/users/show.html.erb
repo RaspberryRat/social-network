@@ -19,7 +19,16 @@
   </div>
 </div>
 
-<div class="user-picture"><%= image_tag user.gravatar_url %></div>
+<div class="user-picture">
+  <% if user.profile_picture.attached? %>
+    <%= image_tag user.profile_picture, class: 'profile-image-upload' %>
+  <% else %>
+    <%= image_tag user.gravatar_url %>
+  <% end %>
+</div>
+
+
+<div class="upload"><%= render 'upload_profile' %></div>
 <ul>
   <li>Name: <%= user.fullname %></li>
   <li>Email: <%= user.email %></li>

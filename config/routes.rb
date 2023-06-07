@@ -7,8 +7,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-
   resources :users, only: [:show, :create, :index] do
+    patch 'update_profile_picture', on: :member
     resources :friendships, only: [:index, :new, :create, :update, :destroy]
     resources :posts, except: [:index] do
       resources :likes, only: [:new, :create, :destroy]
@@ -20,5 +20,3 @@ Rails.application.routes.draw do
   end
   resources :posts, only: [:index]
 end
-
-

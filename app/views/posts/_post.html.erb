@@ -2,9 +2,13 @@
   current_user == post.author %>
   <div class="post-box" data-controller="time">
     <%= turbo_frame_tag post do %>
-      <li>
-        <%= image_tag post.author.gravatar_url(:size => 30), class: "profile-image-small" %>
-      <%= post.author.fullname %></li>
+      <li class="profile-image-small">
+        <% if post.author.profile_picture.attached? %>
+          <%= image_tag post.author.profile_picture %>
+        <% else %>
+          <%= image_tag post.author.gravatar_url %>
+        <% end %>
+        <%= post.author.fullname %></li>
       <li data-time-target="postTime"><%= post.created_at %></li>
       <br />
       <li><%= post.content %></li>

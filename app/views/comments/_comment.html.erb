@@ -1,6 +1,12 @@
   <div class="comment-box">
     <%= turbo_frame_tag comment do %>
-      <li><%= comment.author.fullname %></li>
+    <li class="profile-image-small">
+        <% if comment.author.profile_picture.attached? %>
+          <%= image_tag comment.author.profile_picture %>
+        <% else %>
+          <%= image_tag comment.author.gravatar_url %>
+        <% end %>
+        <%= comment.author.fullname %></li>
       <li><%= comment.content %></li>
       <% if current_user == comment.author %>
         <li>
