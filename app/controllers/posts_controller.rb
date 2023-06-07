@@ -32,7 +32,9 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = current_user.posts.build(post_params)
+    @postable = find_post_type
+    # debugger
+    @post = current_user.posts.build(postable: @postable)
     set_user
 
     return unauthorized unless current_user == @user
@@ -111,5 +113,19 @@ class PostsController < ApplicationController
   def unauthorized
     flash[:alert] = 'You are not authorized to do that'
     redirect_to root_path
+  end
+
+  def find_post_type
+    if !post_params[:content].nil?
+      Text.new(post_params)
+    elsif !post_params[:image].nil?
+      upload_image
+    else
+       render :new, status: :unprocessable_entity, notice: 'Invalid Post object.'
+    end
+  end
+
+  def upload_image
+
   end
 end
