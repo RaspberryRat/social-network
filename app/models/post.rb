@@ -22,7 +22,7 @@ class Post < ApplicationRecord
     order("created_at DESC")
   end
 
-  def remove_associated_post
+  def destroy_associated_post
     postable.destroy
   end
 end

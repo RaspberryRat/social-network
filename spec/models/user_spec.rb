@@ -9,8 +9,8 @@ RSpec.describe User, type: :model do
   let!(:friendship) { Friendship.create(user: user1, friend: user2) }
   let!(:friendship2) { Friendship.create(user: user1, friend: user3) }
   let!(:friendship3) { Friendship.create(user: user4, friend: user1) }
-  let!(:post1) { FactoryBot.create(:post, author: user1, content: 'test') }
-  let(:comment1) { FactoryBot.create(:comment, author: user1, content: 'test') }
+  let!(:post1) { FactoryBot.create(:post, author: user1) }
+  let(:comment1) { FactoryBot.create(:comment, author: user1) }
   let(:like1) { FactoryBot.create(:like, likeable: post1, user: user1) }
 
 
