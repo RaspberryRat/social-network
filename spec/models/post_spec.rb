@@ -122,4 +122,19 @@ RSpec.describe Post, type: :model do
       expect(post).to_not be_valid
     end
   end
+
+  context 'when post is deleted, delete associated textpost' do
+    it 'textpost is not found' do
+      text = TextPost.new(content: 'test')
+      post = Post.create(author: user1, postable: text)
+
+      expect(TextPost.all).to include(text)
+      expect(Post.all).to include(post)
+
+      post.destroy
+
+      expect(Post.all).to_not include(post)
+      expect(TextPost.all).to_not include(text)
+    end
+  end
 end
