@@ -11,7 +11,13 @@
         <%= post.author.fullname %></li>
       <li data-time-target="postTime"><%= post.created_at %></li>
       <br />
-      <li><%= post.content %></li>
+      <li>
+        <% if post.postable_type == 'TextPost' %>
+          <%= post.postable.content %>
+        <% else %>
+          <%= post.postable.url %>
+        <% end %>
+      </li>
       <li><%= link_to 'Edit Post', edit_user_post_path(post.author, post) %></li>
       <li>
         <%= button_to "Delete Post", user_post_path(post.author, post),
