@@ -30,3 +30,7 @@ input[type="text"] {
   width: 300px;
   height: auto;
 }
+
+.comment-comments {
+  outline: 1px solid pink;
+}
