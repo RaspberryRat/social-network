@@ -117,7 +117,7 @@ class PostsController < ApplicationController
 
   def find_post_type
     if !post_params[:content].nil?
-      Text.new(post_params)
+      TextPost.new(post_params)
     elsif !post_params[:image].nil?
       upload_image
     else
