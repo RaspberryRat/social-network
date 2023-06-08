@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   has_many :liking_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
 
-  after_destroy :remove_associated_post
+  after_destroy :destroy_associated_post
 
   def self.show_posts(user)
     Post.where(author: user)
@@ -20,5 +20,9 @@ class Post < ApplicationRecord
 
   def self.reverse_chronological
     order("created_at DESC")
+  end
+
+  def remove_associated_post
+    postable.destroy
   end
 end

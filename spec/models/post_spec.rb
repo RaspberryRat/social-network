@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  let!(:post1) {FactoryBot.create(:post) }
+  let!(:post1) { FactoryBot.create(:post) }
   let(:user1) {FactoryBot.create(:user) }
   let(:user2) {FactoryBot.create(:user) }
   let(:user3) {FactoryBot.create(:user) }
   let(:user4) {FactoryBot.create(:user) }
-  let!(:post2) {FactoryBot.create(:post, author: user1, content: 'test') }
-
+  let(:testpost) { FactoryBot.create(:text_post, content: 'test') }
+  let!(:post2) { FactoryBot.create(:post, author: user1, postable: testpost) }
   context 'when Post associations called' do
     it 'returns 2 record' do
       expect(Post.count).to eq(2)
@@ -16,7 +16,6 @@ RSpec.describe Post, type: :model do
     it 'includes post record' do
       expect(Post.all).to include(post1)
       expect(Post.all).to include(post2)
-
     end
 
     it 'returns post record' do
@@ -29,12 +28,12 @@ RSpec.describe Post, type: :model do
 
     it 'returns post1' do
       post_message = 'test'
-      expect(post2.content).to eq(post_message)
+      expect(post2.postable.content).to eq(post_message)
     end
   end
 
   context 'when show posts is called' do
-    let!(:post) { FactoryBot.create(:post, author: user1, content: 'test')}
+    let!(:post) { FactoryBot.create(:post, author: user1)}
 
     it 'returns authors post' do
       expect(Post.show_posts(user1)).to include(post)
@@ -102,7 +101,7 @@ RSpec.describe Post, type: :model do
 
   context 'when a post is correct' do
     it 'is valid' do
-      post = Post.new(content: 'Test', author: user1)
+      post = Post.new(author: user1, postable: testpost)
 
       expect(post).to be_valid
     end
@@ -110,52 +109,17 @@ RSpec.describe Post, type: :model do
 
   context 'when a post is missing author' do
     it 'is not valid' do
-      post = Post.new(content: 'Test', author: nil)
+      post = Post.new(postable: testpost, author: nil)
 
       expect(post).to_not be_valid
     end
   end
 
-  context 'when a post is missing content' do
+  context 'when a post is missing postable' do
     it 'is not valid' do
-      post = Post.new(content: nil, author: user1)
+      post = Post.new(postable: nil, author: user1)
 
       expect(post).to_not be_valid
     end
   end
-
-  context 'when a content of post is 0 characters' do
-    it 'is not valid' do
-      post = Post.new(content: '', author: user1)
-
-      expect(post).to_not be_valid
-    end
-  end
-
-  context 'when a content of post is over 500 characters' do
-    it 'is not valid' do
-
-      too_long_content = 'gxyuyncbsjotlvyojxueymgrilijplnvpldzsqjdiqdrimgdvtoeawgguamevpclboazzsrxptdywksdzfwfjeuuzklweqzzwkzaxkhymrdonhpavrxrgwazkyhnplqvhalvjbselqgvkqwrycjfhfieabjanopaljhujdqghzejntmraxkkyapjswbnudflftffvzckwgdoltbxpofeaxgrsqolhxqakehloxdlgtlqvqzbghjqfuzeeqkvdcunaufzkxjpsifqjwogioxyevupzpjjronxbcicwzuiyqqroawkrrtokscqbbpfxczwvvmtfqagjjxzpghkszvxnnhtefiunadnqtblyitmlljoqeffyugtzowiizhlmfmqyianrrzopbajxydmxyuzlbtwwbrjhjnvvhfpenkbhweomswnbucmnzjhhhtytidresisyyjuunnibvuqerxeztzfmpejefqgqahtvebpvyhpiuuiiyqkj'
-
-      post = Post.new(content: too_long_content, author: user1)
-
-      expect(post).to_not be_valid
-    end
-  end
-
-  # been superseded by stimuls controller
-  # context 'when formatted date is used' do
-  #   it 'returns current date and time' do
-  #     month = Date::MONTHNAMES[Time.now.utc.month]
-  #     day = Time.now.utc.day
-  #     hour = Time.now.utc.hour
-  #     meridian = hour > 12 ? 'PM' : 'AM'
-  #     hour = hour - 12 if hour > 12
-  #     minute = Time.now.utc.min
-
-
-  #     readable_date = post1.formatted_date
-  #     expect(readable_date).to eq("#{month} #{day} at #{hour}:#{minute} #{meridian}")
-  #   end
-  # end
 end
