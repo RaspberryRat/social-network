@@ -34,7 +34,6 @@ class PostsController < ApplicationController
   def create
     @postable = find_post_type
 
-
     @post = current_user.posts.build(postable: @postable)
     set_user
 
@@ -113,15 +112,14 @@ class PostsController < ApplicationController
 
   # Assigns correct postable
   def find_post_type
-    if !post_params[:content] == ''
-      TextPost.new(post_params)
-    elsif !post_params[:image].nil?
-      return upload_image if upload_image
+    return TextPost.new(post_params) unless post_params[:content].empty?
 
-      render :new, status: :unprocessable_entity, notice: 'Invalid Post object.'
+    if !post_params[:image].nil?
+      return upload_image if upload_image
     else
       render :new, status: :unprocessable_entity, notice: 'Invalid Post object.'
     end
+    render :new, status: :unprocessable_entity, notice: 'Invalid Post object.'
   end
 
   def upload_image

@@ -7,6 +7,8 @@ class Post < ApplicationRecord
   has_many :liking_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
 
+  after_destroy :remove_associated_post
+
   def self.show_posts(user)
     Post.where(author: user)
   end
