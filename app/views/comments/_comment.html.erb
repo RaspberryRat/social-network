@@ -11,12 +11,12 @@
       <% if current_user == comment.author %>
         <li>
           <%= link_to 'Edit Comment',
-            edit_user_post_comment_path(comment.author, comment.post, comment)
+            edit_user_post_comment_path(comment.author, comment.commentable, comment)
           %>
           </li>
         <li>
           <%= button_to "Delete Comment",
-            user_post_comment_path(comment.author, comment.post, comment),
+            user_post_comment_path(comment.author, comment.commentable, comment),
             method: :delete %>
         </li>
       <% end %>

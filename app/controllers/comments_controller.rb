@@ -7,18 +7,18 @@ class CommentsController < ApplicationController
   end
 
   def create
-    set_post
+    set_commentable
+
     @comment = Comment.new(
-      comment_params.merge(post: @post, author: current_user)
-    )
+      comment_params.merge(commentable: @commentable, author: current_user))
 
     respond_to do |format|
       if @comment.save
         format.turbo_stream {
-          render turbo_stream: turbo_stream.append("comment_#{@post.id}", @comment)
+          render turbo_stream: turbo_stream.append("comment_#{@commentable.id}", @comment)
         }
         format.html {
-          redirect_to user_path(@post.author),
+          redirect_to user_path(@commentable.author),
           notice: "Comment was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -95,6 +95,10 @@ class CommentsController < ApplicationController
 
   def set_comment
     @comment = Comment.find(params[:id])
+  end
+
+  def set_commentable
+    @commentable = set_post
   end
 
 end
