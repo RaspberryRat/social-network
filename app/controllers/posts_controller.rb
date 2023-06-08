@@ -33,7 +33,8 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @postable = find_post_type
-    # debugger
+
+
     @post = current_user.posts.build(postable: @postable)
     set_user
 
@@ -47,10 +48,8 @@ class PostsController < ApplicationController
         format.html {
           redirect_to root_path,
           notice: "Post was successfully created." }
-        # format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
-        # format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -67,10 +66,8 @@ class PostsController < ApplicationController
         format.html {
           redirect_to user_path(current_user),
           notice: "Post was successfully updated." }
-        # format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        # format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -90,7 +87,6 @@ class PostsController < ApplicationController
       format.html {
         redirect_to posts_url,
         notice: 'Post was successfully destroyed.' }
-      # format.json { head :no_content }
     end
   end
 
@@ -107,7 +103,7 @@ class PostsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content, :image)
   end
 
   def unauthorized
@@ -115,17 +111,28 @@ class PostsController < ApplicationController
     redirect_to root_path
   end
 
+  # Assigns correct postable
   def find_post_type
-    if !post_params[:content].nil?
+    if !post_params[:content] == ''
       TextPost.new(post_params)
     elsif !post_params[:image].nil?
-      upload_image
+      return upload_image if upload_image
+
+      render :new, status: :unprocessable_entity, notice: 'Invalid Post object.'
     else
-       render :new, status: :unprocessable_entity, notice: 'Invalid Post object.'
+      render :new, status: :unprocessable_entity, notice: 'Invalid Post object.'
     end
   end
 
   def upload_image
+    @image_post = ImagePost.new
 
+    if @image_post.save
+      @image_post.image.attach(post_params[:image])
+      @image_post
+    else
+      render :new, status: :unprocessable_entity, notice: 'Invalid ImagePost object.'
+      false
+    end
   end
 end

@@ -15,7 +15,7 @@
         <% if post.postable_type == 'TextPost' %>
           <%= post.postable.content %>
         <% else %>
-          <%= post.postable.url %>
+          <%= image_tag post.postable.image, class: 'post-image' %>
         <% end %>
       </li>
       <li><%= link_to 'Edit Post', edit_user_post_path(post.author, post) %></li>

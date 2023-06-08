@@ -17,6 +17,8 @@
       <%= form.label :content, ': ' %>
       <%= form.text_field :content,
         placeholder: "What's on your mind?, #{current_user.first_name}", data: { 'form-target': 'contentField' } %>
+      <%= form.label :image %>
+      <%= form.file_field :image %>
     </div>
     <div>
       <%= form.submit %>

@@ -25,3 +25,8 @@ input[type="text"] {
   width: 150px;
   height: auto;
 }
+
+.post-image {
+  width: 300px;
+  height: auto;
+}
