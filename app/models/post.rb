@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
   include Likeable
 
-  belongs_to :author, class_name: 'User'
   belongs_to :postable, polymorphic: true
+  belongs_to :author, class_name: 'User'
   has_many :likes, as: :likeable, dependent: :destroy
   has_many :liking_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
