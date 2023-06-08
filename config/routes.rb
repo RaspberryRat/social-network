@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     resources :friendships, only: [:index, :new, :create, :update, :destroy]
     resources :posts, except: [:index] do
       resources :likes, only: [:new, :create, :destroy]
-      resources :comments
+      resources :comments do
+        resources :comments
+      end
     end
   end
   resources :comments do

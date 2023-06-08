@@ -34,5 +34,9 @@
       <li class="comment-comments"><%= render comment.comments %></li>
       <br />
       <li><%= comment.display_likes %></li>
+
+      <div class="new-comment-link">
+      <%= turbo_frame_tag  id="new_comment", src:new_user_post_comment_comment_path(comment.author, comment.commentable, comment) %>
+    </div>
     <% end %>
   </div>
