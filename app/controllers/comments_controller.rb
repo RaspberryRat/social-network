@@ -10,7 +10,8 @@ class CommentsController < ApplicationController
     set_commentable
 
     @comment = Comment.new(
-      comment_params.merge(commentable: @commentable, author: current_user))
+      comment_params.merge(commentable: @commentable, author: current_user)
+    )
 
     respond_to do |format|
       if @comment.save
