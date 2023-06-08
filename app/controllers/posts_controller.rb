@@ -57,11 +57,11 @@ class PostsController < ApplicationController
   def update
     set_user
     set_post
-
+    @postable = find_post_type
     return unauthorized unless current_user == @user
 
     respond_to do |format|
-      if @post.update(post_params)
+      if @post.update(postable: @postable)
         format.html {
           redirect_to user_path(current_user),
           notice: "Post was successfully updated." }
