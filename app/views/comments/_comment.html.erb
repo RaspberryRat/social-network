@@ -40,14 +40,15 @@
         <%= f.submit "Reply"  %>
       <% end %>
     </li>
+    <li>
+      <%= turbo_frame_tag "comment_#{comment.id}" do %>
+      <% end %>
+    </li>
 
     <ul>
       <li>
         <%= render partial: 'comments/comment', collection: comment.comments %>
       </li>
     </ul>
-      <div class="new-comment-link">
-      <%# turbo_frame_tag  id="new_comment", src:new_user_post_comment_comment_path(comment.author, comment.commentable, comment) %>
-    </div>
     <% end %>
   </div>

@@ -69,7 +69,6 @@ class CommentsController < ApplicationController
       format.html {
         redirect_to posts_url,
         notice: 'Post was successfully destroyed.' }
-      # format.json { head :no_content }
     end
   end
 
@@ -93,6 +92,8 @@ class CommentsController < ApplicationController
   end
 
   def set_comment
+    return @comment = Comment.find(params[:comment_id]) if params[:comment_id]
+
     @comment = Comment.find(params[:id])
   end
 
