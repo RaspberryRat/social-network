@@ -48,12 +48,10 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.update(comment_params)
         format.html {
-          redirect_to user_path(@comment.post.author),
+          redirect_to user_path(@comment.commentable.author),
           notice: "Comment was successfully updated." }
-        # format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        # format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -99,7 +97,10 @@ class CommentsController < ApplicationController
   end
 
   def set_commentable
-    @commentable = set_post
+    if params[:comment_id]
+      @commentable = Comment.find(params[:comment_id])
+    elsif params[:post_id]
+      @commentable = set_post
+    end
   end
-
 end

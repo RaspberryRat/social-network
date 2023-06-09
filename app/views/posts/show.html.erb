@@ -10,5 +10,5 @@
 </div>
 
 <div class="post-comments">
-  <%= render @comments %>
+  <%= render partial: 'comments/comment', collection: @post.comments %>
 </div>
