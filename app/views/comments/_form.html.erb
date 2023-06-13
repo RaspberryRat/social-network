@@ -1,5 +1,7 @@
-<%= form_with model: [commentable, comment],
-  id: dom_id_for_records(commentable, comment) do |form| %>
+<% model = [local_assigns[:commentable], comment].compact %>
+
+<%= form_with model: model,
+  id: dom_id_for_records(*model) do |form| %>
   <% if form.object.errors.any? %>
     <div class="form-errors">
       <% form.object.errors.full_messages.each do |message| %>
@@ -9,4 +11,5 @@
   <% end %>
   <%= form.text_field :content, placeholder: 'Write a comment...' %>
   <%= form.submit %>
+  <%= link_to 'Cancel', comment if form.object.persisted? %>
 <% end %>

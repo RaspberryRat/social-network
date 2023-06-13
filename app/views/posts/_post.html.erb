@@ -31,8 +31,13 @@
      <li>
       <%= render partial: 'comments/form', locals: { comment: Comment.new, commentable: post } %>
      </li>
+      <%= turbo_stream_from post, :comments %>
 
-      <%= render post.comments %>
+        <%= tag.div id: "#{dom_id(post)}_comments" do  %>
+          <%= render post.comments, user: current_user %>
+        <% end %>
+
+
     <% end %>
 
   </div>

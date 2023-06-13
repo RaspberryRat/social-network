@@ -1,9 +1,3 @@
-<h1>Editing comment</h1>
-
 <%= turbo_frame_tag @comment do %>
-  <%= render "form", comment: @comment %>
-  <div><%= link_to 'Back', user_path(@comment.commentable.author),
-    data: { turbo_frame: "_top" } %></div>
+  <%= render 'form', comment: @comment %>
 <% end %>
-
-<br>

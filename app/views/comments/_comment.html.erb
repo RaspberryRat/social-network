@@ -1,36 +1,36 @@
-    <%= turbo_frame_tag comment do %>
-    <div class="comment-box">
-      <li class="profile-image-small">
-          <% if comment.author.profile_picture.attached? %>
-            <%= image_tag comment.author.profile_picture %>
-          <% else %>
-            <%= image_tag comment.author.gravatar_url %>
-          <% end %>
-          <%= comment.author.fullname %></li>
-        <li><%= comment.content %></li>
-        <% if current_user == comment.author %>
-          <li>
-            <%= link_to 'Edit Comment',
-              edit_comment_path(comment)
-            %>
-            </li>
-          <li>
-            <%= button_to "Delete Comment",
-              comment_path(comment), method: :delete,
-              data: { turbo_confirm: "Are you sure?"} %>
-          </li>
+<%= turbo_stream_from comment %>
+<%= turbo_frame_tag comment do %>
+  <div class="comment-box">
+    <li class="profile-image-small">
+        <% if comment.author.profile_picture.attached? %>
+          <%= image_tag comment.author.profile_picture %>
+        <% else %>
+          <%= image_tag comment.author.gravatar_url %>
         <% end %>
-          <%# render 'likes/like', likeable: comment %>
-        <% if comment.liking_users.include?(current_user) %>
-            <%= button_to "Unlike", comment_like_path(comment, comment.likes.where(user_id: current_user.id).take), method: :delete, class: 'unlike-btn' %>
-          <% else %>
-            <%= form_with url: comment_likes_path(comment),
-              method: :post do |f| %>
-              <%= f.submit 'Like' %>
-            <% end %>
+        <%= comment.author.fullname %></li>
+      <li><%= comment.content %></li>
+      <% if user == comment.author %>
+        <li>
+          <%= link_to 'Edit Comment',
+            edit_comment_path(comment)
+          %>
+          </li>
+        <li>
+          <%= button_to "Delete Comment",
+            comment_path(comment), method: :delete, data: { turbo_confirm: "Are you sure?"} %>
+        </li>
+      <% end %>
+        <%# render 'likes/like', likeable: comment %>
+      <% if comment.liking_users.include?(user) %>
+          <%= button_to "Unlike", comment_like_path(comment, comment.likes.where(user_id: user.id).take), method: :delete, class: 'unlike-btn' %>
+        <% else %>
+          <%= form_with url: comment_likes_path(comment),
+            method: :post do |f| %>
+            <%= f.submit 'Like' %>
           <% end %>
-        <br />
+        <% end %>
+      <br />
 
-        <li><%= comment.display_likes %></li>
+      <li><%= comment.display_likes %></li>
   </div>
 <% end %>
