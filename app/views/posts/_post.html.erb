@@ -18,7 +18,9 @@
           <%= image_tag post.postable.image, class: 'post-image' %>
         <% end %>
       </li>
-      <li><%= link_to 'Edit Post', edit_user_post_path(post.author, post) %></li>
+      <li>
+        <%= link_to 'Edit Post', edit_user_post_path(post.author, post) %>
+      </li>
       <li>
         <%= button_to "Delete Post", user_post_path(post.author, post),
           method: :delete %>
@@ -27,19 +29,18 @@
         <%= render 'likes/like', likeable: post %>
 
       <br />
-      <%= render post.comments, post: post %>
 
-     <li>
-      <%= turbo_frame_tag "comment_#{post.id}" do %>
-      <% end %>
-     </li>
-    <div class="new-comment-link">
-      <%= turbo_frame_tag  id="new_comment", src:new_user_post_comment_path(post.author, post) %>
-    </div>
+
     <% end %>
+  <%= render partial: "comments/form", locals: { comment: Comment.new, commentable: post} %>
 
-  </div>
-<% end %>
+<%= turbo_stream_from @post, :comments %>
+
+  <%= tag.div id: "#{dom_id(post)}_comments" do %>
+    <%= render partial: "comments/comment_with_replies", collection: post.comments.where(parent_id: nil), as: :comment %>
+  <% end %>
+    </div>
+  <% end %>
 
 
 

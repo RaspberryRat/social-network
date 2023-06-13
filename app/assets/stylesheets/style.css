@@ -34,3 +34,12 @@ input[type="text"] {
 .comment-comments {
   outline: 1px solid pink;
 }
+
+.hidden-form {
+  display: none;
+}
+
+.comment-replies {
+  padding-left: 15px;
+  border-left: 1px solid blue;
+}
