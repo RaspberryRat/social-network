@@ -12,7 +12,11 @@ module Commentable
 
     respond_to do |format|
       if @comment.save
-        redirect_to @commentable
+        comment = Comment.new
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace(dom_id_for_records(@commentable, comment), partial: 'comments/form', locals: { comment: comment, commentable: @commentable })
+        }
+        format.html { redirect_to @commentable }
       else
         format.turbo_stream {
           render turbo_stream: turbo_stream.replace(dom_id_for_records(@commentable, @comment), partial: 'comments/form', locals: { comment: @comment, commentable: @commentable })

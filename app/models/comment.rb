@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
+  include Likeable
+
   belongs_to :author, class_name: 'User'
   belongs_to :commentable, polymorphic: true
   # has_many :comments, as: :commentable, dependent: :destroy

@@ -31,6 +31,8 @@
      <li>
       <%= render partial: 'comments/form', locals: { comment: Comment.new, commentable: post } %>
      </li>
+
+      <%= render post.comments %>
     <% end %>
 
   </div>
