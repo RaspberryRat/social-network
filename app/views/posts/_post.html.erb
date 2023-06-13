@@ -27,15 +27,10 @@
         <%= render 'likes/like', likeable: post %>
 
       <br />
-      <%= render post.comments, post: post %>
 
      <li>
-      <%= turbo_frame_tag "comment_#{post.id}" do %>
-      <% end %>
+      <%= render partial: 'comments/form', locals: { comment: Comment.new, commentable: post } %>
      </li>
-    <div class="new-comment-link">
-      <%= turbo_frame_tag  id="new_comment", src:new_user_post_comment_path(post.author, post) %>
-    </div>
     <% end %>
 
   </div>

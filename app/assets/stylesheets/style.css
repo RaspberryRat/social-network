@@ -34,3 +34,11 @@ input[type="text"] {
 .comment-comments {
   outline: 1px solid pink;
 }
+
+.form-errors {
+  background-color: rgb(216, 118, 118);
+  font-weight: bold;
+  color: rgb(102, 38, 38);
+  width: fit-content;
+  padding: 5px;
+}

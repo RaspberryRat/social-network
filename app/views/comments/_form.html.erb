@@ -1,22 +1,12 @@
-<%= form_with model: comment,
-    url: comment.persisted? ? user_post_comment_path(comment.commentable.author, comment.commentable, comment) : user_post_comments_path(@user, @post),
-    method: comment.persisted? ? :patch : :post, data: { controller: 'form', action: 'turbo:submit-end->form#reset' } do |form| %>
-    <% if comment.errors.any? %>
-      <div style="color: red">
-        <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-        <ul>
-          <% comment.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <div>
-      <%= form.label :content, ': ' %>
-      <%= form.text_field :content, placeholder: 'Write a comment...',  data: { 'form-target': 'contentField' } %>
-    </div>
-    <div>
-      <%= form.submit %>
+<%= form_with model: [commentable, comment],
+  id: dom_id_for_records(commentable, comment) do |form| %>
+  <% if form.object.errors.any? %>
+    <div class="form-errors">
+      <% form.object.errors.full_messages.each do |message| %>
+        <div><%= message %></div>
+      <% end %>
     </div>
   <% end %>
+  <%= form.text_field :content, placeholder: 'Write a comment...' %>
+  <%= form.submit %>
+<% end %>

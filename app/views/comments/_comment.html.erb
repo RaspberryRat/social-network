@@ -32,23 +32,5 @@
       <br />
 
       <li><%= comment.display_likes %></li>
-
-
-    <li>
-      <%= form_for [comment, Comment.new] do |f| %>
-        <%= f.text_field :content, placeholder: 'Write a comment...', data: { 'form-target': 'contentField' } %><br/>
-        <%= f.submit "Reply"  %>
-      <% end %>
-    </li>
-    <li>
-      <%= turbo_frame_tag "comment_#{comment.id}" do %>
-      <% end %>
-    </li>
-
-    <ul>
-      <li>
-        <%= render partial: 'comments/comment', collection: comment.comments %>
-      </li>
-    </ul>
     <% end %>
   </div>
