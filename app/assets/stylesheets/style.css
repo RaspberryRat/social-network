@@ -2,17 +2,8 @@
   color: red;
 }
 
-
-.post-box {
-  outline: 1px solid blue;
-}
-
 input[type="text"] {
   width: min(15vw, 100%);
-}
-
-.comment-box {
-  outline: 1px solid green;
 }
 
 .profile-image-small>img {
@@ -31,14 +22,19 @@ input[type="text"] {
   height: auto;
 }
 
-.comment-comments {
-  outline: 1px solid pink;
-}
-
 .form-errors {
   background-color: rgb(216, 118, 118);
   font-weight: bold;
   color: rgb(102, 38, 38);
   width: fit-content;
   padding: 5px;
+}
+
+.hidden-form {
+  display: none;
+}
+
+.comment-replies {
+  padding-left: 15px;
+  border-left: 1px solid blue;
 }

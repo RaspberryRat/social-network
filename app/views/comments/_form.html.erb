@@ -1,7 +1,9 @@
 <% model = [local_assigns[:commentable], comment].compact %>
 
 <%= form_with model: model,
-  id: dom_id_for_records(*model) do |form| %>
+  id: dom_id_for_records(*model),
+  data: local_assigns[:data],
+  class: [local_assigns[:class]] do |form| %>
   <% if form.object.errors.any? %>
     <div class="form-errors">
       <% form.object.errors.full_messages.each do |message| %>

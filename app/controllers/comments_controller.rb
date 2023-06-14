@@ -16,9 +16,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def destroy
     @comment.destroy
 
@@ -28,7 +25,6 @@ class CommentsController < ApplicationController
     end
   end
 
-
   private
 
   def set_comment
@@ -36,6 +32,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:content)
+    params.require(:comment).permit(:body)
   end
 end
