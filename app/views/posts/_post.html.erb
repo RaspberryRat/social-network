@@ -34,7 +34,7 @@
       <%= turbo_stream_from post, :comments %>
 
         <%= tag.div id: "#{dom_id(post)}_comments" do  %>
-          <%= render partial: "comments/comment_with_replies", collection: post.comments.where(parent_id: nil), as: :comment, locals: { user: current_user }  %>
+          <%= render partial: "comments/comment_with_replies", collection: post.comments.where(parent_id: nil), as: :comment %>
         <% end %>
 
 
