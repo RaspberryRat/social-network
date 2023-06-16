@@ -3,7 +3,8 @@ class Comment < ApplicationRecord
 
   belongs_to :author, class_name: 'User'
   belongs_to :commentable, polymorphic: true
-  has_many :comments, as: :commentable, dependent: :destroy
+  belongs_to :parent, optional: true, class_name: "Comment"
+  has_many :comments, foreign_key: :parent_id, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
   has_many :liking_users, through: :likes, source: :user
 

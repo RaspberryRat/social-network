@@ -7,18 +7,25 @@ class CommentsController < ApplicationController
   end
 
   def create
+    debugger
     set_commentable
 
     @comment = Comment.new(
       comment_params.merge(commentable: @commentable, author: current_user)
     )
-    @comment.parent_id =
+    @comment.parent_id = @parent&.id
 
     respond_to do |format|
       if @comment.save
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.append("comment_#{@commentable.id}", @comment)
-        }
+        if @parent
+          format.turbo_stream {
+            render turbo_stream: turbo_stream.append(@parent, @comment)
+          }
+        else
+          format.turbo_stream {
+            render turbo_stream: turbo_stream.append("comment_#{@commentable.id}", @comment)
+          }
+        end
         format.html {
           redirect_to user_path(@commentable.author),
           notice: "Comment was successfully created." }
@@ -100,13 +107,14 @@ class CommentsController < ApplicationController
 
   def set_commentable
     if params[:comment_id]
-      @commentable = Comment.find(params[:comment_id])
+      set_parent
+      @commentable = @parent.commentable
     elsif params[:post_id]
       @commentable = set_post
     end
   end
 
   def set_parent
-
+    @parent = Comment.find(params[:comment_id])
   end
 end
