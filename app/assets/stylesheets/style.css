@@ -13,6 +13,8 @@ input[type="text"] {
 
 .comment-box {
   outline: 1px solid green;
+  padding-left: 15px;
+  border-left: 1px solid blue;
 }
 
 .profile-image-small>img {
@@ -33,4 +35,9 @@ input[type="text"] {
 
 .comment-comments {
   outline: 1px solid pink;
+}
+
+.comment-replies {
+  padding-left: 15px;
+  border-left: 1px solid blue;
 }
