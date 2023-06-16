@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(
       comment_params.merge(commentable: @commentable, author: current_user)
     )
+    @comment.parent_id =
 
     respond_to do |format|
       if @comment.save
@@ -103,5 +104,9 @@ class CommentsController < ApplicationController
     elsif params[:post_id]
       @commentable = set_post
     end
+  end
+
+  def set_parent
+
   end
 end
