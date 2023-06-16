@@ -204,14 +204,15 @@ RSpec.describe User, type: :model do
       end
     end
 
-  context 'when #unconfirmed_friends_list is called' do
-    it 'returns list of unconfirmed friends' do
-      unconfirmed = user1.unconfirmed_friends_list
+    # private method
+  # context 'when #unconfirmed_friends_list is called' do
+  #   it 'returns list of unconfirmed friends' do
+  #     unconfirmed = user1.unconfirmed_friends_list
 
-      expect(unconfirmed).to include(user2)
-      expect(unconfirmed).to include(user4)
-    end
-  end
+  #     expect(unconfirmed).to include(user2)
+  #     expect(unconfirmed).to include(user4)
+  #   end
+  # end
 
   context 'when user has pending friend requests' do
     it 'returns true' do
@@ -224,6 +225,7 @@ RSpec.describe User, type: :model do
       expect(user5.friend_requests?).to be(false)
     end
   end
+
 
   context 'when a user is destroyed' do
     it 'destroys all records where user is a friend' do

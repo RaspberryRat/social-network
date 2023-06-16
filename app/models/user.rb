@@ -28,16 +28,9 @@ class User < ApplicationRecord
   end
 
   def friend_requests?
-    return false if unconfirmed_friends_list.empty?
+    return false if pending_incoming_requests_list.empty?
 
     true
-  end
-
-  def unconfirmed_friends_list
-    friends_id = Friendship.where(user: self).where(confirmed?: false).pluck(:friend_id)
-    users_id = Friendship.where(friend: self).where(confirmed?: false).pluck(:user_id)
-    unconfirmed_ids = friends_id + users_id
-    User.where(id: unconfirmed_ids)
   end
 
   def fullname
@@ -69,5 +62,21 @@ class User < ApplicationRecord
 
   def destroy_friendships
     Friendship.where(friend: self).destroy_all
+  end
+
+  def unconfirmed_friends_list
+    friends_id = pending_outgoing_requests_list
+    users_id = pending_incoming_requests_list
+    unconfirmed_ids = friends_id + users_id
+
+    User.where(id: unconfirmed_ids)
+  end
+
+  def pending_outgoing_requests_list
+    Friendship.where(user: self).where(confirmed?: false)
+  end
+
+  def pending_incoming_requests_list
+    Friendship.where(friend: self).where(confirmed?: false)
   end
 end
