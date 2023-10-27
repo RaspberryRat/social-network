@@ -12,13 +12,15 @@
 
   <body>
     <nav class="main-nav">
-      <div>
+      <div class="flash-message">
+        <% flash.each do |name, message| %>
+        <div class="<%= name %>"><%= message %></div>
+        <% end %>
+      </div>
+
+
         <% if user_signed_in? %>
-            <%= link_to current_user.fullname, user_path(current_user) %></div>
           <ul>
-            <li class="log-out-btn link-btn">
-              <%= button_to "Logout", destroy_user_session_path, method: :delete  %>
-            </li>
             <% else %>
             <li class="link-btn">
               <%= link_to "Sign up here", new_user_registration_path %>
@@ -32,22 +34,25 @@
         <% end %>
         </div>
 
-      <div class="site-name"><%= link_to 'Fauxbook', root_path %></div>
-      <% if user_signed_in? %>
-        <div class="user-list"><%= link_to 'All users', users_path %></div>
-      <% end %>
+        <li class="site-name">
+          <%= link_to 'Fauxbook', root_path %></div>
+        </li>
 
-      <div class="flash-message">
-        <% flash.each do |name, message| %>
-        <div class="<%= name %>"><%= message %></div>
-        <% end %>
-      </div>
+        <li>
+          <% if user_signed_in? %>
+            <div class="user-list">
+              <%= link_to 'All users', users_path %>
+            </div>
+          <% end %>
+        </li>
 
-    <div class="notification-icon">
+
+
+    <li class="notification-icon">
         <%= image_tag "bell-icon.png", class: 'notification-img' %>
-      </div>
+      </li>
 
-      <div class="user-picture">
+      <li class="user-picture">
         <% if user_signed_in? %>
         <ul>
           <li class="log-out-btn link-btn">
@@ -69,22 +74,7 @@
           <% end %>
         <% end %>
         </li>
-      </div>
-    </nav>
-
-    <nav class="notification-nav">
-      <div class="notification-icon">
-        <%= image_tag "bell-icon.png", class: 'notification-img' %><span>2</span>
-      </div>
-      <div class="notif-box">
-        <h2>Notifications <span>2</span></h2>
-        <div class="notif-item">
-          <div class="text-test">
-            <h4>A name here</h4>
-            <p>Some text here</p>
-          </div>
-        </div>
-      </div>
+      </li>
     </nav>
 
     <%= yield %>
