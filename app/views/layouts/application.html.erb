@@ -11,10 +11,44 @@
   </head>
 
   <body>
-    <div class="main-nav">
+    <nav class="main-nav">
       <div>
+        <% if user_signed_in? %>
+            <%= link_to current_user.fullname, user_path(current_user) %></div>
+          <ul>
+            <li class="log-out-btn link-btn">
+              <%= button_to "Logout", destroy_user_session_path, method: :delete  %>
+            </li>
+            <% else %>
+            <li class="link-btn">
+              <%= link_to "Sign up here", new_user_registration_path %>
+            </li>
+        <% end %>
+
+        <% unless user_signed_in? %>
+          <li class="link-btn">
+            <%= link_to "Sign in", user_session_path %>
+          </li>
+        <% end %>
+        </div>
+
+      <div class="site-name"><%= link_to 'Fauxbook', root_path %></div>
       <% if user_signed_in? %>
-          <%= link_to current_user.fullname, user_path(current_user) %></div>
+        <div class="user-list"><%= link_to 'All users', users_path %></div>
+      <% end %>
+
+      <div class="flash-message">
+        <% flash.each do |name, message| %>
+        <div class="<%= name %>"><%= message %></div>
+        <% end %>
+      </div>
+
+    <div class="notification-icon">
+        <%= image_tag "bell-icon.png", class: 'notification-img' %>
+      </div>
+
+      <div class="user-picture">
+        <% if user_signed_in? %>
         <ul>
           <li class="log-out-btn link-btn">
             <%= button_to "Logout", destroy_user_session_path, method: :delete  %>
@@ -24,23 +58,34 @@
             <%= link_to "Sign up here", new_user_registration_path %>
           </li>
         <% end %>
-
-          <% unless user_signed_in? %>
-          <li class="link-btn">
-            <%= link_to "Sign in", user_session_path %>
-          </li>
+        <li>
+        <% if current_user.profile_picture.attached? %>
+          <%= link_to user_path(current_user) do %>
+            <%= image_tag current_user.profile_picture, class: "profile-image-med" %>
           <% end %>
-        </div>
-      <div class="site-name"><%= link_to 'Fauxbook', root_path %></div>
-      <% if user_signed_in? %>
-        <div class="user-list"><%= link_to 'All users', users_path %></div>
-      <% end %>
+        <% else %>
+          <%= link_to user_path(current_user) do %>
+            <%= image_tag current_user.gravatar_url, class: "profile-image-med" %>
+          <% end %>
+        <% end %>
+        </li>
+      </div>
+    </nav>
 
-    <div class="flash-message">
-      <% flash.each do |name, message| %>
-      <div class="<%= name %>"><%= message %></div>
-      <% end %>
-    </div>
+    <nav class="notification-nav">
+      <div class="notification-icon">
+        <%= image_tag "bell-icon.png", class: 'notification-img' %><span>2</span>
+      </div>
+      <div class="notif-box">
+        <h2>Notifications <span>2</span></h2>
+        <div class="notif-item">
+          <div class="text-test">
+            <h4>A name here</h4>
+            <p>Some text here</p>
+          </div>
+        </div>
+      </div>
+    </nav>
 
     <%= yield %>
   </body>

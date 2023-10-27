@@ -23,6 +23,12 @@ input[type="text"] {
   height: auto;
 }
 
+.profile-image-med {
+  border-radius: 50%;
+  width: 60px;
+  height: auto;
+}
+
 .profile-image-upload {
   width: 150px;
   height: auto;
@@ -37,7 +43,89 @@ input[type="text"] {
   outline: 1px solid pink;
 }
 
-.comment-replies {
+/* .comment-replies {
   padding-left: 15px;
   border-left: 1px solid blue;
+} */
+
+
+.main-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+nav.notification-nav {
+  display: flex;
+  align-items: center;
+  background: #00A9D4;
+  height: 60px;
+  position: relative;
+}
+
+.notification-icon {
+  cursor: pointer;
+  margin-right: 50px;
+  line-height: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.notification-icon span {
+  background: #f00;
+  padding: 4px;
+  border-radius: 50%;
+  color: #fff;
+
+  margin-right: -15px;
+
+  font-size: 0.7rem;
+  z-index: 1;
+}
+
+.notification-icon img {
+  align-self: end;
+  display: inline-block;
+  width: 20px;
+  margin-top: -10px;
+}
+
+.notification-icon:hover {
+  opacity: .7;
+}
+
+.notif-box {
+  width: 300px;
+  position: absolute;
+  transition-property: 63px;
+  top: 63px;
+  right: 35px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.notif-box h2 {
+  font-size: 14px;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  color: #999;
+}
+
+.notif-box h2 span {
+  color: #f00;
+}
+
+.notif-item {
+  display: flex;
+  border-bottom: 1px solid #eee;
+  padding: 15px 5px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.notif-item .text-test {
+  color: #aaa;
+  font-size: 12px;
 }
