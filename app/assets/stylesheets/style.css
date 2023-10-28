@@ -141,11 +141,13 @@ ABOVE IS RESET
 */
 
 * {
-  --dark-brown: #5d5c61;
-  --light-brown: #938e94;
-  --light-blue: #7395ae;
-  --med-blue: #547a95;
-  --med-brown: #b0a295;
+  --text1: #05396b;
+  --darkmain: #389583;
+  --lightmain: #edf5df;
+  --main: #5cdb94;
+  --lightalt: #edf5df;
+
+  background-color: var(--main);
 
 }
 
@@ -160,6 +162,7 @@ a {
 
 .post-box {
   outline: 1px solid blue;
+  background-color: var(--darkmain);
 }
 
 .main-nav {
@@ -227,24 +230,34 @@ input[type="text"] {
 .main-nav {
   display: flex;
   flex-direction: column;
-  background-color: var(--med-blue);
+  background-color: var(--main);
 }
 
 .main-nav a {
-  color: white;
-
-}
-
-nav.notification-nav {
-  display: flex;
-  align-items: center;
-  background: #00A9D4;
-  height: 60px;
-  position: relative;
+  color: var(--text1);
 }
 
 .notification-icon img {
   width: 30px;
   height: auto;
-  filter: brightness(0) invert(1);
+}
+
+.user-list img {
+  width: 35px;
+  height: auto;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.new-posts-link {
+  display: flex;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
 }

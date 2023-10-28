@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SocialNetwork</title>
+    <title>Social Network</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -41,7 +41,9 @@
         <li>
           <% if user_signed_in? %>
             <div class="user-list">
-              <%= link_to 'All users', users_path %>
+              <%= link_to users_path do %>
+                <%= image_tag "friends-icon.svg" %>
+              <% end %>
             </div>
           <% end %>
         </li>
@@ -49,7 +51,7 @@
 
 
     <li class="notification-icon">
-        <%= image_tag "bell-icon.png", class: 'notification-img' %>
+        <%= image_tag "bell-icon.svg", class: 'notification-img' %>
       </li>
 
       <li class="user-picture">
