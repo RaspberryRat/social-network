@@ -60,22 +60,24 @@
           <li class="log-out-btn link-btn">
             <%= button_to "Logout", destroy_user_session_path, method: :delete  %>
           </li>
-          <% else %>
-          <li class="link-btn">
-            <%= link_to "Sign up here", new_user_registration_path %>
-          </li>
-        <% end %>
-        <li>
-        <% if current_user.profile_picture.attached? %>
-          <%= link_to user_path(current_user) do %>
-            <%= image_tag current_user.profile_picture, class: "profile-image-med" %>
-          <% end %>
+          <li>
+          <% if current_user.profile_picture.attached? %>
+            <%= link_to user_path(current_user) do %>
+              <%= image_tag current_user.profile_picture, class: "profile-image-med" %>
+            <% end %>
         <% else %>
           <%= link_to user_path(current_user) do %>
             <%= image_tag current_user.gravatar_url, class: "profile-image-med" %>
           <% end %>
         <% end %>
         </li>
+          <% else %>
+          <li class="link-btn">
+            <%= link_to "Sign up here", new_user_registration_path %>
+          </li>
+        <% end %>
+
+        </ul>
       </li>
     </nav>
 

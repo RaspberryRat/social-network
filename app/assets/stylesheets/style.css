@@ -134,6 +134,14 @@ table {
   border-spacing: 0;
 }
 
+input,
+button,
+a {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
 /*
 
 ABOVE IS RESET
@@ -147,8 +155,12 @@ ABOVE IS RESET
   --main: #5cdb94;
   --lightalt: #edf5df;
 
-  background-color: var(--main);
+  font-family: 'Jost', sans-serif;
+  font-family: 'Libre Caslon Text', serif;
+  font-family: 'Open Sans', sans-serif;
 
+  background-color: var(--main);
+  font-size: 1rem;
 }
 
 a {
@@ -163,6 +175,54 @@ a {
 .post-box {
   outline: 1px solid blue;
   background-color: var(--darkmain);
+}
+
+.post-box li,
+.post-box li form {
+  background-color: var(--darkmain);
+}
+
+.post-box li form button,
+#likes form input[type="submit"],
+.edit-btn a {
+  border: var(--lightmain) 1px solid;
+  color: var(--text1);
+  background-color: var(--lightalt);
+  font-family: 'Jost', sans-serif;
+  font-size: 1.1rem;
+  margin: 8px 8px 15px 8px;
+  padding: 4px 8px;
+}
+
+.edit-btn {
+  margin-bottom: 15px;
+}
+
+.post-box li form button:hover,
+#likes form input[type="submit"]:hover,
+.edit-btn a:hover {
+  background-color: var(--text1);
+  color: var(--lightalt);
+  border: none;
+  font-style: italic;
+}
+
+.post-box li form button:active,
+#likes form input[type="submit"]:active,
+.edit-btn a:active {
+  background-color: var(--main);
+  color: var(--lightalt);
+  border: none;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.post-content {
+  margin: 10px;
+  padding: 10px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
 }
 
 .main-nav {

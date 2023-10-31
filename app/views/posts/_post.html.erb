@@ -1,38 +1,40 @@
 <% if current_user.friend_list.include?(post.author)  ||
   current_user == post.author %>
   <div class="post-box" data-controller="time">
-    <%= turbo_frame_tag post do %>
-      <li class="profile-image-small">
-        <% if post.author.profile_picture.attached? %>
-          <%= image_tag post.author.profile_picture %>
-        <% else %>
-          <%= image_tag post.author.gravatar_url %>
+    <%= turbo_frame_tag post, class: "post-box" do %>
+      <ul class="post-box">
+        <li class="profile-image-small">
+          <% if post.author.profile_picture.attached? %>
+            <%= image_tag post.author.profile_picture %>
+          <% else %>
+            <%= image_tag post.author.gravatar_url %>
+          <% end %>
+          <%= post.author.fullname %></li>
+        <li data-time-target="postTime"><%= post.created_at %></li>
+        <br />
+        <li class='post-content'>
+          <% if post.postable_type == 'TextPost' %>
+            <%= post.postable.content %>
+          <% else %>
+            <%= image_tag post.postable.image, class: 'post-image' %>
+          <% end %>
+        </li>
+        <% if current_user == post.author %>
+        <li class="edit-btn"><%= link_to 'Edit Post', edit_user_post_path(post.author, post) %></li>
+        <li>
+          <%= button_to "Delete Post", user_post_path(post.author, post),
+            method: :delete %>
+        </li>
         <% end %>
-        <%= post.author.fullname %></li>
-      <li data-time-target="postTime"><%= post.created_at %></li>
-      <br />
-      <li>
-        <% if post.postable_type == 'TextPost' %>
-          <%= post.postable.content %>
-        <% else %>
-          <%= image_tag post.postable.image, class: 'post-image' %>
+          <%= render 'likes/like', likeable: post %>
+        <br />
+        <%= render post.comments, post: post %>
+
+             <li>
+        <%= turbo_frame_tag "comment_#{post.id}" do %>
         <% end %>
-      </li>
-      <li><%= link_to 'Edit Post', edit_user_post_path(post.author, post) %></li>
-      <li>
-        <%= button_to "Delete Post", user_post_path(post.author, post),
-          method: :delete %>
-      </li>
-      <br />
-        <%= render 'likes/like', likeable: post %>
-
-      <br />
-      <%= render post.comments, post: post %>
-
-     <li>
-      <%= turbo_frame_tag "comment_#{post.id}" do %>
-      <% end %>
-     </li>
+             </li>
+      </ul>
     <div class="new-comment-link">
       <%= turbo_frame_tag  id="new_comment", src:new_user_post_comment_path(post.author, post) %>
     </div>
