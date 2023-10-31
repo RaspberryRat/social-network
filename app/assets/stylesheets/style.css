@@ -192,6 +192,7 @@ nav ul li {
 .post-box li form button,
 .like-btn input[type="submit"],
 .unlike-btn,
+.reply-btn,
 .edit-btn a {
   border: var(--lightmain) 1px solid;
   color: var(--text1);
@@ -215,6 +216,7 @@ nav ul li {
 .post-box li form button:hover,
 .like-btn input[type="submit"]:hover,
 .unlike-btn:hover,
+.reply-btn:hover,
 .edit-btn a:hover {
   background-color: var(--text1);
   color: var(--lightalt);
@@ -225,7 +227,8 @@ nav ul li {
 .post-box li form button:active,
 .like-btn input[type="submit"]:active,
 .unlike-btn:active,
-.edit-btn a:active {
+.edit-btn a:active,
+.reply-btn:active {
   background-color: var(--main);
   color: var(--lightalt);
   border: none;
@@ -390,3 +393,8 @@ input[type="text"] {
   background-color: yellow;
   color: red;
 }
+
+.new_comment input[type='text'] {
+  width: 100%;
+  background-color:
+    /* !TODO WORKING HERE */

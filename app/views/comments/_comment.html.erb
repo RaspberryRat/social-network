@@ -37,7 +37,7 @@
     <li>
       <%= form_for [comment, Comment.new] do |f| %>
         <%= f.text_field :content, placeholder: 'Write a comment...', data: { 'form-target': 'contentField' } %><br/>
-        <%= f.submit "Reply"  %>
+        <%= f.submit "Reply", class: 'reply-btn'  %>
       <% end %>
     </li>
     <li>
