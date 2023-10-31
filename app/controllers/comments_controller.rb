@@ -7,7 +7,6 @@ class CommentsController < ApplicationController
   end
 
   def create
-    debugger
     set_commentable
 
     @comment = Comment.new(

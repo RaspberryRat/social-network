@@ -3,14 +3,14 @@
   <div class="post-box" data-controller="time">
     <%= turbo_frame_tag post, class: "post-box" do %>
       <ul class="post-box">
-        <li class="profile-image-small">
+        <li class="profile-image-small profile-image-line">
           <% if post.author.profile_picture.attached? %>
             <%= image_tag post.author.profile_picture %>
           <% else %>
             <%= image_tag post.author.gravatar_url %>
           <% end %>
           <%= post.author.fullname %></li>
-        <li data-time-target="postTime"><%= post.created_at %></li>
+        <li data-time-target="postTime" class="post-time"><%= post.created_at %></li>
         <br />
         <li class='post-content'>
           <% if post.postable_type == 'TextPost' %>
@@ -25,7 +25,7 @@
           <%= button_to "Delete Post", user_post_path(post.author, post),
             method: :delete %>
         </li>
-        <% end %>
+        <% end%>
           <%= render 'likes/like', likeable: post %>
         <br />
         <%= render post.comments, post: post %>

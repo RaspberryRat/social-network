@@ -151,9 +151,9 @@ ABOVE IS RESET
 * {
   --text1: #05396b;
   --darkmain: #389583;
-  --lightmain: #edf5df;
-  --main: #5cdb94;
   --lightalt: #edf5df;
+  --main: #5cdb94;
+  --lightmain: #8ee4af;
 
   font-family: 'Jost', sans-serif;
   font-family: 'Libre Caslon Text', serif;
@@ -161,10 +161,17 @@ ABOVE IS RESET
 
   background-color: var(--main);
   font-size: 1rem;
+  width: 100%;
 }
 
 a {
   text-decoration: none;
+}
+
+nav ul li {
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  color: var(--lightalt);
 }
 
 .flash-message {
@@ -173,8 +180,8 @@ a {
 
 
 .post-box {
-  outline: 1px solid blue;
   background-color: var(--darkmain);
+  margin-bottom: 20px;
 }
 
 .post-box li,
@@ -183,7 +190,8 @@ a {
 }
 
 .post-box li form button,
-#likes form input[type="submit"],
+.like-btn input[type="submit"],
+.unlike-btn,
 .edit-btn a {
   border: var(--lightmain) 1px solid;
   color: var(--text1);
@@ -192,14 +200,21 @@ a {
   font-size: 1.1rem;
   margin: 8px 8px 15px 8px;
   padding: 4px 8px;
+  width: fit-content;
 }
 
 .edit-btn {
   margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.like-btn {
+  background-color: var(--darkmain);
 }
 
 .post-box li form button:hover,
-#likes form input[type="submit"]:hover,
+.like-btn input[type="submit"]:hover,
+.unlike-btn:hover,
 .edit-btn a:hover {
   background-color: var(--text1);
   color: var(--lightalt);
@@ -208,7 +223,8 @@ a {
 }
 
 .post-box li form button:active,
-#likes form input[type="submit"]:active,
+.like-btn input[type="submit"]:active,
+.unlike-btn:active,
 .edit-btn a:active {
   background-color: var(--main);
   color: var(--lightalt);
@@ -219,10 +235,15 @@ a {
 
 .post-content {
   margin: 10px;
-  padding: 10px;
-  font-family: 'Open Sans', sans-serif;
+  padding: 20px 10px 25px 15px;
+  font-family: 'Libre Caslon Text', serif;
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 400;
+  background-color: var(--lightmain) !important;
+  width: 80%;
+  border: 2px solid var(--lightalt);
+  border-radius: 15px;
+
 }
 
 .main-nav {
@@ -237,6 +258,7 @@ input[type="text"] {
   outline: 1px solid green;
   padding-left: 15px;
   border-left: 1px solid blue;
+  background-color: var(--darkmain);
 }
 
 .profile-image-small>img {
@@ -280,6 +302,13 @@ input[type="text"] {
 .site-name {
   flex: 1;
   margin-left: 10px;
+
+}
+
+.site-name a {
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  color: var(--lightalt);
 }
 
 .main-nav ul li {
@@ -295,6 +324,12 @@ input[type="text"] {
 
 .main-nav a {
   color: var(--text1);
+}
+
+.site-name a {
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  color: var(--lightalt);
 }
 
 .notification-icon img {
@@ -320,4 +355,38 @@ input[type="text"] {
 
 .hidden {
   display: none;
+}
+
+#posts {
+  width: 45%;
+}
+
+.likes-message {
+  font-style: italic;
+}
+
+.profile-image-line,
+.post-time {
+  width: fit-content;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.profile-image-line {
+  font-weight: 500;
+  padding: 10px;
+}
+
+.post-time {
+  padding: 0 10px;
+  font-weight: 300;
+}
+
+.new-comment-link {
+  background-color: var(--darkmain);
+}
+
+#new_comment form {
+
+  background-color: yellow;
+  color: red;
 }
