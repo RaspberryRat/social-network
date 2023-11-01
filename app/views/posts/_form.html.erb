@@ -13,15 +13,19 @@
         </ul>
       </div>
     <% end %>
-    <div>
+    <div class="new-post-entry">
       <%= form.label :content, ' :', class: "hidden" %>
       <%= form.text_field :content,
-        placeholder: "What's on your mind?, #{current_user.first_name}", data: { 'form-target': 'contentField' } %>
-      <%= form.label :image %>
-      <%= form.file_field :image %>
-    </div>
-    <div>
-      <%= form.submit %>
+        placeholder: "What's on your mind, #{current_user.first_name}?", data: { 'form-target': 'contentField' } %>
+      <div class="post-btn-container">
+        <%= form.label :image do %>
+          <%= image_tag "attach-image.svg", alt: "attach image"  %>
+        <% end %>
+        <div class="hidden"><%= form.file_field :image %></div>
+        <div class="post-btn">
+          <%= form.submit %>
+        </div>
+      </div>
     </div>
   <% end %>
 

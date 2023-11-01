@@ -193,7 +193,8 @@ nav ul li {
 .like-btn input[type="submit"],
 .unlike-btn,
 .reply-btn,
-.edit-btn a {
+.edit-btn a,
+.post-btn input[type="submit"] {
   border: var(--lightmain) 1px solid;
   color: var(--text1);
   background-color: var(--lightalt);
@@ -213,7 +214,8 @@ nav ul li {
 .like-btn input[type="submit"]:hover,
 .unlike-btn:hover,
 .reply-btn:hover,
-.edit-btn a:hover {
+.edit-btn a:hover,
+.post-btn input[type="submit"]:hover {
   background-color: var(--text1);
   color: var(--lightalt);
   border: none;
@@ -224,7 +226,8 @@ nav ul li {
 .like-btn input[type="submit"]:active,
 .unlike-btn:active,
 .edit-btn a:active,
-.reply-btn:active {
+.reply-btn:active,
+.post-btn input[type="submit"]:active {
   background-color: var(--main);
   color: var(--lightalt);
   border: none;
@@ -248,7 +251,8 @@ nav ul li {
 }
 
 .post-content,
-.new_comment input[type='text'] {
+.new_comment input[type='text'],
+.new-post-entry input[type='text'] {
   margin: 10px;
   padding: 20px 10px 25px 15px;
   font-family: 'Libre Caslon Text', serif;
@@ -260,6 +264,8 @@ nav ul li {
   border-radius: 15px;
 
 }
+
+
 
 .new_comment input[type='text'] {
   background-color: var(--lightmain) !important;
@@ -395,14 +401,24 @@ input[type="text"] {
 .new-posts-link {
   display: flex;
   text-align: center;
+  border: 1px;
+  border-radius: 30px;
+  margin-bottom: 25px;
+
+  /* box-shadow: 3px 1px lightgray; */
+}
+
+#new_post form {
+  border-radius: 30px;
 }
 
 .hidden {
   display: none;
 }
 
-#posts {
-  width: 45%;
+#posts,
+.new-posts-link {
+  width: 60%;
 }
 
 .likes-message {
@@ -429,12 +445,51 @@ input[type="text"] {
   background-color: var(--darkmain);
 }
 
-#new_comment form {
-
-  background-color: yellow;
-  color: red;
+.new_comment input[type='text'],
+.post-entry input[type='text'] {
+  color: #05396b;
 }
 
-.new_comment input[type='text'] {
-  color: #05396b;
+.new-posts-link form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--darkmain);
+}
+
+.new-posts-link div {
+  background-color: var(--darkmain);
+}
+
+.new-posts-link div,
+.post-btn-container label {
+  border-radius: 10px;
+}
+
+.new-post-entry img {
+  width: 30px;
+  height: auto;
+  background-color: var(--darkmain);
+}
+
+.new-post-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post-btn-container {
+  display: flex;
+  align-items: center;
+}
+
+.post-btn-container label {
+  background-color: var(--darkmain);
+}
+
+.post-btn input[type="submit"] {
+  font-size: 0.9rem;
+  border-radius: 8px;
 }

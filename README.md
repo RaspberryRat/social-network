@@ -28,3 +28,6 @@ bell Icon by <a class="link_pro" href="https://freeicons.io/general-icons-set/be
                 on <a href="https://freeicons.io">freeicons.io</a>
 friends Icon by <a class="link_pro" href="https://freeicons.io/undefined/friends-embrace-friendship-friendly-team-icon-1035096">Valentines day</a>
                 on <a href="https://freeicons.io">freeicons.io</a>
+
+attach-image Icon by <a class="link_pro" href="https://freeicons.io/material-icons-images/add-photo-alternate-icon-15213">Free Preloaders</a>
+                on <a href="https://freeicons.io">freeicons.io</a>
