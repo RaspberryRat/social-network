@@ -8,27 +8,31 @@
         <% end %>
         <%= comment.author.fullname %></li>
       <li><%= comment.content %></li>
-      <% if current_user == comment.author %>
-        <li class="edit-btn">
-          <%= link_to 'Edit Comment',
-            edit_user_post_comment_path(comment.author, comment.commentable, comment)
-          %>
+
+      <ul class="comment-btns">
+
+        <% if current_user == comment.author %>
+          <li class="edit-btn">
+            <%= link_to 'Edit Comment',
+              edit_user_post_comment_path(comment.author, comment.commentable, comment)
+            %>
+            </li>
+          <li class="delete-btn">
+            <%= button_to "Delete Comment",
+              user_post_comment_path(comment.author, comment.commentable, comment),
+              method: :delete %>
           </li>
-        <li>
-          <%= button_to "Delete Comment",
-            user_post_comment_path(comment.author, comment.commentable, comment),
-            method: :delete %>
-        </li>
-      <% end %>
-        <%# render 'likes/like', likeable: comment %>
-      <% if comment.liking_users.include?(current_user) %>
-          <%= button_to "Unlike", comment_like_path(comment, comment.likes.where(user_id: current_user.id).take), method: :delete, class: 'unlike-btn' %>
-        <% else %>
-          <%= form_with url: comment_likes_path(comment),
-            method: :post, class: "like-btn" do |f| %>
-            <%= f.submit 'Like' %>
-          <% end %>
         <% end %>
+          <%# render 'likes/like', likeable: comment %>
+        <% if comment.liking_users.include?(current_user) %>
+            <%= button_to "Unlike", comment_like_path(comment, comment.likes.where(user_id: current_user.id).take), method: :delete, class: 'unlike-btn' %>
+          <% else %>
+            <%= form_with url: comment_likes_path(comment),
+              method: :post, class: "like-btn" do |f| %>
+              <%= f.submit 'Like' %>
+            <% end %>
+          <% end %>
+      </ul>
 
 
       <li class= "likes-message"><%= comment.display_likes %></li>

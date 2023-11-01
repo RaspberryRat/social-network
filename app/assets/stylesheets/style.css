@@ -198,20 +198,16 @@ nav ul li {
   color: var(--text1);
   background-color: var(--lightalt);
   font-family: 'Jost', sans-serif;
-  font-size: 1.1rem;
-  margin: 8px 8px 15px 8px;
+  font-size: 0.5rem;
+  margin: 10px 0 15px 0;
   padding: 4px 8px;
   width: fit-content;
-}
-
-.edit-btn {
-  margin-bottom: 15px;
-  margin-top: 15px;
 }
 
 .like-btn {
   background-color: var(--darkmain);
 }
+
 
 .post-box li form button:hover,
 .like-btn input[type="submit"]:hover,
@@ -236,21 +232,38 @@ nav ul li {
   font-style: normal;
 }
 
-.post-content {
+.comment-btns {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+
+.edit-btn {
+  display: flex;
+}
+
+#likes {
+  margin-left: 20px;
+  width: fit-content;
+}
+
+.post-content,
+.new_comment input[type='text'] {
   margin: 10px;
   padding: 20px 10px 25px 15px;
   font-family: 'Libre Caslon Text', serif;
   font-size: 1rem;
   font-weight: 400;
-  background-color: var(--lightmain) !important;
+  background-color: var(--lightalt) !important;
   width: 80%;
   border: 2px solid var(--lightalt);
   border-radius: 15px;
 
 }
 
-.main-nav {
-  border: 1px solid red;
+.new_comment input[type='text'] {
+  background-color: var(--lightmain) !important;
+
 }
 
 input[type="text"] {
@@ -261,6 +274,10 @@ input[type="text"] {
   outline: 1px solid green;
   padding-left: 15px;
   border-left: 1px solid blue;
+  background-color: var(--darkmain);
+}
+
+.comment-box ul {
   background-color: var(--darkmain);
 }
 
@@ -295,17 +312,41 @@ input[type="text"] {
   border-left: 1px solid blue;
 } */
 
-.main-nav ul {
-  display: flex;
-  align-items: center;
+
+.main-nav>ul:first-child {
+  display: grid;
+
   padding-left: 0;
-  justify-content: space-between;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 3fr repeat(2, 50px) 0.1fr;
+  justify-items: end;
+  align-items: center;
 }
 
-.site-name {
-  flex: 1;
-  margin-left: 10px;
+.user-picture>ul {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
 
+.user-list a,
+.notification-icon {
+  display: flex;
+  justify-content: end;
+}
+
+
+.notification-img {
+  padding-right: 10px;
+}
+
+.user-picture {
+  margin-left: 10px;
+}
+
+.site-name a {
+  margin-left: 20px;
+  padding-left: 20px;
 }
 
 .site-name a {
@@ -395,6 +436,5 @@ input[type="text"] {
 }
 
 .new_comment input[type='text'] {
-  width: 100%;
-  background-color:
-    /* !TODO WORKING HERE */
+  color: #05396b;
+}

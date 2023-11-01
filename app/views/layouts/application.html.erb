@@ -12,12 +12,6 @@
 
   <body>
     <nav class="main-nav">
-      <div class="flash-message">
-        <% flash.each do |name, message| %>
-        <div class="<%= name %>"><%= message %></div>
-        <% end %>
-      </div>
-
 
         <% if user_signed_in? %>
           <ul>
@@ -37,6 +31,12 @@
         <li class="site-name">
           <%= link_to 'Fauxbook', root_path %></div>
         </li>
+
+         <li class="flash-message">
+          <% flash.each do |name, message| %>
+            <div class="<%= name %>"><%= message %></div>
+          <% end %>
+       </li>
 
         <li>
           <% if user_signed_in? %>
