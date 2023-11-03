@@ -536,6 +536,17 @@ input[type="text"] {
   border: 1px solid var(--lightalt);
   box-shadow: 1px 1px 1px;
 
+  position: relative;
+}
+
+.post-container::after {
+  content: "";
+  position: absolute;
+  width: 80%;
+  background-color: var(--lightalt);
+  height: 1px;
+  bottom: -20px;
+  left: 10%;
 }
 
 .post-time,
