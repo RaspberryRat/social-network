@@ -3,36 +3,35 @@
   <div class="post-box" data-controller="time">
     <%= turbo_frame_tag post do %>
       <ul class="post-box">
-        <li class="profile-image-small profile-image-line">
-          <% if post.author.profile_picture.attached? %>
-            <%= image_tag post.author.profile_picture %>
-          <% else %>
-            <%= image_tag post.author.gravatar_url %>
-          <% end %>
-          <%= post.author.fullname %></li>
-        <li data-time-target="postTime" class="post-time"><%= post.created_at %></li>
-
-        <li class='post-content'>
-          <% if post.postable_type == 'TextPost' %>
-            <%= post.postable.content %>
-          <% else %>
-            <%= image_tag post.postable.image, class: 'post-image' %>
-          <% end %>
-        </li>
-
-          <ul class="post-btns">
-            <% if current_user == post.author %>
-
-              <li class="edit-btn">
-                <%= link_to 'Edit Post', edit_user_post_path(post.author, post) %>
-              </li>
-              <li>
-                <%= button_to "Delete Post", user_post_path(post.author, post),
-                method: :delete %>
-              </li>
-            <% end%>
-            <%= render 'likes/like', likeable: post %>
-          </ul>
+        <div class="post-container">
+          <li class="profile-image-small profile-image-line">
+            <% if post.author.profile_picture.attached? %>
+              <%= image_tag post.author.profile_picture %>
+            <% else %>
+              <%= image_tag post.author.gravatar_url %>
+            <% end %>
+            <%= post.author.fullname %></li>
+          <li data-time-target="postTime" class="post-time"><%= post.created_at %></li>
+          <li class='post-content'>
+            <% if post.postable_type == 'TextPost' %>
+              <%= post.postable.content %>
+            <% else %>
+              <%= image_tag post.postable.image, class: 'post-image' %>
+            <% end %>
+          </li>
+            <ul class="post-btns">
+              <% if current_user == post.author %>
+                <li class="edit-btn">
+                  <%= link_to 'Edit Post', edit_user_post_path(post.author, post) %>
+                </li>
+                <li>
+                  <%= button_to "Delete Post", user_post_path(post.author, post),
+                  method: :delete %>
+                </li>
+              <% end%>
+              <%= render 'likes/like', likeable: post %>
+            </ul>
+        </div>
 
 
         <%= render post.comments, post: post %>
