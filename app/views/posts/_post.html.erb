@@ -1,7 +1,7 @@
 <% if current_user.friend_list.include?(post.author)  ||
   current_user == post.author %>
   <div class="post-box" data-controller="time">
-    <%= turbo_frame_tag post, class: "post-box" do %>
+    <%= turbo_frame_tag post do %>
       <ul class="post-box">
         <li class="profile-image-small profile-image-line">
           <% if post.author.profile_picture.attached? %>
