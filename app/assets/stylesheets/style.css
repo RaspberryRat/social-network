@@ -209,8 +209,9 @@ nav ul li {
   width: fit-content;
 }
 
-.like-btn {
-  background-color: var(--darkmain);
+.like-btn,
+.edit-btn {
+  background-color: var(--lightmain);
 }
 
 
@@ -239,7 +240,8 @@ nav ul li {
   font-style: normal;
 }
 
-.post-btns {
+.post-btns,
+.comment-btns {
   background-color: var(--lightmain);
   margin-bottom: 20px;
 
@@ -252,20 +254,19 @@ nav ul li {
   align-items: end;
 }
 
+.comment-btns {
+  grid-template-rows: 1fr;
+
+}
+
 .post-btns .likes-message {
   grid-column: 1;
   grid-row: 2;
 }
 
-.comment-btns {
-  display: flex;
-  justify-content: end;
-  align-items: end;
-}
-
-.comment-btns>form,
-.post-btns>form {
-  background-color: var(--darkmain);
+.comment-btns form,
+.post-btns form {
+  background-color: var(--lightmain);
 }
 
 .edit-btn {
@@ -310,9 +311,7 @@ input[type="text"] {
   background-color: var(--darkmain);
 }
 
-.comment-box ul {
-  background-color: var(--darkmain);
-}
+
 
 .post-box>.comment-box {
   width: 80%;
@@ -527,7 +526,8 @@ input[type="text"] {
   border-radius: 8px;
 }
 
-.post-container {
+.post-container,
+.single-comment-container {
   background-color: var(--lightmain);
   border-radius: 10px;
   margin: 30px;
@@ -537,6 +537,10 @@ input[type="text"] {
   box-shadow: 1px 1px 1px;
 
   position: relative;
+}
+
+.comment-container {
+  background-color: var(--darkmain);
 }
 
 .post-container::after {
@@ -550,6 +554,14 @@ input[type="text"] {
 }
 
 .post-time,
-.post-container .likes-message {
+.likes-message,
+.new_comment,
+.comment-reply-item {
   background-color: var(--lightmain);
+  border-radius: 10px;
+}
+
+.comment-box .likes-message {
+  margin-left: 20px;
+  width: auto;
 }
