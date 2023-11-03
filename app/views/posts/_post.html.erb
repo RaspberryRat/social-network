@@ -1,6 +1,6 @@
 <% if current_user.friend_list.include?(post.author)  ||
   current_user == post.author %>
-  <div class="post-box" data-controller="time">
+  <div class="post-box main-post-box" data-controller="time">
     <%= turbo_frame_tag post do %>
       <ul class="post-box">
         <div class="post-container">
@@ -32,7 +32,9 @@
               <%= render 'likes/like', likeable: post %>
             </ul>
         </div>
-
+        <div class="new-comment-link comment-reply-item">
+          <%= turbo_frame_tag  id="new_comment", src:new_user_post_comment_path(post.author, post) %>
+        </div>
 
         <%= render post.comments, post: post %>
 
@@ -42,9 +44,6 @@
         </li>
 
       </ul>
-    <div class="new-comment-link">
-      <%= turbo_frame_tag  id="new_comment", src:new_user_post_comment_path(post.author, post) %>
-    </div>
     <% end %>
 
   </div>
