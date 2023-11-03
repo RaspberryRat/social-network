@@ -19,21 +19,29 @@
             <%= image_tag post.postable.image, class: 'post-image' %>
           <% end %>
         </li>
-        <% if current_user == post.author %>
-        <li class="edit-btn"><%= link_to 'Edit Post', edit_user_post_path(post.author, post) %></li>
-        <li>
-          <%= button_to "Delete Post", user_post_path(post.author, post),
-            method: :delete %>
-        </li>
-        <% end%>
-          <%= render 'likes/like', likeable: post %>
+
+          <ul class="post-btns">
+            <% if current_user == post.author %>
+
+              <li class="edit-btn">
+                <%= link_to 'Edit Post', edit_user_post_path(post.author, post) %>
+              </li>
+              <li>
+                <%= button_to "Delete Post", user_post_path(post.author, post),
+                method: :delete %>
+              </li>
+            <% end%>
+            <%= render 'likes/like', likeable: post %>
+          </ul>
+
 
         <%= render post.comments, post: post %>
 
-             <li>
-        <%= turbo_frame_tag "comment_#{post.id}" do %>
-        <% end %>
-             </li>
+        <li>
+          <%= turbo_frame_tag "comment_#{post.id}" do %>
+          <% end %>
+        </li>
+
       </ul>
     <div class="new-comment-link">
       <%= turbo_frame_tag  id="new_comment", src:new_user_post_comment_path(post.author, post) %>
