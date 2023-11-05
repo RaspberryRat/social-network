@@ -31,3 +31,6 @@ friends Icon by <a class="link_pro" href="https://freeicons.io/undefined/friends
 
 attach-image Icon by <a class="link_pro" href="https://freeicons.io/material-icons-images/add-photo-alternate-icon-15213">Free Preloaders</a>
                 on <a href="https://freeicons.io">freeicons.io</a>
+
+facebook-icon Icon by <a class="link_pro" href="https://freeicons.io/super-tiny-icons/facebook-icon-28494">Fasil</a>
+                on <a href="https://freeicons.io">freeicons.io</a>

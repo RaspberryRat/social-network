@@ -389,7 +389,8 @@ input[type="text"] {
   padding-left: 20px;
 }
 
-.site-name a {
+.site-name a,
+.site-name {
   font-family: 'Jost', sans-serif;
   font-weight: 600;
   color: var(--lightalt);
@@ -406,14 +407,27 @@ input[type="text"] {
   background-color: var(--main);
 }
 
-.main-nav a {
-  color: var(--text1);
+.main-nav>ul:first-child {
+  display: flex;
 }
 
-.site-name a {
-  font-family: 'Jost', sans-serif;
-  font-weight: 600;
+.main-nav>ul:first-child a {
   color: var(--lightalt);
+  font-family: 'Jost', sans-serif
+}
+
+.main-nav>ul:first-child a:hover {
+  color: var(--text1);
+  font-style: italic;
+}
+
+.main-nav>ul:first-child a:active {
+  color: var(--darkmain);
+  font-weight: bolder;
+}
+
+.main-nav a {
+  color: var(--text1);
 }
 
 .notification-icon img {
@@ -609,4 +623,182 @@ input[type="text"] {
 
 .comment-reply-item {
   border-radius: 10px;
+}
+
+
+/* Login Page */
+
+.login-container {
+  display: grid;
+  grid-template-columns: repeat(2, min(400px, 1fr)) 10%;
+  grid-template-rows: 1fr;
+}
+
+.left-container {
+  grid-column: 1;
+  padding: 40% 10% 0 20%;
+}
+
+.right-container {
+  grid-column: 2;
+  padding: 30% 20% 0 0;
+  width: 400px;
+}
+
+.third-container {
+  background-color: var(--main);
+}
+
+.login-container {
+  font-size: 1rem;
+}
+
+.login-container .site-name {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  margin: 30px 0 20px 0;
+  padding-right: 20px;
+}
+
+.left-container div {
+  padding-left: 10px;
+  color: black;
+}
+
+.right-container * {
+  background-color: var(--darkmain);
+
+}
+
+.user-login-form {
+  margin-right: 20px;
+  padding: 10px;
+  background-color: var(--darkmain);
+
+}
+
+.email-field>input,
+.password-field>input {
+  background-color: var(--lightalt);
+  width: 80%;
+  padding: 5px;
+  border: 2px solid var(--lightmain);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  color: var(--text1);
+}
+
+.remember-field {
+  display: flex;
+  color: var(--lightalt);
+  padding-left: 10px;
+}
+
+.remember-field label {
+  width: fit-content;
+  font-size: 0.9rem;
+}
+
+.remember-field input[type="checkbox"] {
+  width: 30px;
+}
+
+.remember-field input[type="checkbox"]:hover,
+.remember-field label:hover {
+  cursor: pointer;
+  font-style: italic;
+}
+
+.actions * {
+  color: var(--lightalt);
+  width: fit-content;
+  font-size: 0.9rem;
+  padding: 3px 0 0 10px;
+  font-family: 'Libre Caslon Text', serif;
+
+}
+
+.actions input:hover {
+  cursor: pointer;
+  font-style: italic;
+}
+
+.actions input:active {
+  cursor: pointer;
+  font-weight: 800;
+  color: var(--text1);
+}
+
+.devise-links * {
+  color: var(--lightalt);
+  font-size: 0.9rem;
+}
+
+.devise-links {
+  display: grid;
+  padding-left: 20px;
+
+  grid-template-columns: 50% 5%;
+  grid-template-rows: repeat(3, 1fr);
+  position: relative;
+}
+
+.devise-links>a:first-child {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.devise-links>a:nth-child(2) {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.devise-links form {
+  grid-column: 1;
+  grid-row: 3;
+  width: fit-content
+}
+
+
+.devise-links a,
+.devise-links button {
+  font-family: 'Libre Caslon Text', serif;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+
+.devise-links a:hover,
+.devise-links button:hover {
+  cursor: pointer;
+  font-style: italic;
+}
+
+.devise-links a:active,
+.devise-links button:active {
+  cursor: pointer;
+  font-weight: 800;
+  color: var(--text1);
+}
+
+.right-container>div:first-child {
+  border-radius: 20px;
+  background-color: var(--darkmain);
+  padding: 10px;
+  box-shadow: 1px 1px 1px;
+}
+
+.user-login-form,
+.devise-links {
+  width: auto;
+}
+
+.facebook-icon {
+  width: 1.4rem;
+  grid-row: 3;
+  grid-column: 2;
+  position: absolute;
+  left: -50px;
+  top: -3px;
 }
