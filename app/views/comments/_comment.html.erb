@@ -1,5 +1,5 @@
   <div class="comment-box">
-    <%= turbo_frame_tag comment do %>
+    <%= turbo_frame_tag "comment_#{comment.id}" do %>
       <ul class="comment-container">
         <div class="single-comment-container">
           <li class="profile-image-small profile-image-line">
@@ -45,16 +45,10 @@
           </li>
         </div>
 
-        <li>
-          <%= turbo_frame_tag "comment_#{comment.id}" do %>
-          <% end %>
-        </li>
 
-        <ul>
-          <li>
+
             <%= render partial: 'comments/comment', collection: comment.comments %>
-          </li>
-            </ul>
+
       <% end %>
       </ul>
   </div>

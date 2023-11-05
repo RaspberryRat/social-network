@@ -36,11 +36,11 @@
           <%= turbo_frame_tag  id="new_comment", src:new_user_post_comment_path(post.author, post) %>
         </div>
 
-        <%= render post.comments, post: post %>
-
+        <% post.comments.where(parent_id: nil).each do |comment| %>
+          <%= render 'comments/comment', comment: comment %>
+        <% end %>
         <li>
-          <%= turbo_frame_tag "comment_#{post.id}" do %>
-          <% end %>
+
         </li>
 
       </ul>
