@@ -38,7 +38,8 @@
           </li>
 
           <li class="comment-reply-item">
-            <%= form_for [comment, Comment.new] do |f| %>
+            <%= form_for [comment, Comment.new],
+            data: { controller: 'form', action: 'turbo:submit-end->form#reset' } do |f| %>
               <%= f.text_field :content, placeholder: 'Write a comment...', data: { 'form-target': 'contentField' } %>
               <%= f.submit "Reply", class: 'reply-btn'  %>
             <% end %>
