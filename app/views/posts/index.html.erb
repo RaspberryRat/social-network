@@ -3,6 +3,32 @@
   <%= render 'new_post', user: current_user %>
 
   <%= render 'posts'%>
+
+  <div class="friends-list">
+    <div>Friend <span>List</span></div>
+    <ul>
+      <% current_user.friends.each do |friend| %>
+        <li>
+          <ul class="friend-link">
+            <%= link_to user_path(friend) do %>
+              <li>
+                <%= friend.fullname %>
+              </li>
+              <li>
+                <% if friend.profile_picture.attached? %>
+                  <%= image_tag friend.profile_picture,
+                  class: "profile-image-med" %>
+                <% else %>
+                  <%= image_tag friend.gravatar_url,
+                  class: "profile-image-med" %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
 
 

@@ -326,13 +326,13 @@ input[type="text"] {
 .profile-image-small>img {
   border-radius: 50%;
   width: 30px;
-  height: auto;
+  height: 30px;
 }
 
 .profile-image-med {
   border-radius: 50%;
   width: 50px;
-  height: auto;
+  height: 50px;
 }
 
 .profile-image-upload {
@@ -383,8 +383,8 @@ input[type="text"] {
   padding-right: 10px;
 }
 
-.user-picture {
-  margin-left: 10px;
+.main-nav .user-picture {
+  margin-right: 10px;
 }
 
 .site-name a {
@@ -400,7 +400,6 @@ input[type="text"] {
 }
 
 .main-nav ul li {
-  margin-right: 10px;
   padding: 5px 0;
 }
 
@@ -410,13 +409,10 @@ input[type="text"] {
   background-color: var(--main);
 }
 
-.main-nav>ul:first-child {
-  display: flex;
-}
-
 .main-nav>ul:first-child a {
   color: var(--lightalt);
-  font-family: 'Jost', sans-serif
+  font-family: 'Jost', sans-serif;
+  font-size: 1.5rem;
 }
 
 .main-nav>ul:first-child a:hover {
@@ -444,19 +440,93 @@ input[type="text"] {
 }
 
 .main-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  grid-template-rows: 200px 1fr;
+  justify-items: center;
 }
 
 .new-posts-link {
+  grid-column: 1;
+  grid-row: 1;
   display: flex;
   text-align: center;
   border: 1px;
   border-radius: 30px;
   margin-bottom: 25px;
+}
 
-  /* box-shadow: 3px 1px lightgray; */
+#posts {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.friends-list {
+  grid-column: 2;
+  grid-row: 1 / 2;
+  margin-right: 40px;
+  height: fit-content;
+  border-radius: 15px;
+  background-color: var(--darkmain);
+  padding: 10px;
+  box-shadow: 2px 2px 2px;
+}
+
+.friends-list * {
+  background-color: var(--darkmain);
+}
+
+.friends-list>div {
+  font-family: 'Jost', sans-serif;
+  font-weight: 800;
+  color: var(--lightalt);
+  padding-top: 20px;
+  font-size: 2rem;
+  text-align: left;
+  position: relative;
+  padding-left: 5px;
+}
+
+.friends-list>div>span {
+  padding-left: 20px;
+}
+
+.friends-list>div::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  background-color: var(--lightalt);
+  height: 3px;
+  bottom: -5px;
+  left: 1px;
+}
+
+.friends-list>ul {
+  padding: 20px 5px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.friend-link>a {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  color: var(--lightalt);
+}
+
+.friend-link>a:hover {
+  color: var(--text1);
+  font-style: italic;
+}
+
+.friend-link>a:active {
+  color: var(--main);
+  font-weight: bolder;
+  font-style: normal;
+}
+
+.friend-link>a>li {
+  text-align: center;
 }
 
 #new_post form {
@@ -469,7 +539,7 @@ input[type="text"] {
 
 #posts,
 .new-posts-link {
-  width: 60%;
+  width: min(60%, 600px);
 }
 
 .likes-message {
