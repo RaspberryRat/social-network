@@ -296,7 +296,10 @@ nav ul li {
 
 }
 
-
+.post-form-container {
+  padding-top: 10px;
+  box-shadow: 2px 2px 2px;
+}
 
 .new_comment input[type='text'] {
   background-color: var(--lightmain) !important;
@@ -802,3 +805,5 @@ input[type="text"] {
   left: -50px;
   top: -3px;
 }
+
+/* END Login page */

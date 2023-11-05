@@ -1,31 +1,33 @@
+<div class="post-form-container">
 
-  <%= form_with model: post,
-    url: post.persisted? ? user_post_path(@user, post) : user_posts_path(@user),
-    method: post.persisted? ? :patch : :post, data: { controller: 'form', action: 'turbo:submit-end->form#reset' } do |form| %>
-    <% if post.errors.any? %>
-      <div style="color: red">
-        <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+    <%= form_with model: post,
+      url: post.persisted? ? user_post_path(@user, post) : user_posts_path(@user),
+      method: post.persisted? ? :patch : :post, data: { controller: 'form', action: 'turbo:submit-end->form#reset' } do |form| %>
+      <% if post.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-        <ul>
-          <% post.errors.each do |error| %>
-            <li><%= error.full_message %></li>
+          <ul>
+            <% post.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="new-post-entry">
+        <%= form.label :content, ' :', class: "hidden" %>
+        <%= form.text_field :content,
+          placeholder: "What's on your mind, #{current_user.first_name}?", data: { 'form-target': 'contentField' } %>
+        <div class="post-btn-container">
+          <%= form.label :image do %>
+            <%= image_tag "attach-image.svg", alt: "attach image"  %>
           <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <div class="new-post-entry">
-      <%= form.label :content, ' :', class: "hidden" %>
-      <%= form.text_field :content,
-        placeholder: "What's on your mind, #{current_user.first_name}?", data: { 'form-target': 'contentField' } %>
-      <div class="post-btn-container">
-        <%= form.label :image do %>
-          <%= image_tag "attach-image.svg", alt: "attach image"  %>
-        <% end %>
-        <div class="hidden"><%= form.file_field :image %></div>
-        <div class="post-btn">
-          <%= form.submit %>
+          <div class="hidden"><%= form.file_field :image %></div>
+          <div class="post-btn">
+            <%= form.submit %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+</div>
 
