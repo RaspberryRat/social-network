@@ -47,10 +47,30 @@
         <% end %>
 
 
+        <div class="notification-icon" data-controller="dropdown">
+          <button
+            type="button"
+            id="notification-dropdown"
+            data-dropdown-target="button"
+            data-action="click->dropdown#toggle keydown.esc->dropdown#toggle click@window->dropdown#hide"
+            tabindex="0"
+            aria-haspopup="true"
+            aria-expanded="true"
+          >
+            <%= image_tag "bell-icon.svg", class: 'notification-img' %>
+          </button>
 
-        <li class="notification-icon">
-          <%= image_tag "bell-icon.svg", class: 'notification-img' %>
-        </li>
+          <div class="overlay" data-dropdown-target="overlay"></div>
+
+          <div class="dropdown-menu"
+          data-dropdown-target="menu"
+          aria-orientation="vertical"
+          aria-labelledby="notification-dropdown">
+            <p>Item1</p>
+            <p>Item2</p>
+            <p>Item3r</p>
+          </div>
+        </div>
 
         <% if user_signed_in? %>
           <li class="user-picture">
@@ -77,27 +97,7 @@
       </ul>
     </nav>
 
-    <div class="dropdown-container" data-controller="dropdown">
-      <button
-        type="button"
-        id="notification-dropdown"
-        data-dropdown-target="button"
-        data-action="click->dropdown#toggle keydown.esc->dropdown#toggle click@window->dropdown#hide"
-        tabindex="0"
-        aria-haspopup="true"
-        aria-expanded="true">
-        CLICK ME
-      </button>
 
-      <div class="dropdown-menu"
-      data-dropdown-target="menu"
-      aria-orientation="vertical"
-      aria-labelledby="notification-dropdown">
-        <p>Item1</p>
-        <p>Item2</p>
-        <p>Item3r</p>
-      </div>
-    </div>
     <%= yield %>
   </body>
 </html>

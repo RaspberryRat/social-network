@@ -3,7 +3,7 @@ import { leave, toggle } from "el-transition"
 
 // Connects to data-controller="dropdown"
 export default class extends Controller {
-  static targets = ["menu", "button"]
+  static targets = ["menu", "button", "overlay"]
 
   connect() {
     // Ensure the menu is hidden when the page loads
@@ -12,6 +12,7 @@ export default class extends Controller {
 
   toggle() {
     toggle(this.menuTarget)
+    toggle(this.overlayTarget)
   }
 
   hide(event) {
@@ -19,6 +20,8 @@ export default class extends Controller {
 
     if (!buttonClicked) {
       leave(this.menuTarget)
+      leave(this.overlayTargetTarget)
+
     }
   }
 }
