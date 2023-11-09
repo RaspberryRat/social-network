@@ -77,6 +77,27 @@
       </ul>
     </nav>
 
+    <div class="dropdown-container" data-controller="dropdown">
+      <button
+        type="button"
+        id="notification-dropdown"
+        data-dropdown-target="button"
+        data-action="click->dropdown#toggle keydown.esc->dropdown#toggle click@window->dropdown#hide"
+        tabindex="0"
+        aria-haspopup="true"
+        aria-expanded="true">
+        CLICK ME
+      </button>
+
+      <div class="dropdown-menu"
+      data-dropdown-target="menu"
+      aria-orientation="vertical"
+      aria-labelledby="notification-dropdown">
+        <p>Item1</p>
+        <p>Item2</p>
+        <p>Item3r</p>
+      </div>
+    </div>
     <%= yield %>
   </body>
 </html>
