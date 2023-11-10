@@ -1,6 +1,7 @@
  <div class="friendship-container">
    <div class="friend-request-container">
      <% if current_user == @user %>
+     <% unless @friend_requests.empty? %>
       <div><%= @user.fullname %>'s friend requests</div>
       <div class="friend-request-list">
         <% @friend_requests.each do |fr| %>
@@ -17,7 +18,7 @@
                       class: "profile-image-med" %>
                     <% end %>
                   </li>
-                  <li>
+                  <li class="user-name">
                     <%= fr.user.fullname %>
                   </li>
                 <% end %>
@@ -85,7 +86,8 @@
 
         <% end %>
       </div>
-     <% end %>
+    <% end %>
+    <% end %>
    </div>
 
    <div class="friend-list-container">
