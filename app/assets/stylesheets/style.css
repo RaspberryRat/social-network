@@ -909,6 +909,7 @@ dropdown-container {
   right: -75%;
   z-index: 1001;
   outline: 1px solid red;
+  width: fit-content;
   /* Make sure it's above the overlay */
 }
 
@@ -1063,4 +1064,28 @@ h2 {
   padding: 15px 0 0 15px;
   width: auto;
 
+}
+
+
+.friendship-container .overlay {
+  display: none;
+  position: fixed;
+  top: 300px;
+  left: 1000px;
+  width: fit-content;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Adjust the background color and opacity as needed */
+  z-index: 1000;
+  /* Adjust the z-index to make sure it's above other content */
+}
+
+
+.friendship-container .dropdown-menu {
+  position: absolute;
+  top: 490px;
+  right: 550px;
+  z-index: 1001;
+  outline: 1px solid red;
+  /* Make sure it's above the overlay */
 }
