@@ -939,12 +939,14 @@ dropdown-container {
 
 /* Friend page */
 
-.friend-request-container * {
+.friend-request-container *,
+.friend-list-container * {
   background-color: var(--darkmain);
   font-family: 'Libre Caslon Text', serif;
 }
 
-.friend-request * {
+.friend-request *,
+.friend * {
   background-color: var(--lightmain);
 }
 
@@ -953,11 +955,25 @@ dropdown-container {
   border-radius: 10px;
   height: 170px;
   background-color: var(--lightmain);
+}
 
+.friend {
+  border: 1px solid var(--lightalt);
+  border-radius: 10px;
+  height: 150px;
+  background-color: var(--lightmain);
+}
+
+.profile-image-large {
+  height: 100px;
+  width: 100px;
 }
 
 .friend-request>li,
-.friend-request>li>ul {
+.friend-request>li>ul,
+.friend>.friend-link>a>li,
+.friend>.friend-link,
+.friend>.friend-link>a {
   border-radius: 10px;
 }
 
@@ -967,7 +983,8 @@ dropdown-container {
   width: auto;
 }
 
-.friend-request-list {
+.friend-request-list,
+.friend-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 15%));
   grid-template-rows: auto;
@@ -975,15 +992,17 @@ dropdown-container {
   padding: 30px 0 30px 30px;
 }
 
-.friend-request-container>div:first-child {
+.friend-request-container>div:first-child,
+h2 {
   padding: 5px 0 5px 20px;
   font-size: 1.2rem;
   color: var(--lightalt);
-  font-family: 'Jost', sans-serif;
+  font-family: 'Jost', sans-serif !important;
   font-weight: 800;
 }
 
-.friend-request-container {
+.friend-request-container,
+.friend-list-container {
   margin-bottom: 30px;
   max-width: 40%;
   min-width: 220px;
@@ -1029,10 +1048,19 @@ dropdown-container {
   font-family: 'Jost', sans-serif;
   font-size: 0.9rem;
   padding: 5px 0;
+  color: var(--text1);
+  text-align: left;
 }
 
 .friendship-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.friendship-container .friend-link a li {
+  text-align: start;
+  padding: 15px 0 0 15px;
+  width: auto;
+
 }
