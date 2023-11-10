@@ -19,16 +19,31 @@
                 <%= fr.user.fullname %>
               </li>
             <% end %>
+            <% unless fr.mutual_friends.empty? %>
               <li class="mutual-friend">
-                Mutual Friends:
-                <% fr.mutual_friends.each do |mf| %>
-                  <ul>
-                    <li>
-                      <%= mf.fullname %>
-                    </li>
-                  </ul>
-                <% end %>
+
+                <%# make a dropdown%>
+                <div class="mutual-friends-dropdown" data-controller="dropdown">
+                  <button
+                    type="button"
+                    id="mutual-friend-dropdown"
+                    data-dropdown-target="button"
+                    data-action="click->dropdown#toggle keydown.esc->dropdown#toggle click@window->dropdown#hide"
+                    tabindex="0"
+                    aria-haspopup="true"
+                    aria-expanded="true"
+                  > <%= fr.mutual_friends.length %> mutual friends</button>
+<%#TODO NEED TO FINISH DROPDOWN MENU%>
+                  <% fr.mutual_friends.each do |mf| %>
+                    <ul>
+                      <li>
+                        <%= mf.fullname %>
+                      </li>
+                    </ul>
+                  <% end %>
+                </div>
               </li>
+            <% end %>
           </ul>
         </li>
          <li>
