@@ -30,6 +30,10 @@ class Friendship < ApplicationRecord
     Friendship.find(mutual_friend_record.id).update(confirmed?: true)
   end
 
+  def mutual_friends
+    common_friends = user.friends & friend.friends
+  end
+
   private
 
   def add_mutual_friend
@@ -42,4 +46,3 @@ class Friendship < ApplicationRecord
     end
   end
 end
-

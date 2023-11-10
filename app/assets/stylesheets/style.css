@@ -879,7 +879,7 @@ input[type="text"] {
 
 /* END Login page */
 
-
+/* Notification Dropdown menu */
 dropdown-container {
   position: relative;
 }
@@ -909,3 +909,26 @@ dropdown-container {
 .dropdown-container.open .overlay {
   display: block;
 }
+
+.enter-transition {
+  transition: transform ease-out 100ms, opacity ease-out 100ms, scale ease-out 100ms;
+  transform-origin: top right;
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+.leave-transition {
+  transition: transform ease-in 75ms, opacity ease-in 75ms, scale ease-in 75ms;
+  transform-origin: top right;
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Notification Dropdown menu END */
+
+/* Friend page */

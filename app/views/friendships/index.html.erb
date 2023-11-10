@@ -1,32 +1,76 @@
- <% if current_user == @user %>
-  <div><%= @user.fullname %>'s friend requests</div>
+ <div class="friend-request-container">
+   <% if current_user == @user %>
+    <div><%= @user.fullname %>'s friend requests</div>
+    <ul>
+      <% @friend_requests.each do |fr| %>
+        <li>
+          <ul>
+            <%= link_to user_path(fr.user) do %>
+              <li>
+                <% if fr.user.profile_picture.attached? %>
+                  <%= image_tag fr.user.profile_picture,
+                    class: "profile-image-med" %>
+                <% else %>
+                  <%= image_tag fr.user.gravatar_url,
+                    class: "profile-image-med" %>
+                <% end %>
+              </li>
+              <li>
+                <%= fr.user.fullname %>
+              </li>
+            <% end %>
+              <li class="mutual-friend">
+                Mutual Friends:
+                <% fr.mutual_friends.each do |mf| %>
+                  <ul>
+                    <li>
+                      <%= mf.fullname %>
+                    </li>
+                  </ul>
+                <% end %>
+              </li>
+          </ul>
+        </li>
+         <li>
+          <%= form_with model: @friendship,
+            url: user_friendship_path(@user.id, fr.id), method: :patch do |f| %>
+            <%= f.submit 'Confirm Friend Request' %>
+          <% end %>
+        </li>
+        <li>
+          <%= form_with model: @friendship,
+            url: user_friendship_path(@user.id, fr.id), method: :delete do |f| %>
+            <%= f.submit 'Deny Friend Request' %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+   <% end %>
+ </div>
 
-
+<div class="friend-list-container">
+  <h2><%= @user.fullname %>'s Friends</h2>
   <ul>
-    <% request_num = 1 %>
-    <% @friend_requests.each do |fr| %>
+    <% current_user.friends.each do |friend| %>
       <li>
-        Friend Request # <%= request_num %>
+        <ul class="friend-link">
+          <%= link_to user_path(friend) do %>
+            <li>
+              <%= friend.fullname %>
+            </li>
+            <li>
+              <% if friend.profile_picture.attached? %>
+                <%= image_tag friend.profile_picture,
+                  class: "profile-image-med" %>
+              <% else %>
+                <%= image_tag friend.gravatar_url,
+                  class: "profile-image-med" %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
       </li>
-      <li>
-        Name: <%= fr.user.fullname %>
-      </li>
-      <li>
-        Email: <%= fr.user.email %>
-      </li>
-      <li>
-        <%= form_with model: @friendship,
-          url: user_friendship_path(@user.id, fr.id), method: :patch do |f| %>
-          <%= f.submit 'Confirm Friend Request' %>
-        <% end %>
-      </li>
-      <li>
-        <%= form_with model: @friendship,
-          url: user_friendship_path(@user.id, fr.id), method: :delete do |f| %>
-          <%= f.submit 'Deny Friend Request' %>
-        <% end %>
-      </li>
-      <% request_num +=1 %>
     <% end %>
   </ul>
-<% end %>
+</div>
+

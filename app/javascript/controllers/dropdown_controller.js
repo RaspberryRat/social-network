@@ -13,6 +13,7 @@ export default class extends Controller {
   toggle() {
     toggle(this.menuTarget)
     toggle(this.overlayTarget)
+    this.menuTarget.classList.toggle("visible")
   }
 
   hide(event) {
@@ -21,6 +22,7 @@ export default class extends Controller {
     if (!buttonClicked) {
       leave(this.menuTarget)
       leave(this.overlayTargetTarget)
+      this.menuTarget.classList.remove("visible")
 
     }
   }
