@@ -22,7 +22,7 @@
             <% unless fr.mutual_friends.empty? %>
               <li class="mutual-friend">
 
-                <%# make a dropdown%>
+
                 <div class="mutual-friends-dropdown" data-controller="dropdown">
                   <button
                     type="button"
@@ -32,15 +32,38 @@
                     tabindex="0"
                     aria-haspopup="true"
                     aria-expanded="true"
-                  > <%= fr.mutual_friends.length %> mutual friends</button>
-<%#TODO NEED TO FINISH DROPDOWN MENU%>
+                  >
+                    <%= fr.mutual_friends.length %> mutual friends
+                  </button>
+
+                <div class="overlay-mutual-friends"       data-dropdown-target="overlay"></div>
+
+                <div class="dropdown-menu"
+                data-dropdown-target="menu"
+                class="enter-transition leave-transition"
+                aria-orientation="vertical"
+                aria-labelledby="notification-dropdown"
+                >
+
                   <% fr.mutual_friends.each do |mf| %>
                     <ul>
-                      <li>
-                        <%= mf.fullname %>
-                      </li>
+                      <%= link_to user_path(mf) do %>
+                        <li>
+                          <% if mf.profile_picture.attached? %>
+                            <%= image_tag mf.profile_picture,
+                              class: "profile-image-med" %>
+                          <% else %>
+                              <%= image_tag mf.gravatar_url,
+                                class: "profile-image-med" %>
+                            <% end %>
+                        </li>
+                        <li>
+                          <%= mf.fullname %>
+                        </li>
+                      <% end %>
                     </ul>
                   <% end %>
+                </div>
                 </div>
               </li>
             <% end %>
