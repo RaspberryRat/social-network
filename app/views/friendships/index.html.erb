@@ -1,114 +1,116 @@
- <div class="friend-request-container">
-   <% if current_user == @user %>
-    <div><%= @user.fullname %>'s friend requests</div>
+ <div class="friendship-container">
+   <div class="friend-request-container">
+     <% if current_user == @user %>
+      <div><%= @user.fullname %>'s friend requests</div>
+      <div class="friend-request-list">
+        <% @friend_requests.each do |fr| %>
+          <ul class="friend-request">
+            <li>
+              <ul>
+                <%= link_to user_path(fr.user) do %>
+                  <li>
+                    <% if fr.user.profile_picture.attached? %>
+                      <%= image_tag fr.user.profile_picture,
+                      class: "profile-image-med" %>
+                    <% else %>
+                      <%= image_tag fr.user.gravatar_url,
+                      class: "profile-image-med" %>
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= fr.user.fullname %>
+                  </li>
+                <% end %>
+                <% if fr.mutual_friends.empty? %>
+                <li class="mutual-friend-text">You have no mutual friends</li>
+                <% else %>
+                <li class="mutual-friend mutual-friend-text">
+                  <div class="mutual-friends-dropdown" data-controller="dropdown">
+                    <button
+                      type="button"
+                      id="mutual-friend-dropdown"
+                      data-dropdown-target="button"
+                      data-action="click->dropdown#toggle keydown.esc->dropdown#toggle click@window->dropdown#hide"
+                      tabindex="0"
+                      aria-haspopup="true"
+                      aria-expanded="true"
+                    >
+                      <%= fr.mutual_friends.length %> mutual friends
+                    </button>
+                  <div class="overlay-mutual-friends"       data-dropdown-target="overlay"></div>
+                  <div class="dropdown-menu"
+                  data-dropdown-target="menu"
+                  class="enter-transition leave-transition"
+                  aria-orientation="vertical"
+                  aria-labelledby="notification-dropdown"
+                  >
+                    <% fr.mutual_friends.each do |mf| %>
+                      <ul>
+                        <%= link_to user_path(mf) do %>
+                          <li>
+                            <% if mf.profile_picture.attached? %>
+                              <%= image_tag mf.profile_picture,
+                                class: "profile-image-med" %>
+                            <% else %>
+                                <%= image_tag mf.gravatar_url,
+                                  class: "profile-image-med" %>
+                              <% end %>
+                          </li>
+                          <li>
+                            <%= mf.fullname %>
+                          </li>
+                        <% end %>
+                      </ul>
+                    <% end %>
+                  </div>
+                  </div>
+                </li>
+                <% end %>
+              </ul>
+            <li class="friendship-btns">
+              <div class="confirm-btn">
+                <%= form_with model: @friendship,
+                url: user_friendship_path(@user.id, fr.id), method: :patch do |f| %>
+                  <%= f.submit 'Confirm Friend Request' %>
+                <% end %>
+                </div>
+              <div class="deny-btn">
+                <%= form_with model: @friendship,
+                url: user_friendship_path(@user.id, fr.id), method: :delete do |f| %>
+                  <%= f.submit 'Deny Friend Request' %>
+                <% end %>
+              </div>
+            </li>
+          </ul>
+
+        <% end %>
+      </div>
+     <% end %>
+   </div>
+
+   <div class="friend-list-container">
+    <h2><%= @user.fullname %>'s Friends</h2>
     <ul>
-      <% @friend_requests.each do |fr| %>
+      <% current_user.friends.each do |friend| %>
         <li>
-          <ul>
-            <%= link_to user_path(fr.user) do %>
+          <ul class="friend-link">
+            <%= link_to user_path(friend) do %>
               <li>
-                <% if fr.user.profile_picture.attached? %>
-                  <%= image_tag fr.user.profile_picture,
+                <%= friend.fullname %>
+              </li>
+              <li>
+                <% if friend.profile_picture.attached? %>
+                  <%= image_tag friend.profile_picture,
                     class: "profile-image-med" %>
                 <% else %>
-                  <%= image_tag fr.user.gravatar_url,
+                  <%= image_tag friend.gravatar_url,
                     class: "profile-image-med" %>
                 <% end %>
-              </li>
-              <li>
-                <%= fr.user.fullname %>
-              </li>
-            <% end %>
-            <% unless fr.mutual_friends.empty? %>
-              <li class="mutual-friend">
-
-
-                <div class="mutual-friends-dropdown" data-controller="dropdown">
-                  <button
-                    type="button"
-                    id="mutual-friend-dropdown"
-                    data-dropdown-target="button"
-                    data-action="click->dropdown#toggle keydown.esc->dropdown#toggle click@window->dropdown#hide"
-                    tabindex="0"
-                    aria-haspopup="true"
-                    aria-expanded="true"
-                  >
-                    <%= fr.mutual_friends.length %> mutual friends
-                  </button>
-
-                <div class="overlay-mutual-friends"       data-dropdown-target="overlay"></div>
-
-                <div class="dropdown-menu"
-                data-dropdown-target="menu"
-                class="enter-transition leave-transition"
-                aria-orientation="vertical"
-                aria-labelledby="notification-dropdown"
-                >
-
-                  <% fr.mutual_friends.each do |mf| %>
-                    <ul>
-                      <%= link_to user_path(mf) do %>
-                        <li>
-                          <% if mf.profile_picture.attached? %>
-                            <%= image_tag mf.profile_picture,
-                              class: "profile-image-med" %>
-                          <% else %>
-                              <%= image_tag mf.gravatar_url,
-                                class: "profile-image-med" %>
-                            <% end %>
-                        </li>
-                        <li>
-                          <%= mf.fullname %>
-                        </li>
-                      <% end %>
-                    </ul>
-                  <% end %>
-                </div>
-                </div>
               </li>
             <% end %>
           </ul>
         </li>
-         <li>
-          <%= form_with model: @friendship,
-            url: user_friendship_path(@user.id, fr.id), method: :patch do |f| %>
-            <%= f.submit 'Confirm Friend Request' %>
-          <% end %>
-        </li>
-        <li>
-          <%= form_with model: @friendship,
-            url: user_friendship_path(@user.id, fr.id), method: :delete do |f| %>
-            <%= f.submit 'Deny Friend Request' %>
-          <% end %>
-        </li>
       <% end %>
     </ul>
-   <% end %>
+   </div>
  </div>
-
-<div class="friend-list-container">
-  <h2><%= @user.fullname %>'s Friends</h2>
-  <ul>
-    <% current_user.friends.each do |friend| %>
-      <li>
-        <ul class="friend-link">
-          <%= link_to user_path(friend) do %>
-            <li>
-              <%= friend.fullname %>
-            </li>
-            <li>
-              <% if friend.profile_picture.attached? %>
-                <%= image_tag friend.profile_picture,
-                  class: "profile-image-med" %>
-              <% else %>
-                <%= image_tag friend.gravatar_url,
-                  class: "profile-image-med" %>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      </li>
-    <% end %>
-  </ul>
-</div>
-

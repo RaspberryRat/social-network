@@ -222,7 +222,9 @@ nav ul li {
 .reply-btn:hover,
 .comment-submit-btn input[type="submit"]:hover,
 .edit-btn a:hover,
-.post-btn input[type="submit"]:hover {
+.post-btn input[type="submit"]:hover,
+.confirm-btn input[type="submit"]:hover,
+.deny-btn input[type="submit"]:hover {
   background-color: var(--text1);
   color: var(--lightalt);
   border: none;
@@ -235,7 +237,9 @@ nav ul li {
 .edit-btn a:active,
 .reply-btn:active,
 .comment-submit-btn input[type="submit"]:active,
-.post-btn input[type="submit"]:active {
+.post-btn input[type="submit"]:active,
+.confirm-btn input[type="submit"]:active,
+.deny-btn input[type="submit"]:active {
   background-color: var(--main);
   color: var(--lightalt);
   border: none;
@@ -932,3 +936,64 @@ dropdown-container {
 /* Notification Dropdown menu END */
 
 /* Friend page */
+
+.friend-request-container * {
+  background-color: var(--darkmain);
+  font-family: 'Libre Caslon Text', serif;
+}
+
+.friend-request * {
+  background-color: var(--lightmain);
+}
+
+.friend-request {
+  height: min(150px, fit-content);
+
+}
+
+.friendship-btns,
+.friend-request>li>ul {
+  padding: 20px 20px 0 20px;
+  width: auto;
+}
+
+.friend-request-list {
+  display: grid;
+  grid-template-columns: repeat(5, max(200px, 15%));
+  grid-template-rows: auto;
+  gap: 20px;
+  padding: 30px;
+}
+
+.friend-request-container {
+  margin-bottom: 30px;
+}
+
+.mutual-friend-text,
+.mutual-friend-text * {
+  font-size: 0.9rem;
+}
+
+.confirm-btn input[type="submit"],
+.deny-btn input[type="submit"] {
+  background-color: var(--lightalt);
+  font-size: 0.6rem;
+  font-family: 'Libre Caslon Text', serif;
+  color: var(--text1);
+  border-radius: 20px;
+  white-space: pre-line;
+  padding: 3px;
+  height: 30px;
+  width: 80px;
+}
+
+.confirm-btn input[type="submit"] {
+  margin-right: 6px;
+}
+
+
+.friendship-btns {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
