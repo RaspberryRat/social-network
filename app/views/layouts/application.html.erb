@@ -52,9 +52,15 @@
             <%= image_tag "bell-icon.svg", class: 'notification-img' %>
           </span>
           <div class="notification-dropdown dropdown-content">
-            <p>Item 1</p>
-            <p>Item 2</p>
-            <p>Item 3</p>
+            <% if current_user.friend_requests? %>
+              <p>
+                You have a new friend request:
+                <br/>
+                <%= link_to "click here to see your new friend request", user_friendships_path(current_user), class: "notification-link" %>
+              </p>
+            <% else %>
+              <p>You have no new notifications</p>
+            <% end %>
           </div>
         </div>
 

@@ -895,11 +895,14 @@ input[type="text"] {
 .dropdown-content {
   display: none;
   position: absolute;
+  min-width: 100px;
   background-color: var(--lightalt);
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  padding: 12px 16px;
+  height: auto;
   z-index: 1;
+  border: 1px solid var(--text1);
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px;
 }
 
 .dropdown:hover .dropdown-content {
@@ -910,6 +913,33 @@ input[type="text"] {
   display: flex;
   justify-content: end;
 }
+
+.dropdown-content * {
+  background-color: var(--lightalt);
+  color: var(--text1);
+  font-size: 0.8rem;
+  font-family: 'Libre Caslon Text', serif;
+}
+
+.notification-link {
+  font-style: italic;
+  color: var(--darkmain) !important;
+  font-size: 0.7rem !important;
+}
+
+.notification-link:hover {
+  font-style: normal !important;
+  font-weight: 800;
+  color: var(--text1) !important;
+}
+
+.notification-link:active {
+  font-style: normal !important;
+  font-weight: 800;
+  color: var(--main) !important;
+}
+
+
 
 /* Notification Dropdown menu END */
 
