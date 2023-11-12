@@ -47,29 +47,14 @@
         <% end %>
 
 
-        <div class="notification-icon" data-controller="dropdown">
-          <button
-            type="button"
-            id="notification-dropdown"
-            data-dropdown-target="button"
-            data-action="click->dropdown#toggle keydown.esc->dropdown#toggle click@window->dropdown#hide"
-            tabindex="0"
-            aria-haspopup="true"
-            aria-expanded="true"
-          >
+        <div class="notification-icon dropdown">
+          <span>
             <%= image_tag "bell-icon.svg", class: 'notification-img' %>
-          </button>
-
-          <div class="overlay" data-dropdown-target="overlay"></div>
-
-          <div class="dropdown-menu"
-          data-dropdown-target="menu"
-          class="enter-transition leave-transition"
-          aria-orientation="vertical"
-          aria-labelledby="notification-dropdown">
-            <p>Item1</p>
-            <p>Item2</p>
-            <p>Item3r</p>
+          </span>
+          <div class="notification-dropdown dropdown-content">
+            <p>Item 1</p>
+            <p>Item 2</p>
+            <p>Item 3</p>
           </div>
         </div>
 
