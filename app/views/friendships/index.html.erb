@@ -25,47 +25,31 @@
                 <% if fr.mutual_friends.empty? %>
                 <li class="mutual-friend-text">You have no mutual friends</li>
                 <% else %>
-                <li class="mutual-friend mutual-friend-text">
-                  <div class="mutual-friends-dropdown" data-controller="dropdown">
-                    <button
-                      type="button"
-                      id="mutual-friend-dropdown"
-                      data-dropdown-target="button"
-                      data-action="click->dropdown#toggle keydown.esc->dropdown#toggle click@window->dropdown#hide"
-                      tabindex="0"
-                      aria-haspopup="true"
-                      aria-expanded="true"
-                    >
+                  <li class="mutual-friend mutual-friend-text">
+                    <div class="mutual-friends-dropdown dropdown">
                       <%= fr.mutual_friends.length %> mutual friends
-                    </button>
-                  <div class="overlay-mutual-friends"       data-dropdown-target="overlay"></div>
-                  <div class="dropdown-menu"
-                  data-dropdown-target="menu"
-                  class="enter-transition leave-transition"
-                  aria-orientation="vertical"
-                  aria-labelledby="notification-dropdown"
-                  >
-                    <% fr.mutual_friends.each do |mf| %>
-                      <ul>
-                        <%= link_to user_path(mf) do %>
-                          <li>
-                            <% if mf.profile_picture.attached? %>
-                              <%= image_tag mf.profile_picture,
-                                class: "profile-image-med" %>
-                            <% else %>
-                                <%= image_tag mf.gravatar_url,
-                                  class: "profile-image-med" %>
+                        <div class="dropdown-content">
+                          <% fr.mutual_friends.each do |mf| %>
+                            <ul>
+                              <%= link_to user_path(mf) do %>
+                                <li>
+                                  <% if mf.profile_picture.attached? %>
+                                    <%= image_tag mf.profile_picture,
+                                      class: "profile-image-med" %>
+                                  <% else %>
+                                      <%= image_tag mf.gravatar_url,
+                                        class: "profile-image-med" %>
+                                    <% end %>
+                                </li>
+                                <li>
+                                  <%= mf.fullname %>
+                                </li>
                               <% end %>
-                          </li>
-                          <li>
-                            <%= mf.fullname %>
-                          </li>
-                        <% end %>
-                      </ul>
-                    <% end %>
-                  </div>
-                  </div>
-                </li>
+                            </ul>
+                          <% end %>
+                        </div>
+                    </div>
+                  </li>
                 <% end %>
               </ul>
             <li class="friendship-btns">
