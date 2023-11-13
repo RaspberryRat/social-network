@@ -72,8 +72,6 @@
 
 
   <div class="user-posts">
-    <p><%= user.fullname %>'s Posts</p>
-
     <% if current_user == user %>
       <%= render 'posts/new_post', user: user %>
     <% end %>

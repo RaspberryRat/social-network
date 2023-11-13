@@ -1150,12 +1150,26 @@ h2 {
 }
 
 .additional-friends-link {
-  font-family: 'Libre Caslon Text', serif;
   font-size: 0.7rem;
   height: auto;
   border-radius: 10px;
   text-align: center;
+}
+
+.additional-friends-link a {
+  font-family: 'Libre Caslon Text', serif;
   color: var(--lightalt);
+}
+
+.additional-friends-link a:hover {
+  font-style: italic;
+  color: var(--text1);
+}
+
+.additional-friends-link a:active {
+  font-style: normal;
+  color: var(--lightmain);
+  font-weight: 800;
 }
 
 .user-page-container .friend-list {
