@@ -39,7 +39,7 @@
           friends
       </h2>
       <ul class="friend-list">
-        <% current_user.friends.shuffle.each do |friend| %>
+        <% current_user.friends.shuffle.first(3).each do |friend| %>
           <li class="friend">
             <ul class="friend-link">
               <%= link_to user_path(friend) do %>
@@ -57,6 +57,12 @@
                 </li>
               <% end %>
             </ul>
+          </li>
+        <% end %>
+        <% if current_user.friends.length > 2 %>
+          <li class="additional-friends-link">
+            <%= link_to "See all friends", user_friendships_path(user) %>
+            <%#TODO USER ARE NOT AUTHORIZED %>
           </li>
         <% end %>
       </ul>
