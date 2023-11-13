@@ -328,7 +328,8 @@ input[type="text"] {
   width: 80%;
 }
 
-.profile-image-small>img {
+.profile-image-small>img,
+.profile-image-small {
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -968,6 +969,8 @@ input[type="text"] {
   border-radius: 10px;
   height: 150px;
   background-color: var(--lightmain);
+  width: 130px;
+
 }
 
 .profile-image-large {
@@ -997,6 +1000,7 @@ input[type="text"] {
   grid-template-rows: auto;
   gap: 20px;
   padding: 30px 0 30px 30px;
+  justify-items: center;
 }
 
 .friend-request-container>div:first-child,
@@ -1009,7 +1013,7 @@ h2 {
 }
 
 .friend-request-container,
-.friend-list-container {
+.friend-request-container .friend-list-container {
   margin-bottom: 30px;
   max-width: 40%;
   min-width: 220px;
@@ -1070,4 +1074,77 @@ h2 {
   padding: 15px 0 0 15px;
   width: auto;
 
+}
+
+/* User Show page */
+
+.user-page-container {
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 20% 1fr;
+  grid-template-rows: 350px 1fr;
+}
+
+.profile-image {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.user-page-container .friend-list-container {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.user-posts {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.user-page-container h2 {
+  padding: 5px 0 5px 5px;
+  font-size: 0.8rem;
+  color: var(--lightalt);
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 400;
+  width: auto;
+  border-radius: 10px;
+}
+
+.user-page-container .friend-list {
+  padding-left: 10px;
+  width: auto;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fill, max(100%, 60px));
+  padding-top: 8px;
+  border-radius: 10px;
+}
+
+.user-page-container .friend-list-container {
+  margin-bottom: 30px;
+  height: 300px;
+  border: 1px solid var(--text1);
+  border-radius: 10px;
+  padding: 0;
+  background-color: var(--darkmain);
+  box-shadow: 2px 2px 2px;
+  width: 100px;
+}
+
+.user-page-container .friend {
+  height: auto;
+  width: 80px;
+}
+
+.user-page-container .friend-link>a {
+  margin-bottom: 2px;
+}
+
+.user-page-container .friend-link a li {
+  text-align: start;
+  padding: 8px 0 0 8px;
+  width: auto;
+}
+
+.user-page-container .friend-link .user-name {
+  font-size: 0.6rem;
 }

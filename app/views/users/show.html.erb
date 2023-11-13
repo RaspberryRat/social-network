@@ -1,83 +1,80 @@
 <% user = @user %>
 
-<div class="user-navbar">
-  <div class="user-name"><%= user.fullname %>'s Page</div>
-  <div class="root-link">
-    <div><%= link_to 'Main Page', root_path %></div>
+
+<div class="user-page-container">
+  <div class="profile-image">
+    <div class="user-picture">
+      <% if user.profile_picture.attached? %>
+        <%= image_tag user.profile_picture, class: 'profile-image-upload' %>
+      <% else %>
+        <%= image_tag user.gravatar_url %>
+      <% end %>
+    </div>
+
+
+    <div class="upload"><%= render 'upload_profile' %></div>
+    <ul>
+      <li>Name: <%= user.fullname %></li>
+      <li>Email: <%= user.email %></li>
+    </ul>
+
+
+      <% if current_user != user &&
+    user_signed_in? &&
+    !current_user.friends.include?(user)%>
+
+    <div class="add-friend">
+      <%= form_with model: @friendship,
+        url: user_friendships_path(@user), method: :post do |f| %>
+        <%= f.hidden_field :friend_id, value: user.id %>
+        <%= f.submit 'Send Friend Request' %>
+      <% end %>
+    </div>
+  <% end %>
   </div>
-  <div class="notifications">
+
+  <div class="friend-list-container">
+      <h2><%= user.fullname %> has
+          <%= user.friends.length %>
+          friends
+      </h2>
+      <ul class="friend-list">
+        <% current_user.friends.shuffle.each do |friend| %>
+          <li class="friend">
+            <ul class="friend-link">
+              <%= link_to user_path(friend) do %>
+                <li>
+                  <% if friend.profile_picture.attached? %>
+                    <%= image_tag friend.profile_picture,
+                      class: "profile-image-small" %>
+                  <% else %>
+                    <%= image_tag friend.gravatar_url,
+                      class: "profile-image-small" %>
+                  <% end %>
+                </li>
+                <li class="user-name">
+                  <%= friend.fullname %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+   </div>
+
+
+
+
+  <div class="user-posts">
+    <p><%= user.fullname %>'s Posts</p>
 
     <% if current_user == user %>
-      <% if user.friend_requests? %>
-        <div class="friend-requests">
-          <div>You have a friend request from:
-          </div>
-          <%= link_to 'See Friend Requests', user_friendships_path(user) %>
-        </div>
-      <% end %>
+      <%= render 'posts/new_post', user: user %>
     <% end %>
+
+    <ul>
+      <%= render 'posts/posts' %>
+    </ul>
   </div>
-</div>
-
-<div class="user-picture">
-  <% if user.profile_picture.attached? %>
-    <%= image_tag user.profile_picture, class: 'profile-image-upload' %>
-  <% else %>
-    <%= image_tag user.gravatar_url %>
-  <% end %>
-</div>
-
-
-<div class="upload"><%= render 'upload_profile' %></div>
-<ul>
-  <li>Name: <%= user.fullname %></li>
-  <li>Email: <%= user.email %></li>
-</ul>
-
-<div class="friend-list">
-  <ul>
-    <% friend_num = 1 %>
-    <% user.friends.each do |friend| %>
-      <% friendship = Friendship.find_by(
-        user_id: user.id, friend_id: friend.id
-        ) %>
-      <% if friendship.confirmed? == true %>
-        <li>Friend # <%=friend_num %>:
-          Friend's name: <%= friend.fullname %>
-        </li>
-        <li>
-          Friend's email: <%= friend.email %>
-        </li>
-
-      <% end %>
-        <% friend_num += 1 %>
-    <% end %>
-  </ul>
-</div>
-
-<% if current_user != user &&
-  user_signed_in? &&
-  !current_user.friends.include?(user)%>
-
-  <div class="add-friend">
-    <%= form_with model: @friendship,
-      url: user_friendships_path(@user), method: :post do |f| %>
-      <%= f.hidden_field :friend_id, value: user.id %>
-      <%= f.submit 'Send Friend Request' %>
-    <% end %>
-  </div>
-<% end %>
-
-
-<div class="user-posts">
-  <p><%= user.fullname %>'s Posts</p>
-
-  <% if current_user == user %>
-    <%= render 'posts/new_post', user: user %>
-  <% end %>
-
-  <ul>
-    <%= render 'posts/posts' %>
-  </ul>
 </div>
 
