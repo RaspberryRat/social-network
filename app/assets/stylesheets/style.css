@@ -1246,7 +1246,7 @@ h2 {
   width: fit-content;
 }
 
-.user-picture {
+.user-page-container .user-picture {
   grid-column: 1;
 }
 
