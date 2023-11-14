@@ -657,6 +657,10 @@ input[type="text"] {
   position: relative;
 }
 
+.single-comment-container {
+  padding: 0 8px;
+}
+
 .comment-container,
 .comment-container>ul>li {
   background-color: var(--darkmain);
