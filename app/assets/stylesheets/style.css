@@ -1200,6 +1200,11 @@ h2 {
   text-align: start;
   padding: 8px 0 0 8px;
   width: auto;
+  color: var(--text1)
+}
+
+.user-page-container .friend-link a li:hover {
+  color: var(--lightalt);
 }
 
 .user-page-container .friend-link .user-name {
