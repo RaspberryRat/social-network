@@ -709,10 +709,12 @@ input[type="text"] {
 
 /* Login Page */
 
-.login-container {
+.login-container,
+.signup-container {
   display: grid;
   grid-template-columns: repeat(2, min(400px, 1fr)) 10%;
   grid-template-rows: 1fr;
+  font-size: 1rem;
 }
 
 .left-container {
@@ -730,11 +732,8 @@ input[type="text"] {
   background-color: var(--main);
 }
 
-.login-container {
-  font-size: 1rem;
-}
-
-.login-container .site-name {
+.login-container .site-name,
+.signup-container .site-name {
   font-size: 3rem;
   margin-bottom: 20px;
   margin-top: 30px;
@@ -752,7 +751,8 @@ input[type="text"] {
 
 }
 
-.user-login-form {
+.user-login-form,
+user-sign-up-form {
   margin-right: 20px;
   padding: 10px;
   background-color: var(--darkmain);
@@ -770,23 +770,23 @@ input[type="text"] {
   color: var(--text1);
 }
 
-.remember-field {
+.login-container .remember-field {
   display: flex;
   color: var(--lightalt);
   padding-left: 10px;
 }
 
-.remember-field label {
+.login-container .remember-field label {
   width: fit-content;
   font-size: 0.9rem;
 }
 
-.remember-field input[type="checkbox"] {
+.login-container .remember-field input[type="checkbox"] {
   width: 30px;
 }
 
-.remember-field input[type="checkbox"]:hover,
-.remember-field label:hover {
+.login-container .remember-field input[type="checkbox"]:hover,
+.login-container .remember-field label:hover {
   cursor: pointer;
   font-style: italic;
 }
@@ -876,7 +876,7 @@ input[type="text"] {
 }
 
 .facebook-icon {
-  width: 1.4rem;
+  width: 1.2rem;
   grid-row: 3;
   grid-column: 2;
   position: absolute;
@@ -884,7 +884,62 @@ input[type="text"] {
   top: -3px;
 }
 
+.right-container,
+.left-container {
+  min-width: 360px;
+}
+
+.right-container>div {
+  border: 1px solid var(--text1);
+}
+
 /* END Login page */
+
+/* Sign-up Page
+most is same as login page */
+
+.signup-container h2 {
+  width: auto;
+  padding: 0;
+  margin-bottom: 5px;
+}
+
+.name-field>input {
+  background-color: var(--lightalt);
+  width: 80%;
+  padding: 5px;
+  border: 2px solid var(--lightmain);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  color: var(--text1);
+}
+
+.signup-container .actions input[type="submit"] {
+  padding-left: 20px;
+}
+
+.signup-container .devise-links {
+  display: grid;
+  padding-left: 20px;
+
+  grid-template-columns: 50% 5%;
+  grid-template-rows: 1fr;
+  position: relative;
+}
+
+.devise-links>a:first-child {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.signup-container .facebook-signup {
+  grid-row: 1;
+}
+
+.signup-container .facebook-signup span {
+  text-decoration: underline;
+  font-weight: 800;
+}
 
 /* Notification Dropdown menu */
 
