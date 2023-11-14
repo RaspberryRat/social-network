@@ -1,25 +1,51 @@
 <% users = @users %>
 
-<h2>List of users</h2>
 
-<ul>
-  <% users.each do |user| %>
-    <% unless user == current_user %>
-      <li><%= link_to user.fullname, user %></li>
-      <li>
-        <% if current_user != user &&
-        user_signed_in? &&
-        !current_user.friends.include?(user) %>
+<div class="alluser-container"> <%#was friendship-container%>
+  <div class="user-list-container"> <%#was friend-list-container%>
+    <h2>List of users</h2>
 
-          <div class="add-friend">
-            <%= form_with model: @friendship,
-              url: user_friendships_path(user), method: :post do |f| %>
-              <%= f.hidden_field :friend_id, value: user.id %>
-              <%= f.submit 'Send Friend Request' %>
-            <% end %>
-          </div>
+    <ul class="user-list"> <%#was friend-list%>
+      <% users.each do |user| %>
+        <% unless user == current_user %>
+          <li class="user"> <%# friend %>
+            <ul class="user-link"> <%# friend-link%>
+              <%= link_to user_path(user) do %>
+                <li>
+                  <% if user.profile_picture.attached? %>
+                    <%= image_tag user.profile_picture,
+                      class: 'profile-image-med' %>
+                  <% else %>
+                    <%= image_tag user.gravatar_url, class: "profile-image-med" %>
+                  <% end %>
+                </li>
+                <li class="user-name">
+                  <%= truncate(user.fullname, length: 14) %>
+                </li>
+              <% end%>
+
+                <li>
+                  <% if current_user != user &&
+                    user_signed_in? &&
+                    !current_user.friends.include?(user) %>
+
+                    <div class="add-friend">
+                      <%= form_with model: @friendship,
+                      url: user_friendships_path(user), method: :post do |f| %>
+                        <%= f.hidden_field :friend_id, value: user.id %>
+                        <%= f.submit 'Send Friend Request' %>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <div>
+                      Already friends
+                    </div>
+                  <% end %>
+                </li>
+            </ul>
+          </li>
         <% end %>
-      </li>
-    <% end %>
-  <% end %>
-</ul>
+      <% end %>
+    </ul>
+  </div>
+</div>
