@@ -26,6 +26,11 @@ class FriendshipsController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find(params[:user_id])
+    @friends = @user.friends
+  end
+
   def update
     @friend_request = Friendship.find(params[:id])
     @user = @friend_request.friend

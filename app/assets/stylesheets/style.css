@@ -1068,7 +1068,7 @@ h2 {
 }
 
 .friend-request-container,
-.friend-request-container .friend-list-container {
+.friendship-container .friend-list-container {
   margin-bottom: 30px;
   max-width: 40%;
   min-width: 220px;
