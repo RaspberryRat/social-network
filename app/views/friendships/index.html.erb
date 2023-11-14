@@ -19,7 +19,7 @@
                     <% end %>
                   </li>
                   <li class="user-name">
-                    <%= fr.user.fullname %>
+                    <%= truncate(fr.user.fullname, length: 14) %>
                   </li>
                 <% end %>
                 <% if fr.mutual_friends.empty? %>
@@ -42,7 +42,7 @@
                                     <% end %>
                                 </li>
                                 <li>
-                                  <%= mf.fullname %>
+                                  <%= truncate(mf.fullname, length: 14) %>
                                 </li>
                               <% end %>
                             </ul>
@@ -91,7 +91,7 @@
                   <% end %>
                 </li>
                 <li class="user-name">
-                  <%= friend.fullname %>
+                  <%= truncate(friend.fullname, length: 14) %>
                 </li>
               <% end %>
             </ul>

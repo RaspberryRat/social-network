@@ -1,0 +1,27 @@
+<div class="friendship-container">
+  <div class="friend-list-container">
+    <h2><%= @user.fullname %>'s Friends</h2>
+      <ul class="friend-list">
+        <% @friends.each do |friend| %>
+          <li class="friend">
+            <ul class="friend-link">
+              <%= link_to user_path(friend) do %>
+                <li>
+                  <% if friend.profile_picture.attached? %>
+                    <%= image_tag friend.profile_picture,
+                      class: "profile-image-large" %>
+                  <% else %>
+                    <%= image_tag friend.gravatar_url,
+                      class: "profile-image-large" %>
+                  <% end %>
+                </li>
+                <li class="user-name">
+                  <%= truncate(friend.fullname, length: 14) %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+     </div>
+</div>

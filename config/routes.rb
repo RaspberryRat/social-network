@@ -20,4 +20,8 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
   end
   resources :posts, only: [:index]
+
+  namespace :users do
+    resources :friends, only: [:index], path: "/:id/friends", as: :user_friends
+  end
 end

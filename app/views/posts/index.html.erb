@@ -12,7 +12,7 @@
           <ul class="friend-link">
             <%= link_to user_path(friend) do %>
               <li>
-                <%= friend.fullname %>
+                <%= truncate(friend.fullname, length: 14) %>
               </li>
               <li>
                 <% if friend.profile_picture.attached? %>

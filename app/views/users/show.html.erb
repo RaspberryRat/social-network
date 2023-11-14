@@ -51,7 +51,7 @@
                   <% end %>
                 </li>
                 <li class="user-name">
-                  <%= friend.fullname %>
+                  <%= truncate(friend.fullname, length: 14) %>
                 </li>
               <% end %>
             </ul>
@@ -59,14 +59,11 @@
         <% end %>
         <% if current_user.friends.length > 2 %>
           <li class="additional-friends-link">
-            <%= link_to "See all friends", user_friendships_path(user) %>
-            <%#TODO USER ARE NOT AUTHORIZED %>
+            <%= link_to "See all friends", users_user_friends_path(user) %>
           </li>
         <% end %>
       </ul>
    </div>
-
-
 
 
   <div class="user-posts">
