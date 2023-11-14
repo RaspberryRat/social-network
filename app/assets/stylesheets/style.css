@@ -1329,3 +1329,21 @@ h2 {
 .user-page-container .profile-info .user-picture {
   background: var(--lightmain);
 }
+
+.add-friend * {
+  background-color: var(--lightmain);
+  color: var(--text1);
+  font-family: 'Libre Caslon Text', serif;
+  font-size: 1rem;
+}
+
+.add-friend *:hover {
+  font-style: italic;
+  color: var(--lightalt);
+}
+
+.add-friend *:active {
+  font-style: normal;
+  font-weight: 800;
+  color: var(--darkmain);
+}

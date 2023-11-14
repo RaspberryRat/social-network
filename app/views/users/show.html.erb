@@ -32,7 +32,7 @@
     </div>
 
   <div class="friend-list-container">
-      <h2><%= user.fullname %> has
+      <h2><%= truncate(user.fullname, length:14) %> has
           <%= user.friends.length %>
           friends
       </h2>
