@@ -1136,8 +1136,10 @@ h2 {
 .user-page-container {
   padding: 40px;
   display: grid;
-  grid-template-columns: 20% 1fr;
+  grid-template-columns: 20% 15px 1fr;
   grid-template-rows: 350px 1fr;
+  gap: 15px;
+  min-width: 580px;
 }
 
 .profile-image {
@@ -1230,4 +1232,37 @@ h2 {
 .user-page-container .friend-list {
   padding-bottom: 5px;
   border-radius: 10px;
+}
+
+.user-page-container .profile-info {
+  height: 350px;
+  width: auto;
+  display: grid;
+  grid-template-columns: 1fr 30px 1fr;
+  align-items: end;
+}
+
+.profile-info * {
+  width: fit-content;
+}
+
+.user-picture {
+  grid-column: 1;
+}
+
+.upload {
+  grid-column: 2;
+}
+
+.user-details {
+  grid-column: 3;
+}
+
+.user-page-container .user-picture img {
+  height: 250px;
+  width: auto;
+}
+
+.user-posts {
+  margin-top: 50px;
 }

@@ -2,7 +2,7 @@
 
 
 <div class="user-page-container">
-  <div class="profile-image">
+  <div class="profile-info">
     <div class="user-picture">
       <% if user.profile_picture.attached? %>
         <%= image_tag user.profile_picture, class: 'profile-image-upload' %>
@@ -12,8 +12,10 @@
     </div>
 
 
-    <div class="upload"><%= render 'upload_profile' %></div>
-    <ul>
+    <div class="upload" data-controller="upload-image">
+      <%= render 'upload_profile' %>
+    </div>
+    <ul class="user-details">
       <li>Name: <%= user.fullname %></li>
       <li>Email: <%= user.email %></li>
     </ul>

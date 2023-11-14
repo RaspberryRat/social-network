@@ -34,3 +34,6 @@ attach-image Icon by <a class="link_pro" href="https://freeicons.io/material-ico
 
 facebook-icon Icon by <a class="link_pro" href="https://freeicons.io/super-tiny-icons/facebook-icon-28494">Fasil</a>
                 on <a href="https://freeicons.io">freeicons.io</a>
+
+add-image-icon by <a class="link_pro" href="https://freeicons.io/images-icon-set-2/image-plus-photo-icon-698080">master mind</a>
+                on <a href="https://freeicons.io">freeicons.io</a>
