@@ -51,6 +51,12 @@
             <span>
               <%= image_tag "bell-icon.svg", class: 'notification-img' %>
             </span>
+
+            <% if current_user.friend_requests? %>
+              <span class="notify">
+                !
+              </span>
+            <% end %>
             <div class="notification-dropdown dropdown-content">
               <% if current_user.friend_requests? %>
                 <p>
