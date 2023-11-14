@@ -3,37 +3,33 @@
 
 <div class="user-page-container">
   <div class="profile-info">
-    <div class="user-picture">
-      <% if user.profile_picture.attached? %>
-        <%= image_tag user.profile_picture, class: 'profile-image-upload' %>
-      <% else %>
-        <%= image_tag user.gravatar_url %>
-      <% end %>
+    <div>
+      <div class="user-picture">
+        <% if user.profile_picture.attached? %>
+          <%= image_tag user.profile_picture, class: 'profile-image-upload' %>
+        <% else %>
+          <%= image_tag user.gravatar_url %>
+        <% end %>
+      </div>
+      <div class="upload">
+        <%= render 'upload_profile' %>
+      </div>
+      <ul class="user-details">
+        <li><%= user.fullname %></li>
+      </ul>
+        <% if current_user != user &&
+      user_signed_in? &&
+      !current_user.friends.include?(user)%>
+      <div class="add-friend">
+        <%= form_with model: @friendship,
+          url: user_friendships_path(@user), method: :post do |f| %>
+          <%= f.hidden_field :friend_id, value: user.id %>
+          <%= f.submit 'Send Friend Request' %>
+        <% end %>
+      </div>
+        <% end %>
+        </div>
     </div>
-
-
-    <div class="upload">
-      <%= render 'upload_profile' %>
-    </div>
-    <ul class="user-details">
-      <li>Name: <%= user.fullname %></li>
-      <li>Email: <%= user.email %></li>
-    </ul>
-
-
-      <% if current_user != user &&
-    user_signed_in? &&
-    !current_user.friends.include?(user)%>
-
-    <div class="add-friend">
-      <%= form_with model: @friendship,
-        url: user_friendships_path(@user), method: :post do |f| %>
-        <%= f.hidden_field :friend_id, value: user.id %>
-        <%= f.submit 'Send Friend Request' %>
-      <% end %>
-    </div>
-  <% end %>
-  </div>
 
   <div class="friend-list-container">
       <h2><%= user.fullname %> has

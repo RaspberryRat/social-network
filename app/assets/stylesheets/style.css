@@ -1239,12 +1239,18 @@ h2 {
   border-radius: 10px;
 }
 
-.user-page-container .profile-info {
-  height: 350px;
-  width: auto;
+.user-page-container .profile-info>div:first-child {
   display: grid;
   grid-template-columns: 1fr 30px 1fr;
   align-items: end;
+  height: 90%;
+  width: 95%;
+  background-color: var(--lightmain);
+  border: 1px solid var(--lightalt);
+  box-shadow: 1px 1px 1px;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
 }
 
 .profile-info * {
@@ -1270,4 +1276,56 @@ h2 {
 
 .user-posts {
   margin-top: 50px;
+}
+
+.upload {
+  background-color: var(--lightalt);
+  padding: 8px;
+  border-radius: 50px;
+  position: absolute;
+  left: -65px;
+  bottom: 20px;
+  border: 2px solid var(--lightalt);
+}
+
+.upload * {
+  background-color: var(--lightalt);
+}
+
+.upload *:hover,
+.upload:hover {
+  background-color: var(--lightmain);
+}
+
+.upload:hover {
+  border: 2px solid var(--text1);
+}
+
+.user-page-container .profile-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--darkmain);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px;
+  width: 500px;
+  height: 350px;
+}
+
+.user-page-container .user-details * {
+  font-size: 1.5rem;
+  background-color: var(--lightmain);
+  font-family: 'Jost', sans-serif;
+  color: #e9f1dd;
+  font-weight: 800;
+}
+
+.user-page-container .profile-info .user-picture>img {
+  border-radius: 200px;
+}
+
+.user-page-container .profile-info .user-picture {
+  background: var(--lightmain);
 }
