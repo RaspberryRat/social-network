@@ -7,6 +7,20 @@ class Users::FriendsController < ApplicationController
     @friends = @user.friends
   end
 
+  def destroy
+    @user = User.find(params[:user_id])
+    @friend = User.find(params[:friend_id])
+    @friendship = Friendship.find(user: @user, friend: @friend)
+
+    if @user == current_user
+      @friendship.friendship_over
+      redirect_to users_user_friend_path(current_user)
+    else
+      flash[:error] = "You cannot remove other user's friends."
+      redirect_to user_path(current_user)
+    end
+  end
+
   private
 
   def set_user

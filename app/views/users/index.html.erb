@@ -1,15 +1,15 @@
 <% users = @users %>
 
 
-<div class="alluser-container"> <%#was friendship-container%>
-  <div class="user-list-container"> <%#was friend-list-container%>
+<div class="alluser-container">
+  <div class="user-list-container">
     <h2>List of users</h2>
 
-    <ul class="user-list"> <%#was friend-list%>
+    <ul class="user-list">
       <% users.each do |user| %>
         <% unless user == current_user %>
-          <li class="user"> <%# friend %>
-            <ul class="user-link"> <%# friend-link%>
+          <li class="user">
+            <ul class="user-link">
               <%= link_to user_path(user) do %>
                 <li>
                   <% if user.profile_picture.attached? %>

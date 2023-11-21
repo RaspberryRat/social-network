@@ -22,6 +22,6 @@ Rails.application.routes.draw do
   resources :posts, only: [:index]
 
   namespace :users do
-    resources :friends, only: [:index], path: "/:id/friends", as: :user_friends
+    resources :friends, only: [:index, :destroy], path: "/:id/friends", as: :user_friends
   end
 end

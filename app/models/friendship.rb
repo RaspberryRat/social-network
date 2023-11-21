@@ -34,7 +34,18 @@ class Friendship < ApplicationRecord
     common_friends = user.friends & friend.friends
   end
 
+  def friendship_over
+    mutual_friend_record = mutual_friend
+
+    mutual_friend_record.destroy
+    self.destroy
+  end
+
   private
+
+  def mutual_friend
+    Friendship.find_by(user: friend, friend: user)
+  end
 
   def add_mutual_friend
     mutual_friend = Friendship.find_by(user_id: friend_id, friend_id: user_id)

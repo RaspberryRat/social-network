@@ -1051,6 +1051,7 @@ most is same as login page */
 
 .friend {
   border: 1px solid var(--lightalt);
+  box-shadow: 1px 1px 1px;
   border-radius: 10px;
   height: 150px;
   background-color: var(--lightmain);

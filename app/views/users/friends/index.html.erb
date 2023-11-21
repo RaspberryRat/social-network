@@ -19,6 +19,14 @@
                   <%= truncate(friend.fullname, length: 14) %>
                 </li>
               <% end %>
+              <% if current_user == @user %>
+               <li class="remove-friend">
+                  <%= form_with model: @friend,
+                    url: users_user_friend_path(user_id:@user.id, friend_id:friend.id), method: :delete do |f| %>
+                    <%= f.submit 'Remove Friend' %>
+                  <% end %>
+                </li>
+              <% end %>
             </ul>
           </li>
         <% end %>

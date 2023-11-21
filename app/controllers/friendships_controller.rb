@@ -51,7 +51,6 @@ class FriendshipsController < ApplicationController
     redirect_to user_path(@user)
   end
 
-
   private
   # TODO can't get this working
   # def friendship_params
