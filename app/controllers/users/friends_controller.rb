@@ -10,7 +10,7 @@ class Users::FriendsController < ApplicationController
   def destroy
     @user = User.find(params[:user_id])
     @friend = User.find(params[:friend_id])
-    @friendship = Friendship.find(user: @user, friend: @friend)
+    @friendship = Friendship.find_by(user: @user, friend: @friend)
 
     if @user == current_user
       @friendship.friendship_over
