@@ -1053,7 +1053,7 @@ most is same as login page */
   border: 1px solid var(--lightalt);
   box-shadow: 1px 1px 1px;
   border-radius: 10px;
-  height: 150px;
+  min-height: 150px;
   background-color: var(--lightmain);
   width: 130px;
 
@@ -1121,7 +1121,8 @@ h2 {
 }
 
 .confirm-btn input[type="submit"],
-.deny-btn input[type="submit"] {
+.deny-btn input[type="submit"],
+.remove-friend input[type="submit"] {
   background-color: var(--lightalt);
   font-size: 0.6rem;
   font-family: 'Libre Caslon Text', serif;
@@ -1469,4 +1470,9 @@ h2 {
   color: var(--darkmain);
   font-style: normal;
   font-weight: 800;
+}
+
+.friend-list-container .friend {
+  min-height: 150px;
+  max-height: 220px;
 }
