@@ -1228,6 +1228,7 @@ h2 {
 .user-page-container .friend {
   height: auto;
   width: 80px;
+  min-height: 0;
 }
 
 .user-page-container .friend-link>a,
@@ -1472,7 +1473,18 @@ h2 {
   font-weight: 800;
 }
 
-.friend-list-container .friend {
+.friend-ship-container .friend-list-container .friend {
   min-height: 150px;
   max-height: 220px;
+}
+
+.friend-link {
+  display: flex;
+  flex-direction: column;
+}
+
+.remove-friend {
+  text-align: center;
+  padding-bottom: 8px;
+  border-radius: 10px;
 }
