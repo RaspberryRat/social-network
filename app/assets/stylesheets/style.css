@@ -225,7 +225,8 @@ nav ul li {
 .edit-btn a:hover,
 .post-btn input[type="submit"]:hover,
 .confirm-btn input[type="submit"]:hover,
-.deny-btn input[type="submit"]:hover {
+.deny-btn input[type="submit"]:hover,
+.remove-friend input[type="submit"]:hover {
   background-color: var(--text1);
   color: var(--lightalt);
   border: none;
@@ -240,7 +241,8 @@ nav ul li {
 .comment-submit-btn input[type="submit"]:active,
 .post-btn input[type="submit"]:active,
 .confirm-btn input[type="submit"]:active,
-.deny-btn input[type="submit"]:active {
+.deny-btn input[type="submit"]:active,
+.remove-friend input[type="submit"]:active {
   background-color: var(--main);
   color: var(--lightalt);
   border: none;
